@@ -64,54 +64,54 @@ int CPUConnectClock(CPU c, Clock clk);
 // === Getters and Setters ===
 
 // CPUSetStatusFlag : Sets a CPU Status Flag (Returns 0 on fail)
-int CPUSetStatusFlag(CPU C, int flagId, int flagValue);
+int CPUSetStatusFlag(CPU c, int flagId, int flagValue);
 
 // CPUGetStatusRegister : Returns the entire status register
-byte CPUGetStatusRegister(CPU C);
+byte CPUGetStatusRegister(CPU c);
 
 // CPUSetStatusRegister : Sets the entire status register
-int CPUSetStatusRegister(CPU C, byte val);
+int CPUSetStatusRegister(CPU c, byte val);
 
 // CPUGetStatusFlag : Gets a CPU Status Flag (Returns -1 if not valid)
-int CPUGetStatusFlag(CPU C, int flagId);
+int CPUGetStatusFlag(CPU c, int flagId);
 
 // CPUGetClock : Returns a pointer to the clock
-Clock CPUGetClock(CPU C);
+Clock CPUGetClock(CPU c);
 
 // CPUIncrementPC : Increments the program counter by a given value (Can be negative)
-void CPUIncrementPC(CPU C, byte val);
+void CPUIncrementPC(CPU c, byte val);
 
 // CPUIncrementSP : Increments the stack pointer by a given value (Can be negative)
-void CPUIncrementSP(CPU C, byte val);
+void CPUIncrementSP(CPU c, byte val);
 
 // CPUSetPC : Sets a value for the program counter
-void CPUSetPC(CPU C, word val);
+void CPUSetPC(CPU c, word val);
 
 // CPUSetSP : Sets a value for the stack pointer
-void CPUSetSP(CPU C, byte val);
+void CPUSetSP(CPU c, byte val);
 
 // CPSettA : Sets a value for the accumulator
-void CPUSetA(CPU C, byte val);
+void CPUSetA(CPU c, byte val);
 
 // CPUSetX : Sets a value in the X Register
-void CPUSetX(CPU C, byte val);
+void CPUSetX(CPU c, byte val);
 
 // CPUSetY : Sets a value in the Y Register
-void CPUSetY(CPU C, byte val);
+void CPUSetY(CPU c, byte val);
 
 // CPUGetPC : Returns the value of the program counter
-word CPUGetPC(CPU C);
+word CPUGetPC(CPU c);
 
 // CPUGetSP : Returns the value of the stack pointer
-byte CPUGetSP(CPU C);
+byte CPUGetSP(CPU c);
 
 // CPUGetA : Returns the value of the accumulator
-byte CPUGetA(CPU C);
+byte CPUGetA(CPU c);
 
 // CPUGetX : Returns the value in the X Register
-byte CPUGetX(CPU C);
+byte CPUGetX(CPU c);
 
 // CPUGetY : Returns the value in the Y Register
-byte CPUGetY(CPU C);
+byte CPUGetY(CPU c);
 
 #endif

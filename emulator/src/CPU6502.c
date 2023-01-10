@@ -117,7 +117,7 @@ int CPUConnectClock(CPU c, Clock clk)
 
 byte CPUFetchByte(CPU c)
 {
-    HANDLE_NULL(c, -1);
+    HANDLE_NULL(c, error_invalid_argument);
 
     if (c->mem == NULL || c->clk == NULL)
     {
@@ -127,8 +127,38 @@ byte CPUFetchByte(CPU c)
 
     byte data = MemoryReadByte(c->mem, c->PC);
     ClockTick(c->clk);
-
     c->PC++;
+
+    return data;
+}
+
+word CPUFetchWord(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    if (c->mem == NULL || c->clk == NULL)
+    {
+        LOG_STATUS(error_read);
+        return error_read;
+    }
+
+    // MOS6502 Is Little Endian
+
+    word data = MemoryReadByte(c->mem, c->PC);
+    ClockTick(c->clk);
+    c->PC++;
+
+    data |= MemoryReadByte(c->mem, c->PC) << 8;
+    ClockTick(c->clk);
+    c->PC++;
+
+    return data;
+}
+
+word CPUGetPC(CPU c)
+{
+    HANDLE_NULL(c, -1);
+    return c->PC;
 }
 
 static void s_setup_op_array(CPU c)

@@ -23,8 +23,11 @@ int ClockSetPeriod(Clock clk, int period);
 // ClockSetTickLimit : Sets the tick limit
 int ClockSetTickLimit(Clock clk, int tick_limit);
 
-// ClockTick : Ticks the clock
-void ClockTick(Clock clk);
+// ClockTick : Ticks the clock and returns remaining ticks (-1 if result should be disregarded)
+int ClockTick(Clock clk);
+
+// ClockGetTickLimit : Returns the tick_limit (Remaining ticks)
+int ClockGetTickLimit(Clock clk);
 
 // ClockFree : Frees a clock object
 int ClockFree(Clock clk);
