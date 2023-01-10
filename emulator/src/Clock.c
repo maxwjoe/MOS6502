@@ -1,6 +1,6 @@
 #include "Clock.h"
 #include "stdlib.h"
-#include "EmulatorIO.h"
+#include "EmulatorHelper.h"
 #include "EmulatorTypes.h"
 
 typedef struct clock

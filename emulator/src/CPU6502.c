@@ -1,6 +1,6 @@
 #include "CPU6502.h"
 #include "stdlib.h"
-#include "EmulatorIO.h"
+#include "EmulatorHelper.h"
 
 static void s_setup_op_array(CPU c);
 
@@ -113,4 +113,25 @@ int CPUConnectClock(CPU c, Clock clk)
 
     c->clk = clk;
     return ok;
+}
+
+byte CPUFetchByte(CPU c)
+{
+    HANDLE_NULL(c, -1);
+
+    if (c->mem == NULL || c->clk == NULL)
+    {
+        LOG_STATUS(error_read);
+        return error_read;
+    }
+
+    byte data = MemoryReadByte(c->mem, c->PC);
+    ClockTick(c->clk);
+
+    c->PC++;
+}
+
+static void s_setup_op_array(CPU c)
+{
+    return;
 }

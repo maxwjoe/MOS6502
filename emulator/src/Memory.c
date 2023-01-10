@@ -2,7 +2,7 @@
 
 #include "stdlib.h"
 #include "stdio.h"
-#include "EmulatorIO.h"
+#include "EmulatorHelper.h"
 
 // s_check_bounds : Checks that given address is within memory bounds
 static int s_check_bounds(Memory m, word address);
