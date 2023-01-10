@@ -1,0 +1,11 @@
+6502 Emulator Goals
+
+* Able to execute ALL Legal 6502 OpCodes
+* Read a binary from a file to execute
+* Read and write to a virtual memory struct
+* Easy API that can be integrated with a GUI later or other components
+* Software only (Don't clutter with hardware compatible for now but make writing functions abstracted)
+
+------------------------------------------------------------------------------
+
+Note : All memory functions to be accessed THROUGH the CPU -> Allows decoupling
