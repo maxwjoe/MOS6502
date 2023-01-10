@@ -119,12 +119,6 @@ byte CPUFetchByte(CPU c)
 {
     HANDLE_NULL(c, error_invalid_argument);
 
-    if (c->mem == NULL || c->clk == NULL)
-    {
-        LOG_STATUS(error_read);
-        return error_read;
-    }
-
     byte data = MemoryReadByte(c->mem, c->PC);
     ClockTick(c->clk);
     c->PC++;
@@ -135,12 +129,6 @@ byte CPUFetchByte(CPU c)
 word CPUFetchWord(CPU c)
 {
     HANDLE_NULL(c, error_invalid_argument);
-
-    if (c->mem == NULL || c->clk == NULL)
-    {
-        LOG_STATUS(error_read);
-        return error_read;
-    }
 
     // MOS6502 Is Little Endian
 
@@ -153,6 +141,26 @@ word CPUFetchWord(CPU c)
     c->PC++;
 
     return data;
+}
+
+byte CPUReadByte(CPU c, word address)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    byte data = MemoryReadByte(c->mem, address);
+    ClockTick(c->clk);
+
+    return data;
+}
+
+int CPUWriteByte(CPU c, word address, byte data)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    int status_code = MemoryWriteByte(c->mem, address, data);
+    ClockTick(c->clk);
+
+    return status_code;
 }
 
 word CPUGetPC(CPU c)
