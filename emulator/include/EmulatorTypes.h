@@ -25,6 +25,7 @@ enum enum_status
     error_invalid_argument,
     error_null_deref,
     error_file_io,
+    error_free,
 };
 
 #endif
