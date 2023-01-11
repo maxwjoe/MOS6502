@@ -22,12 +22,6 @@ void INS_LDA_ZPX(CPU c)
     OPER_LDA(c, address);
 }
 
-void INS_LDA_ZPY(CPU c)
-{
-    byte address = ADDR_ZPY(c);
-    OPER_LDA(c, address);
-}
-
 void INS_LDA_AB(CPU c)
 {
     word address = ADDR_AB(c);
