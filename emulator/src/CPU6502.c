@@ -163,10 +163,143 @@ int CPUWriteByte(CPU c, word address, byte data)
     return status_code;
 }
 
+int CPUSetStatusFlag(CPU c, int flag_id, int flag_value)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    if (flag_id < 0 || flag_id > 7)
+    {
+        LOG_STATUS(error_invalid_argument);
+        return error_invalid_argument;
+    }
+
+    if (flag_value)
+    {
+        c->PS |= 1 << flag_id;
+        return ok;
+    }
+
+    c->PS &= ~(1 << flag_id);
+    return ok;
+}
+
+byte CPUGetStatusRegister(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    return c->PS;
+}
+
+int CPUSetStatusRegister(CPU c, byte val)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    c->PS = val;
+    return ok;
+}
+
+int CPUGetStatusFlag(CPU c, int flag_id)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    if (flag_id < 0 || flag_id > 7)
+    {
+        LOG_STATUS(error_invalid_argument);
+        return error_invalid_argument;
+    }
+
+    return (c->PS >> flag_id) & 0x01;
+}
+
+Clock CPUGetClock(CPU c)
+{
+    HANDLE_NULL(c, NULL);
+
+    return c->clk;
+}
+
+Memory CPUGetMemory(CPU c)
+{
+    HANDLE_NULL(c, NULL);
+
+    return c->mem;
+}
+
+int CPUIncrementPC(CPU c, byte val)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    return ++c->PC;
+}
+
+int CPUIncrementSP(CPU c, byte val)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    return ++c->SP;
+}
+
+int CPUSetPC(CPU c, word val)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    c->PC = val;
+    return ok;
+}
+
+int CPUSetSP(CPU c, byte val)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    c->SP = val;
+    return ok;
+}
+
+int CPUSetA(CPU c, byte val)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    c->A = val;
+    return ok;
+}
+
+int CPUSetX(CPU c, byte val)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    c->X = val;
+    return ok;
+}
+
+int CPUSetY(CPU c, byte val)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    c->Y = val;
+    return ok;
+}
+
 word CPUGetPC(CPU c)
 {
-    HANDLE_NULL(c, -1);
+    HANDLE_NULL(c, error_invalid_argument);
     return c->PC;
+}
+
+byte CPUGetSP(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    return c->SP;
+}
+
+byte CPUGetA(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    return c->A;
+}
+
+byte CPUGetX(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    return c->X;
+}
+
+byte CPUGetY(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    return c->Y;
 }
 
 static void s_setup_op_array(CPU c)

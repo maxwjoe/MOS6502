@@ -125,3 +125,31 @@ TEST(T_CPU_WRITE_BYTE)
 
     CPUFree(c, 1);
 }
+
+TEST(T_CPU_SET_AND_READ_STATUS_REG)
+{
+    SETUP_HW();
+
+    CPUSetStatusRegister(c, 0x13);
+    byte status_register = CPUGetStatusRegister(c);
+
+    CHECK_EQ(status_register, 0x13);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_CPU_SET_AND_READ_FLAGS)
+{
+    SETUP_HW();
+
+    CPUSetStatusFlag(c, PS_N, 1);
+    int neg_flag = CPUGetStatusFlag(c, PS_N);
+
+    CPUSetStatusFlag(c, PS_Z, 0);
+    int zero_flag = CPUGetStatusFlag(c, PS_Z);
+
+    CHECK_TRUE(neg_flag);
+    CHECK_FALSE(zero_flag);
+
+    CPUFree(c, 1);
+}

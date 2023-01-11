@@ -13,7 +13,7 @@ typedef struct cpu6502 *CPU;
 #define DEFAULT_PROGRAM_COUNTER 0xFFFC
 #define DEFAULT_PROCESSOR_STATUS_FLAGS 0x00
 #define DEFAULT_STACK_BEGIN 0x0100
-#define DEFAULT_STACK_END 0x0100
+#define DEFAULT_STACK_END 0x01FF
 
 // === Enumerations ===
 
@@ -64,7 +64,7 @@ int CPUConnectClock(CPU c, Clock clk);
 // === Getters and Setters ===
 
 // CPUSetStatusFlag : Sets a CPU Status Flag (Returns 0 on fail)
-int CPUSetStatusFlag(CPU c, int flagId, int flagValue);
+int CPUSetStatusFlag(CPU c, int flag_id, int flag_value);
 
 // CPUGetStatusRegister : Returns the entire status register
 byte CPUGetStatusRegister(CPU c);
@@ -72,32 +72,35 @@ byte CPUGetStatusRegister(CPU c);
 // CPUSetStatusRegister : Sets the entire status register
 int CPUSetStatusRegister(CPU c, byte val);
 
-// CPUGetStatusFlag : Gets a CPU Status Flag (Returns -1 if not valid)
-int CPUGetStatusFlag(CPU c, int flagId);
+// CPUGetStatusFlag : Gets a CPU Status Flag
+int CPUGetStatusFlag(CPU c, int flag_id);
 
-// CPUGetClock : Returns a pointer to the clock
+// CPUGetClock : Returns a pointer to the connected clock
 Clock CPUGetClock(CPU c);
 
+// CPUGetMemory : Returns a pointer to the connected memory
+Memory CPUGetMemory(CPU c);
+
 // CPUIncrementPC : Increments the program counter by a given value (Can be negative)
-void CPUIncrementPC(CPU c, byte val);
+int CPUIncrementPC(CPU c, byte val);
 
 // CPUIncrementSP : Increments the stack pointer by a given value (Can be negative)
-void CPUIncrementSP(CPU c, byte val);
+int CPUIncrementSP(CPU c, byte val);
 
-// CPUSetPC : Sets a value for the program counter
-void CPUSetPC(CPU c, word val);
+// CPUSetPC : Sets a value for the program count
+int CPUSetPC(CPU c, word val);
 
 // CPUSetSP : Sets a value for the stack pointer
-void CPUSetSP(CPU c, byte val);
+int CPUSetSP(CPU c, byte val);
 
 // CPSettA : Sets a value for the accumulator
-void CPUSetA(CPU c, byte val);
+int CPUSetA(CPU c, byte val);
 
 // CPUSetX : Sets a value in the X Register
-void CPUSetX(CPU c, byte val);
+int CPUSetX(CPU c, byte val);
 
 // CPUSetY : Sets a value in the Y Register
-void CPUSetY(CPU c, byte val);
+int CPUSetY(CPU c, byte val);
 
 // CPUGetPC : Returns the value of the program counter
 word CPUGetPC(CPU c);
