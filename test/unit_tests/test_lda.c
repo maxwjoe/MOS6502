@@ -11,7 +11,7 @@ TEST(T_LDA_IM)
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, LDA_IM);
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x99);
 
-    CPUExecute(c);
+    int execution_result = CPUExecute(c);
 
     byte a_register = CPUGetA(c);
     int cycles_remaining = ClockGetTickLimit(clk);
@@ -21,6 +21,7 @@ TEST(T_LDA_IM)
     CHECK_EQ(cycles_remaining, 0);
     CHECK_TRUE(F_N);
     CHECK_FALSE(F_Z);
+    CHECK_EQ(execution_result, ok);
 
     CPUFree(c, 1);
 }
@@ -35,7 +36,7 @@ TEST(T_LDA_ZP)
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0xAA);
     MemoryWriteByte(m, 0x00AA, 0x7f);
 
-    CPUExecute(c);
+    int execution_result = CPUExecute(c);
 
     byte a_register = CPUGetA(c);
     int cycles_remaining = ClockGetTickLimit(clk);
@@ -45,6 +46,7 @@ TEST(T_LDA_ZP)
     CHECK_EQ(cycles_remaining, 0);
     CHECK_FALSE(F_Z);
     CHECK_FALSE(F_N);
+    CHECK_EQ(execution_result, ok);
 
     CPUFree(c, 1);
 }
@@ -62,7 +64,7 @@ TEST(T_LDA_ZPX)
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0xAA);
     MemoryWriteByte(m, 0x00AA + x_reg, 0x7f);
 
-    CPUExecute(c);
+    int execution_result = CPUExecute(c);
 
     byte a_register = CPUGetA(c);
     int cycles_remaining = ClockGetTickLimit(clk);
@@ -72,6 +74,7 @@ TEST(T_LDA_ZPX)
     CHECK_EQ(cycles_remaining, 0);
     CHECK_FALSE(F_Z);
     CHECK_FALSE(F_N);
+    CHECK_EQ(execution_result, ok);
 
     CPUFree(c, 1);
 }
@@ -87,7 +90,7 @@ TEST(T_LDA_AB)
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0xBB);
     MemoryWriteByte(m, 0xBBAA, 0x33);
 
-    CPUExecute(c);
+    int execution_result = CPUExecute(c);
 
     byte a_register = CPUGetA(c);
     int cycles_remaining = ClockGetTickLimit(clk);
@@ -97,6 +100,7 @@ TEST(T_LDA_AB)
     CHECK_EQ(cycles_remaining, 0);
     CHECK_FALSE(F_Z);
     CHECK_FALSE(F_N);
+    CHECK_EQ(execution_result, ok);
 
     CPUFree(c, 1);
 }
@@ -112,7 +116,7 @@ TEST(T_LDA_ABX_NO_CROSS)
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x22);
     MemoryWriteByte(m, 0x2222, 0x89);
 
-    CPUExecute(c);
+    int execution_result = CPUExecute(c);
 
     byte a_register = CPUGetA(c);
     int cycles_remaining = ClockGetTickLimit(clk);
@@ -122,6 +126,7 @@ TEST(T_LDA_ABX_NO_CROSS)
     CHECK_EQ(cycles_remaining, 0);
     CHECK_FALSE(F_Z);
     CHECK_TRUE(F_N);
+    CHECK_EQ(execution_result, ok);
 
     CPUFree(c, 1);
 }
@@ -137,7 +142,7 @@ TEST(T_LDA_ABY_NO_CROSS)
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x22);
     MemoryWriteByte(m, 0x2222, 0x01);
 
-    CPUExecute(c);
+    int execution_result = CPUExecute(c);
 
     byte a_register = CPUGetA(c);
     int cycles_remaining = ClockGetTickLimit(clk);
@@ -147,6 +152,7 @@ TEST(T_LDA_ABY_NO_CROSS)
     CHECK_EQ(cycles_remaining, 0);
     CHECK_FALSE(F_Z);
     CHECK_FALSE(F_N);
+    CHECK_EQ(execution_result, ok);
 
     CPUFree(c, 1);
 }
@@ -166,7 +172,7 @@ TEST(T_LDA_INX)
     MemoryWriteByte(m, 0x56 + x_reg + 1, 0x99);
     MemoryWriteByte(m, 0x9999, 0x42);
 
-    CPUExecute(c);
+    int execution_result = CPUExecute(c);
 
     byte a_register = CPUGetA(c);
     int cycles_remaining = ClockGetTickLimit(clk);
@@ -176,6 +182,7 @@ TEST(T_LDA_INX)
     CHECK_EQ(cycles_remaining, 0);
     CHECK_FALSE(F_Z);
     CHECK_FALSE(F_N);
+    CHECK_EQ(execution_result, ok);
 
     CPUFree(c, 1);
 }
@@ -195,7 +202,7 @@ TEST(T_LDA_INY_NO_CROSS)
     MemoryWriteByte(m, 0x56 + y_reg, 0x99);
     MemoryWriteByte(m, 0x9999, 0x42);
 
-    CPUExecute(c);
+    int execution_result = CPUExecute(c);
 
     byte a_register = CPUGetA(c);
     int cycles_remaining = ClockGetTickLimit(clk);
@@ -205,6 +212,7 @@ TEST(T_LDA_INY_NO_CROSS)
     CHECK_EQ(cycles_remaining, 0);
     CHECK_FALSE(F_Z);
     CHECK_FALSE(F_N);
+    CHECK_EQ(execution_result, ok);
 
     CPUFree(c, 1);
 }

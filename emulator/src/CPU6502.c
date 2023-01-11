@@ -339,12 +339,14 @@ int CPUExecute(CPU c)
 
         if (!func)
         {
-            LOG_STATUS(error_invalid_op_code);
+            // LOG_STATUS(error_invalid_op_code);
             return error_invalid_op_code;
         }
 
         func(c);
     }
+
+    return ok;
 }
 
 static void s_setup_op_array(CPU c)

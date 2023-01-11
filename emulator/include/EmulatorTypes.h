@@ -17,16 +17,16 @@ typedef void (*cpu_operation)(CPU);
 // enum_status : Status definitions for Emulator
 enum enum_status
 {
-    ok,
-    error_generic,
-    error_create,
-    error_read,
-    error_write,
-    error_invalid_argument,
-    error_null_deref,
-    error_file_io,
-    error_free,
-    error_invalid_op_code,
+    ok,                     // Successful Completion
+    error_generic,          // Generic (Catch all) Error
+    error_create,           // Failed to create
+    error_read,             // Failed to read memory
+    error_write,            // Failed to write to memory
+    error_invalid_argument, // Invalid parameter passed
+    error_null_deref,       // Attempted to dereference a null pointer
+    error_file_io,          // Error reading to or writing from a file
+    error_free,             // Error attempting to free memory
+    error_invalid_op_code,  // Error attempting to execute an unknown CPU Instruction
 };
 
 #endif
