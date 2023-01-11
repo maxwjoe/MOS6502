@@ -68,6 +68,12 @@ int ClockGetTickLimit(Clock clk)
     return clk->tick_limit;
 }
 
+int ClockGetMode(Clock clk)
+{
+    HANDLE_NULL(clk, error_invalid_argument);
+    return clk->mode;
+}
+
 int ClockFree(Clock clk)
 {
     if (clk == NULL)

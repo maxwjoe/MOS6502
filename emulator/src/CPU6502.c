@@ -302,6 +302,28 @@ byte CPUGetY(CPU c)
     return c->Y;
 }
 
+int CPUExecute(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    int tick_forever = ClockGetMode(c->clk);
+
+    while (tick_forever || ClockGetTickLimit(c->clk))
+    {
+        byte instruction = CPUFetchByte(c);
+
+        cpu_operation func = c->ops[instruction];
+
+        if (!func)
+        {
+            LOG_STATUS(error_invalid_op_code);
+            return error_invalid_op_code;
+        }
+
+        func(c);
+    }
+}
+
 static void s_setup_op_array(CPU c)
 {
     return;

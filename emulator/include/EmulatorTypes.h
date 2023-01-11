@@ -26,6 +26,7 @@ enum enum_status
     error_null_deref,
     error_file_io,
     error_free,
+    error_invalid_op_code,
 };
 
 #endif

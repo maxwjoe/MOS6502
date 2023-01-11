@@ -61,6 +61,9 @@ int CPUConnectClock(CPU c, Clock clk);
 
 // === CPU Operations ===
 
+// CPUExecute : Runs the CPU
+int CPUExecute(CPU c);
+
 // === Getters and Setters ===
 
 // CPUSetStatusFlag : Sets a CPU Status Flag (Returns 0 on fail)

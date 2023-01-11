@@ -17,6 +17,9 @@ Clock ClockNew();
 // ClockSetMode : Sets the clock mode
 int ClockSetMode(Clock clk, int clock_mode);
 
+// ClockGetMode : Gets the clock mode
+int ClockGetMode(Clock clk);
+
 // ClockSetPeriod : Sets the clock period (ms)
 int ClockSetPeriod(Clock clk, int period);
 
