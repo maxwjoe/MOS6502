@@ -1,13 +1,6 @@
 #include "CPU6502.h"
 #include "Eagle.h"
-
-// SETUP_HW : Sets up CPU, Clock and Memory
-#define SETUP_HW()                \
-    CPU c = CPUNew();             \
-    Memory m = MemoryNew(0xFFFF); \
-    Clock clk = ClockNew();       \
-    CPUConnectMemory(c, m);       \
-    CPUConnectClock(c, clk)
+#include "common_macros.h"
 
 TEST(T_CPU_CREATE)
 {
@@ -104,6 +97,24 @@ TEST(T_CPU_READ_BYTE)
     CHECK_EQ(data_read, 0x65);
     CHECK_EQ(prog_counter, DEFAULT_PROGRAM_COUNTER);
     CHECK_EQ(cycles_remaining, 2);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_CPU_READ_WORD)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 3);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, 0x65);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x33);
+
+    word word_read = CPUReadWord(c, DEFAULT_PROGRAM_COUNTER);
+    int cycles_remaining = ClockGetTickLimit(clk);
+
+    CHECK_EQ(word_read, 0x3365);
+    CHECK_EQ(cycles_remaining, 1);
 
     CPUFree(c, 1);
 }

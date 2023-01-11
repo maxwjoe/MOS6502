@@ -3,6 +3,7 @@
 #include "./unit_tests/test_memory.c"
 #include "./unit_tests/test_cpu.c"
 #include "./unit_tests/test_clock.c"
+#include "./unit_tests/test_lda.c"
 
 int main()
 {
@@ -26,13 +27,18 @@ int main()
     ADD_TEST(CPU_COLLECTION, T_CPU_FETCH_BYTE);
     ADD_TEST(CPU_COLLECTION, T_CPU_FETCH_WORD);
     ADD_TEST(CPU_COLLECTION, T_CPU_READ_BYTE);
+    ADD_TEST(CPU_COLLECTION, T_CPU_READ_WORD);
     ADD_TEST(CPU_COLLECTION, T_CPU_WRITE_BYTE);
     ADD_TEST(CPU_COLLECTION, T_CPU_SET_AND_READ_STATUS_REG);
     ADD_TEST(CPU_COLLECTION, T_CPU_SET_AND_READ_FLAGS);
 
+    // === LDA Collection ===
+    ADD_TEST(LDA_COLLECTION, T_LDA_IM);
+
     // === RUN ===
     RUN_COLLECTION(CLOCK_COLLECTION);
     RUN_COLLECTION(CPU_COLLECTION);
+    RUN_COLLECTION(LDA_COLLECTION);
 
     EAGLE_END();
 }

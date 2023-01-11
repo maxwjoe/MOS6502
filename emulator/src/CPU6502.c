@@ -1,6 +1,7 @@
 #include "CPU6502.h"
 #include "stdlib.h"
 #include "EmulatorHelper.h"
+#include "Instructions.h"
 
 static void s_setup_op_array(CPU c);
 
@@ -153,6 +154,20 @@ byte CPUReadByte(CPU c, word address)
     return data;
 }
 
+word CPUReadWord(CPU c, word address)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    word data = MemoryReadByte(c->mem, address);
+    CPUClockTick(c);
+    address++;
+
+    data |= MemoryReadByte(c->mem, address) << 8;
+    CPUClockTick(c);
+
+    return data;
+}
+
 int CPUWriteByte(CPU c, word address, byte data)
 {
     HANDLE_NULL(c, error_invalid_argument);
@@ -216,6 +231,14 @@ Clock CPUGetClock(CPU c)
     HANDLE_NULL(c, NULL);
 
     return c->clk;
+}
+
+int CPUClockTick(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    ClockTick(c->clk);
+    return ok;
 }
 
 Memory CPUGetMemory(CPU c)
@@ -326,5 +349,20 @@ int CPUExecute(CPU c)
 
 static void s_setup_op_array(CPU c)
 {
-    return;
+    if (c == NULL)
+    {
+        return;
+    }
+
+    // LDA
+    c->ops[LDA_IM] = &INS_LDA_IM;
+    c->ops[LDA_ZP] = &INS_LDA_ZP;
+    c->ops[LDA_ZPX] = &INS_LDA_ZPX;
+    c->ops[LDA_AB] = &INS_LDA_AB;
+    c->ops[LDA_ABX] = &INS_LDA_ABX;
+    c->ops[LDA_ABY] = &INS_LDA_ABY;
+    c->ops[LDA_INX] = &INS_LDA_INX;
+    c->ops[LDA_INY] = &INS_LDA_INY;
+
+    // LDX
 }

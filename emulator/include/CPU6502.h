@@ -5,6 +5,7 @@
 #include "Clock.h"
 #include "EmulatorTypes.h"
 #include "EmulatorConfig.h"
+#include "Opcodes.h"
 
 typedef struct cpu6502 *CPU;
 
@@ -51,6 +52,9 @@ word CPUFetchWord(CPU c);
 // CPUReadByte : Reads a byte from memory at a given address(1 Cycle)
 byte CPUReadByte(CPU c, word address);
 
+// CPUReadWord : Reads a word from memory at a given address
+word CPUReadWord(CPU c, word address);
+
 // CPUWriteByte : Writes a byte to memory at a given address (1 Cycle)
 int CPUWriteByte(CPU c, word address, byte data);
 
@@ -58,6 +62,9 @@ int CPUWriteByte(CPU c, word address, byte data);
 
 // CPUConnectClock : Connects CPU to clock
 int CPUConnectClock(CPU c, Clock clk);
+
+// CPUClockTick : Ticks the connected clock
+int CPUClockTick(CPU c);
 
 // === CPU Operations ===
 
