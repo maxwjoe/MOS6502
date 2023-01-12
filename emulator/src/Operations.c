@@ -40,5 +40,5 @@ void SET_PS_YREGISTER(CPU c)
 {
     byte y_val = CPUGetY(c);
     CPUSetStatusFlag(c, PS_Z, (y_val == 0));
-    CPUSetStatusFlag(c, PS_N, (y_val & 0b10000000 > 0));
+    CPUSetStatusFlag(c, PS_N, (y_val & 0b10000000) > 0);
 }

@@ -10,6 +10,7 @@ byte ADDR_ZPX(CPU c)
 {
     byte zp_address = CPUFetchByte(c);
 
+    // Note that zp_address stored as byte handles wrap around
     zp_address += CPUGetX(c);
     CPUClockTick(c);
 
@@ -20,6 +21,7 @@ byte ADDR_ZPY(CPU c)
 {
     byte zp_address = CPUFetchByte(c);
 
+    // Note that zp_address stored as byte handles wrap around
     zp_address += CPUGetY(c);
     CPUClockTick(c);
 

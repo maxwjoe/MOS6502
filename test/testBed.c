@@ -5,6 +5,7 @@
 #include "./unit_tests/test_clock.c"
 #include "./unit_tests/test_lda.c"
 #include "./unit_tests/test_ldx.c"
+#include "./unit_tests/test_ldy.c"
 
 int main()
 {
@@ -51,6 +52,15 @@ int main()
     ADD_TEST(LDX_COLLECTION, T_LDX_ZPY);
     ADD_TEST(LDX_COLLECTION, T_LDX_AB);
     ADD_TEST(LDX_COLLECTION, T_LDX_ABY_NO_CROSS);
+    ADD_TEST(LDX_COLLECTION, T_LDX_ABY_WITH_CROSS);
+
+    // === LDY Collection ===
+    ADD_TEST(LDY_COLLECTION, T_LDY_IM);
+    ADD_TEST(LDY_COLLECTION, T_LDY_ZP);
+    ADD_TEST(LDY_COLLECTION, T_LDY_ZPX);
+    ADD_TEST(LDY_COLLECTION, T_LDY_AB);
+    ADD_TEST(LDY_COLLECTION, T_LDY_ABX_NO_CROSS);
+    ADD_TEST(LDY_COLLECTION, T_LDY_ABX_WITH_CROSS);
 
     // === RUN ===
     // RUN_COLLECTION(CLOCK_COLLECTION);

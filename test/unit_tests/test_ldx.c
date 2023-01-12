@@ -134,3 +134,32 @@ TEST(T_LDX_ABY_NO_CROSS)
 
     CPUFree(c, 1);
 }
+
+TEST(T_LDX_ABY_WITH_CROSS)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 5);
+
+    byte y_reg = 0x11;
+    CPUSetY(c, y_reg);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, LDX_ABY);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0xFF);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0xAA);
+    MemoryWriteByte(m, 0xAAFF + y_reg, 0x23);
+
+    int execution_result = CPUExecute(c);
+
+    int cycles_remaining = ClockGetTickLimit(clk);
+    byte x_register = CPUGetX(c);
+    GET_ALL_FLAGS();
+
+    CHECK_EQ(execution_result, ok);
+    CHECK_EQ(x_register, 0x23);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_FALSE(F_N);
+    CHECK_FALSE(F_Z);
+
+    CPUFree(c, 1);
+}

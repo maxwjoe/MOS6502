@@ -82,3 +82,34 @@ void INS_LDX_ABY(CPU c)
     word address = ADDR_ABY(c);
     OPER_LDX(c, address);
 }
+
+void INS_LDY_IM(CPU c)
+{
+    byte load_value = CPUFetchByte(c);
+    CPUSetY(c, load_value);
+    SET_PS_YREGISTER(c);
+}
+
+void INS_LDY_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_LDY(c, address);
+}
+
+void INS_LDY_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_LDY(c, address);
+}
+
+void INS_LDY_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_LDY(c, address);
+}
+
+void INS_LDY_ABX(CPU c)
+{
+    word address = ADDR_ABX(c);
+    OPER_LDY(c, address);
+}

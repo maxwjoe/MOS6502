@@ -78,13 +78,13 @@ int MemoryWriteAll(Memory m, byte data)
 
 int MemoryHexDump(Memory m, word lower_addr, word upper_addr)
 {
-    if (m == NULL || !s_check_bounds(m, lower_addr) || !s_check_bounds(m, upper_addr))
+    if (m == NULL || !s_check_bounds(m, lower_addr) || !s_check_bounds(m, upper_addr) || lower_addr >= upper_addr)
     {
         LOG_STATUS(error_invalid_argument);
         return error_invalid_argument;
     }
 
-    for (byte i = lower_addr; i < upper_addr; i++)
+    for (word i = lower_addr; i < upper_addr; i++)
     {
         printf("Addr : 0x%04X\tData : 0x%02X\n", i, m->data[i]);
     }
