@@ -22,6 +22,12 @@ void OPER_LDY(CPU c, word address)
     SET_PS_YREGISTER(c);
 }
 
+void OPER_STA(CPU c, word address)
+{
+    byte a_register = CPUGetA(c);
+    CPUWriteByte(c, address, a_register);
+}
+
 void SET_PS_ACCUMULATOR(CPU c)
 {
     byte a_val = CPUGetA(c);

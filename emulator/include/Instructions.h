@@ -72,4 +72,27 @@ void INS_LDY_AB(CPU c);
 // INS_LDY_ABX : Executes LDY_ABX (TODO: Handle page crossing)
 void INS_LDY_ABX(CPU c);
 
+// --- STA ---
+
+// INS_STA_ZP : Executes STA_ZP
+void INS_STA_ZP(CPU c);
+
+// INS_STA_ZPX : Executes STA_ZPX
+void INS_STA_ZPX(CPU c);
+
+// INS_STA_AB : Executes STA_AB
+void INS_STA_AB(CPU c);
+
+// INS_STA_ABX : Executes STA_ABX
+void INS_STA_ABX(CPU c);
+
+// INS_STA_ABY : Executes STA_ABY
+void INS_STA_ABY(CPU c);
+
+// INS_STA_INX : Executes STA_INX
+void INS_STA_INX(CPU c);
+
+// INS_STA_INY : Executes STA_INY
+void INS_STA_INY(CPU c);
+
 #endif

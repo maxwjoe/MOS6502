@@ -113,3 +113,45 @@ void INS_LDY_ABX(CPU c)
     word address = ADDR_ABX(c);
     OPER_LDY(c, address);
 }
+
+void INS_STA_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_STA(c, address);
+}
+
+void INS_STA_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_STA(c, address);
+}
+
+void INS_STA_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_STA(c, address);
+}
+
+void INS_STA_ABX(CPU c)
+{
+    word address = ADDR_ABX(c);
+    OPER_STA(c, address);
+}
+
+void INS_STA_ABY(CPU c)
+{
+    word address = ADDR_ABY(c);
+    OPER_STA(c, address);
+}
+
+void INS_STA_INX(CPU c)
+{
+    word address = ADDR_INX(c);
+    OPER_STA(c, address);
+}
+
+void INS_STA_INY(CPU c)
+{
+    word address = ADDR_INY(c);
+    OPER_STA(c, address);
+}

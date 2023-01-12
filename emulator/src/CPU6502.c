@@ -379,4 +379,13 @@ static void s_setup_op_array(CPU c)
     c->ops[LDY_ZPX] = &INS_LDY_ZPX;
     c->ops[LDY_AB] = &INS_LDY_AB;
     c->ops[LDY_ABX] = &INS_LDY_ABX;
+
+    // STA
+    c->ops[STA_ZP] = &INS_STA_ZP;
+    c->ops[STA_ZPX] = &INS_STA_ZPX;
+    c->ops[STA_AB] = &INS_STA_AB;
+    c->ops[STA_ABX] = &INS_STA_ABX;
+    c->ops[STA_ABY] = &INS_STA_ABY;
+    c->ops[STA_INX] = &INS_STA_INX;
+    c->ops[STA_INY] = &INS_STA_INY;
 }

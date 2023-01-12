@@ -6,6 +6,7 @@
 #include "./unit_tests/test_lda.c"
 #include "./unit_tests/test_ldx.c"
 #include "./unit_tests/test_ldy.c"
+#include "./unit_tests/test_sta.c"
 
 int main()
 {
@@ -61,6 +62,9 @@ int main()
     ADD_TEST(LDY_COLLECTION, T_LDY_AB);
     ADD_TEST(LDY_COLLECTION, T_LDY_ABX_NO_CROSS);
     ADD_TEST(LDY_COLLECTION, T_LDY_ABX_WITH_CROSS);
+
+    // === STA Collection ===
+    ADD_TEST(STA_COLLECTION, T_STA_ZP);
 
     // === RUN ===
     // RUN_COLLECTION(CLOCK_COLLECTION);
