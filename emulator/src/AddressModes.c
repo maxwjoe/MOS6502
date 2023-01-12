@@ -34,17 +34,29 @@ word ADDR_AB(CPU c)
 word ADDR_ABX(CPU c)
 {
     word address = CPUFetchWord(c);
-    address += CPUGetX(c);
+    word shifted_address = address + CPUGetX(c);
 
-    return address;
+    // Check for and handle page cross after offsetting address
+    if ((shifted_address & 0xFF00) != (address & 0xFF00))
+    {
+        CPUClockTick(c);
+    }
+
+    return shifted_address;
 }
 
 word ADDR_ABY(CPU c)
 {
     word address = CPUFetchWord(c);
-    address += CPUGetY(c);
+    word shifted_address = address + CPUGetY(c);
 
-    return address;
+    // Check for and handle page cross after offsetting address
+    if ((shifted_address & 0xFF00) != (address & 0xFF00))
+    {
+        CPUClockTick(c);
+    }
+
+    return shifted_address;
 }
 
 word ADDR_INX(CPU c)
@@ -62,11 +74,17 @@ word ADDR_INX(CPU c)
 word ADDR_INY(CPU c)
 {
     byte zp_address = CPUFetchByte(c);
+    word shifted_zp_address = zp_address + CPUGetY(c);
 
-    zp_address += CPUGetY(c);
-    CPUClockTick(c);
+    // CPUClockTick(c);
 
-    word load_address = CPUReadWord(c, zp_address);
+    // Check for and handle page cross after offsetting address
+    if (shifted_zp_address & 0xFF00)
+    {
+        CPUClockTick(c);
+    }
+
+    word load_address = CPUReadWord(c, shifted_zp_address);
 
     return load_address;
 }

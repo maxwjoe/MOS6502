@@ -111,10 +111,42 @@ TEST(T_LDA_ABX_NO_CROSS)
 
     ClockSetTickLimit(clk, 4);
 
+    byte x_reg = 0x11;
+    CPUSetX(c, x_reg);
+
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, LDA_ABX);
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x22);
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x22);
-    MemoryWriteByte(m, 0x2222, 0x89);
+    MemoryWriteByte(m, 0x2222 + x_reg, 0x89);
+
+    int execution_result = CPUExecute(c);
+
+    byte a_register = CPUGetA(c);
+    int cycles_remaining = ClockGetTickLimit(clk);
+    GET_ALL_FLAGS();
+
+    CHECK_EQ(a_register, 0x89);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_FALSE(F_Z);
+    CHECK_TRUE(F_N);
+    CHECK_EQ(execution_result, ok);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_LDA_ABX_WITH_CROSS)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 5);
+
+    byte x_reg = 0x22;
+    CPUSetX(c, x_reg);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, LDA_ABX);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0xFF);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x22);
+    MemoryWriteByte(m, 0x22FF + x_reg, 0x89);
 
     int execution_result = CPUExecute(c);
 
@@ -191,7 +223,7 @@ TEST(T_LDA_INY_NO_CROSS)
 {
     SETUP_HW();
 
-    ClockSetTickLimit(clk, 6);
+    ClockSetTickLimit(clk, 5);
 
     byte y_reg = 0x22;
     CPUSetY(c, y_reg);
@@ -201,6 +233,36 @@ TEST(T_LDA_INY_NO_CROSS)
     MemoryWriteByte(m, 0x56 + y_reg, 0x99);
     MemoryWriteByte(m, 0x56 + y_reg + 1, 0x88);
     MemoryWriteByte(m, 0x8899, 0x42);
+
+    int execution_result = CPUExecute(c);
+
+    byte a_register = CPUGetA(c);
+    int cycles_remaining = ClockGetTickLimit(clk);
+    GET_ALL_FLAGS();
+
+    CHECK_EQ(a_register, 0x42);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_FALSE(F_Z);
+    CHECK_FALSE(F_N);
+    CHECK_EQ(execution_result, ok);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_LDA_INY_WITH_CROSS)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 6);
+
+    byte y_reg = 0x22;
+    CPUSetY(c, y_reg);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, LDA_INY);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0xFE);
+    MemoryWriteByte(m, 0x00FE + y_reg, 0xFF);
+    MemoryWriteByte(m, 0x00FF + y_reg + 1, 0x88);
+    MemoryWriteByte(m, 0x88FF, 0x42);
 
     int execution_result = CPUExecute(c);
 

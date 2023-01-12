@@ -331,7 +331,7 @@ int CPUExecute(CPU c)
 
     int tick_forever = ClockGetMode(c->clk);
 
-    while (tick_forever || ClockGetTickLimit(c->clk))
+    while (tick_forever || ClockGetTickLimit(c->clk) > 0)
     {
         byte instruction = CPUFetchByte(c);
 
