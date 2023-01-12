@@ -38,10 +38,10 @@ word ADDR_ABX(CPU c);
 // ADDR_ABY : Absolute Y Addressing Mode (2 CPU Cycles)
 word ADDR_ABY(CPU c);
 
-// ADDR_INX : Indirect X Addressing Mode (3 CPU Cycles)
+// ADDR_INX : Indirect X Addressing Mode (4 CPU Cycles)
 word ADDR_INX(CPU c);
 
-// ADDR_INY : Indirect Y Addressing Mode (3 CPU Cycles)
+// ADDR_INY : Indirect Y Addressing Mode (4 CPU Cycles)
 word ADDR_INY(CPU c);
 
 #endif

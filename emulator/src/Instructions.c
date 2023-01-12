@@ -48,6 +48,37 @@ void INS_LDA_INX(CPU c)
 
 void INS_LDA_INY(CPU c)
 {
-    word address = ADDR_INX(c);
+    word address = ADDR_INY(c);
     OPER_LDA(c, address);
+}
+
+void INS_LDX_IM(CPU c)
+{
+    byte load_value = CPUFetchByte(c);
+    CPUSetX(c, load_value);
+    SET_PS_XREGISTER(c);
+}
+
+void INS_LDX_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_LDX(c, address);
+}
+
+void INS_LDX_ZPY(CPU c)
+{
+    byte address = ADDR_ZPY(c);
+    OPER_LDX(c, address);
+}
+
+void INS_LDX_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_LDX(c, address);
+}
+
+void INS_LDX_ABY(CPU c)
+{
+    word address = ADDR_ABY(c);
+    OPER_LDX(c, address);
 }

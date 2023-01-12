@@ -9,9 +9,9 @@ byte ADDR_ZP(CPU c)
 byte ADDR_ZPX(CPU c)
 {
     byte zp_address = CPUFetchByte(c);
-    zp_address += CPUGetX(c);
 
-    // CPUClockTick(c);
+    zp_address += CPUGetX(c);
+    CPUClockTick(c);
 
     return zp_address;
 }
@@ -19,9 +19,9 @@ byte ADDR_ZPX(CPU c)
 byte ADDR_ZPY(CPU c)
 {
     byte zp_address = CPUFetchByte(c);
-    zp_address += CPUGetY(c);
 
-    // CPUClockTick(c);
+    zp_address += CPUGetY(c);
+    CPUClockTick(c);
 
     return zp_address;
 }
@@ -50,7 +50,9 @@ word ADDR_ABY(CPU c)
 word ADDR_INX(CPU c)
 {
     byte zp_address = CPUFetchByte(c);
+
     zp_address += CPUGetX(c);
+    CPUClockTick(c);
 
     word load_address = CPUReadWord(c, zp_address);
 
@@ -60,7 +62,9 @@ word ADDR_INX(CPU c)
 word ADDR_INY(CPU c)
 {
     byte zp_address = CPUFetchByte(c);
+
     zp_address += CPUGetY(c);
+    CPUClockTick(c);
 
     word load_address = CPUReadWord(c, zp_address);
 

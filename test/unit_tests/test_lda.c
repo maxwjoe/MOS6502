@@ -191,16 +191,16 @@ TEST(T_LDA_INY_NO_CROSS)
 {
     SETUP_HW();
 
-    ClockSetTickLimit(clk, 5);
+    ClockSetTickLimit(clk, 6);
 
     byte y_reg = 0x22;
     CPUSetY(c, y_reg);
 
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, LDA_INY);
-    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x22);
-    MemoryWriteByte(m, 0x56 + y_reg + 1, 0x99);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x56);
     MemoryWriteByte(m, 0x56 + y_reg, 0x99);
-    MemoryWriteByte(m, 0x9999, 0x42);
+    MemoryWriteByte(m, 0x56 + y_reg + 1, 0x88);
+    MemoryWriteByte(m, 0x8899, 0x42);
 
     int execution_result = CPUExecute(c);
 

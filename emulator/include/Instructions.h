@@ -38,4 +38,21 @@ void INS_LDA_INX(CPU c);
 // INS_LDA_INY : Executes LDA_INY (TODO: Handle Page Cross)
 void INS_LDA_INY(CPU c);
 
+// --- LDX ---
+
+// INS_LDX_IM : Executes LDX_IM
+void INS_LDX_IM(CPU c);
+
+// INS_LDX_ZP : Executes LDX_ZP
+void INS_LDX_ZP(CPU c);
+
+// INS_LDX_ZPY : Executes LDX_ZPY
+void INS_LDX_ZPY(CPU c);
+
+// INS_LDX_AB : Executes LDX_AB
+void INS_LDX_AB(CPU c);
+
+// INS_LDX_ABY : Executes LDX_ABY (TODO: Need to handle page crossing)
+void INS_LDX_ABY(CPU c);
+
 #endif

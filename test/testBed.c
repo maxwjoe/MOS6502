@@ -4,6 +4,7 @@
 #include "./unit_tests/test_cpu.c"
 #include "./unit_tests/test_clock.c"
 #include "./unit_tests/test_lda.c"
+#include "./unit_tests/test_ldx.c"
 
 int main()
 {
@@ -41,6 +42,13 @@ int main()
     ADD_TEST(LDA_COLLECTION, T_LDA_ABY_NO_CROSS);
     ADD_TEST(LDA_COLLECTION, T_LDA_INX);
     ADD_TEST(LDA_COLLECTION, T_LDA_INY_NO_CROSS);
+
+    // === LDX Collection ===
+    ADD_TEST(LDX_COLLECTION, T_LDX_IM);
+    ADD_TEST(LDX_COLLECTION, T_LDX_ZP);
+    ADD_TEST(LDX_COLLECTION, T_LDX_ZPY);
+    ADD_TEST(LDX_COLLECTION, T_LDX_AB);
+    ADD_TEST(LDX_COLLECTION, T_LDX_ABY_NO_CROSS);
 
     // === RUN ===
     // RUN_COLLECTION(CLOCK_COLLECTION);

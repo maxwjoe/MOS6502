@@ -10,13 +10,13 @@
 
 // === OPERATION DECLARATIONS ===
 
-// OPER_LDA : Implements LDA Instruction
+// OPER_LDA : Implements LDA Instruction (1 Cycle)
 void OPER_LDA(CPU c, word address);
 
-// OPER_LDX : Implements LDX Instruction
+// OPER_LDX : Implements LDX Instruction (1 Cycle)
 void OPER_LDX(CPU c, word address);
 
-// OPER_LDY : Implements LDY Instruction
+// OPER_LDY : Implements LDY Instruction (1 Cycle)
 void OPER_LDY(CPU c, word address);
 
 // OPER_STA : Implements STA Instruction
@@ -50,5 +50,11 @@ void OPER_SBC(CPU c, word address);
 
 // SET_PS_ACCUMULATOR : Sets the processor status flags based on value in accumulator
 void SET_PS_ACCUMULATOR(CPU c);
+
+// SET_PS_XREGISTER : Sets the processor status flags based on value in the X Register
+void SET_PS_XREGISTER(CPU c);
+
+// SET_PS_YREGISTER : Sets the processor status flags based on value in the Y Register
+void SET_PS_YREGISTER(CPU c);
 
 #endif
