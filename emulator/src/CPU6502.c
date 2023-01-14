@@ -25,6 +25,7 @@ typedef struct cpu6502
 
     // === Other ===
 
+    int cycle_penalty;  // Flag to indicate additional cycle required
     cpu_operation *ops; // Array of function pointers to CPU Operations
 
 } *CPU;
@@ -325,6 +326,18 @@ byte CPUGetY(CPU c)
     return c->Y;
 }
 
+int CPUSetCyclePenalty(CPU c, int value)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    c->cycle_penalty = value;
+}
+
+int CPUGetCyclePenalty(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+    return c->cycle_penalty;
+}
+
 int CPUExecute(CPU c)
 {
     HANDLE_NULL(c, error_invalid_argument);
@@ -344,6 +357,7 @@ int CPUExecute(CPU c)
         }
 
         func(c);
+        CPUSetCyclePenalty(c, 0);
     }
 
     return ok;

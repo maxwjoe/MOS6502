@@ -41,7 +41,7 @@ word ADDR_ABX(CPU c)
     // Check for and handle page cross after offsetting address
     if ((shifted_address & 0xFF00) != (address & 0xFF00))
     {
-        CPUClockTick(c);
+        CPUSetCyclePenalty(c, CPUGetCyclePenalty(c) + 1);
     }
 
     return shifted_address;
@@ -55,7 +55,7 @@ word ADDR_ABY(CPU c)
     // Check for and handle page cross after offsetting address
     if ((shifted_address & 0xFF00) != (address & 0xFF00))
     {
-        CPUClockTick(c);
+        CPUSetCyclePenalty(c, CPUGetCyclePenalty(c) + 1);
     }
 
     return shifted_address;
@@ -83,7 +83,7 @@ word ADDR_INY(CPU c)
     // Check for and handle page cross after offsetting address
     if (shifted_zp_address & 0xFF00)
     {
-        CPUClockTick(c);
+        CPUSetCyclePenalty(c, CPUGetCyclePenalty(c) + 1);
     }
 
     word load_address = CPUReadWord(c, shifted_zp_address);

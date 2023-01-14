@@ -22,6 +22,15 @@
 #define HANDLE_NULL(X, RET)
 #endif
 
+// CYCLE_PENALTY : Executes penalty CPU Cycles
+#define CYCLE_PENALTY(c)                       \
+    int cycle_penalty = CPUGetCyclePenalty(c); \
+    while (cycle_penalty > 0)                  \
+    {                                          \
+        CPUClockTick(c);                       \
+        cycle_penalty--;                       \
+    }
+
 // LOG_WARN_MSG : Logs a warning to the console
 #define LOG_WARN_MSG(X) printf("WARNING : %s\n", X);
 

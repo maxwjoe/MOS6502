@@ -73,6 +73,12 @@ int CPUExecute(CPU c);
 
 // === Getters and Setters ===
 
+// CPUSetCyclePenalty : Sets the value of the cycle_penalty variable
+int CPUSetCyclePenalty(CPU c, int value);
+
+// CPUGetCyclePenalty : Gets the value of the cycle_penalty variable
+int CPUGetCyclePenalty(CPU c);
+
 // CPUSetStatusFlag : Sets a CPU Status Flag (Returns 0 on fail)
 int CPUSetStatusFlag(CPU c, int flag_id, int flag_value);
 

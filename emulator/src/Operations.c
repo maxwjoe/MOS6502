@@ -1,8 +1,11 @@
 #include "Operations.h"
+#include "EmulatorHelper.h"
 #include "CPU6502.h"
 
 void OPER_LDA(CPU c, word address)
 {
+    CYCLE_PENALTY(c);
+
     byte load_value = CPUReadByte(c, address);
     CPUSetA(c, load_value);
     SET_PS_ACCUMULATOR(c);
@@ -10,6 +13,8 @@ void OPER_LDA(CPU c, word address)
 
 void OPER_LDX(CPU c, word address)
 {
+    CYCLE_PENALTY(c);
+
     byte load_value = CPUReadByte(c, address);
     CPUSetX(c, load_value);
     SET_PS_XREGISTER(c);
@@ -17,6 +22,8 @@ void OPER_LDX(CPU c, word address)
 
 void OPER_LDY(CPU c, word address)
 {
+    CYCLE_PENALTY(c);
+
     byte load_value = CPUReadByte(c, address);
     CPUSetY(c, load_value);
     SET_PS_YREGISTER(c);
