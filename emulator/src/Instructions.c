@@ -176,3 +176,39 @@ void INS_STA_INY(CPU c)
 
     OPER_STA(c, address);
 }
+
+void INS_STX_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_STX(c, address);
+}
+
+void INS_STX_ZPY(CPU c)
+{
+    byte address = ADDR_ZPY(c);
+    OPER_STX(c, address);
+}
+
+void INS_STX_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_STX(c, address);
+}
+
+void INS_STY_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_STY(c, address);
+}
+
+void INS_STY_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_STY(c, address);
+}
+
+void INS_STY_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_STY(c, address);
+}

@@ -35,6 +35,18 @@ void OPER_STA(CPU c, word address)
     CPUWriteByte(c, address, a_register);
 }
 
+void OPER_STX(CPU c, word address)
+{
+    byte x_register = CPUGetX(c);
+    CPUWriteByte(c, address, x_register);
+}
+
+void OPER_STY(CPU c, word address)
+{
+    byte y_register = CPUGetY(c);
+    CPUWriteByte(c, address, y_register);
+}
+
 void SET_PS_ACCUMULATOR(CPU c)
 {
     byte a_val = CPUGetA(c);

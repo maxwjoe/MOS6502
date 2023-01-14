@@ -180,3 +180,149 @@ TEST(T_STA_INY)
 
     CPUFree(c, 1);
 }
+
+TEST(T_STX_ZP)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 3);
+
+    CPUSetX(c, 0x46);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, STX_ZP);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x11);
+
+    int execution_status = CPUExecute(c);
+
+    byte value_written = MemoryReadByte(m, 0x0011);
+    int cycles_remaining = ClockGetTickLimit(clk);
+
+    CHECK_EQ(execution_status, ok);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_EQ(value_written, 0x46);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_STX_ZPY)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 4);
+
+    CPUSetX(c, 0x46);
+
+    byte y_reg = 0x77;
+    CPUSetY(c, y_reg);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, STX_ZPY);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x11);
+
+    int execution_status = CPUExecute(c);
+
+    byte value_written = MemoryReadByte(m, 0x0011 + y_reg);
+    int cycles_remaining = ClockGetTickLimit(clk);
+
+    CHECK_EQ(execution_status, ok);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_EQ(value_written, 0x46);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_STX_AB)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 4);
+
+    CPUSetX(c, 0x46);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, STX_AB);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x11);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x55);
+
+    int execution_status = CPUExecute(c);
+
+    byte value_written = MemoryReadByte(m, 0x5511);
+    int cycles_remaining = ClockGetTickLimit(clk);
+
+    CHECK_EQ(execution_status, ok);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_EQ(value_written, 0x46);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_STY_ZP)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 3);
+
+    CPUSetY(c, 0x46);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, STY_ZP);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x11);
+
+    int execution_status = CPUExecute(c);
+
+    byte value_written = MemoryReadByte(m, 0x0011);
+    int cycles_remaining = ClockGetTickLimit(clk);
+
+    CHECK_EQ(execution_status, ok);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_EQ(value_written, 0x46);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_STY_ZPX)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 4);
+
+    CPUSetY(c, 0x46);
+
+    byte x_reg = 0x77;
+    CPUSetX(c, x_reg);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, STY_ZPX);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x11);
+
+    int execution_status = CPUExecute(c);
+
+    byte value_written = MemoryReadByte(m, 0x0011 + x_reg);
+    int cycles_remaining = ClockGetTickLimit(clk);
+
+    CHECK_EQ(execution_status, ok);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_EQ(value_written, 0x46);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_STY_AB)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 4);
+
+    CPUSetY(c, 0x46);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, STY_AB);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x11);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x55);
+
+    int execution_status = CPUExecute(c);
+
+    byte value_written = MemoryReadByte(m, 0x5511);
+    int cycles_remaining = ClockGetTickLimit(clk);
+
+    CHECK_EQ(execution_status, ok);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_EQ(value_written, 0x46);
+
+    CPUFree(c, 1);
+}
