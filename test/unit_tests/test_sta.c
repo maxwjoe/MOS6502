@@ -109,7 +109,7 @@ TEST(T_STA_ABY)
 
     CPUSetA(c, 0x11);
     byte y_reg = 0x25;
-    CPUSetX(c, y_reg);
+    CPUSetY(c, y_reg);
 
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, STA_ABY);
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x55);
@@ -162,7 +162,7 @@ TEST(T_STA_INY)
 
     CPUSetA(c, 0x78);
     byte y_reg = 0x21;
-    CPUSetX(c, y_reg);
+    CPUSetY(c, y_reg);
 
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, STA_INY);
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x23);
@@ -180,14 +180,3 @@ TEST(T_STA_INY)
 
     CPUFree(c, 1);
 }
-
-/*
-Problem : STA_ABX does not require an extra cycle on page cross
-You have put the extra cycle inside the ABX addressing function which is wrong
-Instead, set a flag on CPU struct that an extra cycle is needed (do it inside ADDR_ABX)
-Following this, inside the OPER_LDA for example, set a flag that an extra cycle COULD BE needed
-
-inside the execution loop, check that both flags are high, if both are high do the extra cycle
-Set both back to low again regardless
-
-*/

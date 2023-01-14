@@ -3,6 +3,18 @@
 #include "Operations.h"
 #include "CPU6502.h"
 
+/*
+File : Instructions
+Description : Code to be executed in emulating an individual CPU Instruction
+
+Notes :
+
+1. Writing with offset (eg. STA_ABX) requires an additional CPU Cycle after addressing.
+This is to emulate the 6502 checking that no overflow has occurred in the low byte, if overflow happens
+it needs to increment the high byte to avoid indexing 256 bytes too low into memory.
+
+*/
+
 void INS_LDA_IM(CPU c)
 {
     byte load_value = CPUFetchByte(c);
@@ -135,12 +147,18 @@ void INS_STA_AB(CPU c)
 void INS_STA_ABX(CPU c)
 {
     word address = ADDR_ABX(c);
+
+    CPUClockTick(c); // See Note 1
+
     OPER_STA(c, address);
 }
 
 void INS_STA_ABY(CPU c)
 {
     word address = ADDR_ABY(c);
+
+    CPUClockTick(c); // See Note 1
+
     OPER_STA(c, address);
 }
 

@@ -343,6 +343,7 @@ int CPUExecute(CPU c)
     HANDLE_NULL(c, error_invalid_argument);
 
     int tick_forever = ClockGetMode(c->clk);
+    tick_forever = 0; // Remove Later
 
     while (tick_forever || ClockGetTickLimit(c->clk) > 0)
     {
