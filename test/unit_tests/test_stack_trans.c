@@ -215,7 +215,7 @@ TEST(T_PLA_IMP)
     ClockSetTickLimit(clk, 4);
 
     CPUSetSP(c, 0x66);
-    MemoryWriteByte(m, DEFAULT_STACK_BEGIN + 0x66, 0x89);
+    MemoryWriteByte(m, DEFAULT_STACK_BEGIN + 0x66 + 1, 0x89);
 
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, PLA_IMP);
 
@@ -230,6 +230,8 @@ TEST(T_PLA_IMP)
     CHECK_EQ(data_pulled, 0x89);
     CHECK_FALSE(F_Z);
     CHECK_TRUE(F_N);
+
+    CPUFree(c, 1);
 }
 
 TEST(T_PLP_IMP)
@@ -239,19 +241,20 @@ TEST(T_PLP_IMP)
     ClockSetTickLimit(clk, 4);
 
     CPUSetSP(c, 0xFF);
-    MemoryWriteByte(m, DEFAULT_STACK_BEGIN + 0xFF, 0x99);
 
-    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, PLA_IMP);
+    // Checks that stack can wrap around
+    MemoryWriteByte(m, DEFAULT_STACK_BEGIN + 0x00, 0x99);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, PLP_IMP);
 
     int execution_status = CPUExecute(c);
     int cycles_remaining = ClockGetTickLimit(clk);
 
     byte data_pulled = CPUGetStatusRegister(c);
-    GET_ALL_FLAGS();
 
     CHECK_EQ(execution_status, ok);
     CHECK_EQ(cycles_remaining, 0);
     CHECK_EQ(data_pulled, 0x99);
-    CHECK_FALSE(F_Z);
-    CHECK_TRUE(F_N);
+
+    CPUFree(c, 1);
 }

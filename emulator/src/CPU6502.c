@@ -195,10 +195,10 @@ byte CPUPopByteFromStack(CPU c)
 {
     HANDLE_NULL(c, error_invalid_argument);
 
-    c->PS++;
+    c->SP++;
     CPUClockTick(c);
 
-    byte data = CPUReadByte(c, DEFAULT_STACK_BEGIN + c->PS);
+    byte data = CPUReadByte(c, DEFAULT_STACK_BEGIN + c->SP);
     return data;
 }
 

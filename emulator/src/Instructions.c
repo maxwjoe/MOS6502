@@ -2,6 +2,7 @@
 #include "AddressModes.h"
 #include "Operations.h"
 #include "CPU6502.h"
+#include "stdio.h"
 
 /*
 File : Instructions
@@ -293,5 +294,4 @@ void INS_PLP_IMP(CPU c)
 
     CPUClockTick(c); // Why?
     CPUSetStatusRegister(c, value);
-    SET_PS_ACCUMULATOR(c);
 }
