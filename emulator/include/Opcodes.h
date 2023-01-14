@@ -41,65 +41,65 @@
 
 // STA : Store Accumulator
 
-#define STA_ZP 0x85  // Store Accumulator (Zero Page Mode, 3) :
-#define STA_ZPX 0x95 // Store Accumulator (Zero Page X Mode, 4) :
-#define STA_AB 0x8D  // Store Accumulator (Absolute Mode, 4) :
-#define STA_ABX 0x9D // Store Accumulator (Absolute X Mode, 5) :
-#define STA_ABY 0x99 // Store Accumulator (Absolute Y Mode, 5) :
-#define STA_INX 0x81 // Store Accumulator (Indirect X Mode, 6) :
-#define STA_INY 0x91 // Store Accumulator (Indirect Y Mode, 6) :
+#define STA_ZP 0x85  // Store Accumulator (Zero Page Mode, 3) : C, T
+#define STA_ZPX 0x95 // Store Accumulator (Zero Page X Mode, 4) : C, T
+#define STA_AB 0x8D  // Store Accumulator (Absolute Mode, 4) : C, T
+#define STA_ABX 0x9D // Store Accumulator (Absolute X Mode, 5) : C, T
+#define STA_ABY 0x99 // Store Accumulator (Absolute Y Mode, 5) : C, T
+#define STA_INX 0x81 // Store Accumulator (Indirect X Mode, 6) : C, T
+#define STA_INY 0x91 // Store Accumulator (Indirect Y Mode, 6) : C, T
 
 // STX : Store X Register
 
-#define STX_ZP 0x86  // Store X Register (Zero Page Mode, 3) :
-#define STX_ZPY 0x96 // Store X Register (Zero Page Y Mode, 4) :
-#define STX_AB 0x8E  // Store X Register (Absolute Mode, 4) :
+#define STX_ZP 0x86  // Store X Register (Zero Page Mode, 3) : C, T
+#define STX_ZPY 0x96 // Store X Register (Zero Page Y Mode, 4) : C, T
+#define STX_AB 0x8E  // Store X Register (Absolute Mode, 4) : C, T
 
 // STY : Store Y Register
 
-#define STY_ZP 0x84  // Store Y Register (Zero Page Mode, 3) :
-#define STY_ZPX 0x94 // Store Y Register (Zero Page Y Mode, 4) :
-#define STY_AB 0x8C  // Store Y Register (Absolute Mode, 4) :
+#define STY_ZP 0x84  // Store Y Register (Zero Page Mode, 3) : C, T
+#define STY_ZPX 0x94 // Store Y Register (Zero Page Y Mode, 4) : C, T
+#define STY_AB 0x8C  // Store Y Register (Absolute Mode, 4) : C, T
 
 // TAX : Transfer Accumulator to X Register
 
-#define TAX_IMP 0xAA // Transfer Accumulator to X Register (Implied, 2) :
+#define TAX_IMP 0xAA // Transfer Accumulator to X Register (Implied, 2) : C, T
 
 // TAY : Transfer Accumulator to Y Register
 
-#define TAY_IMP 0xA8 // Transfer Accumulator to Y Register (Implied, 2) :
+#define TAY_IMP 0xA8 // Transfer Accumulator to Y Register (Implied, 2) : C, T
 
 // TXA : Transfer X Register to Accumulator
 
-#define TXA_IMP 0x8A // Transfer X Register to Accumulator (Implied, 2) :
+#define TXA_IMP 0x8A // Transfer X Register to Accumulator (Implied, 2) : C, T
 
 // TYA : Transfer Y Register to Accumulator
 
-#define TYA_IMP 0x98 // Transfer Y Register to Accumulator (Implied, 2) :
+#define TYA_IMP 0x98 // Transfer Y Register to Accumulator (Implied, 2) : C, T
 
 // TSX : Transfer Stack Pointer to X Register
 
-#define TSX_IMP 0xBA // Transfer Stack Pointer to X Register (Implied, 2) :
+#define TSX_IMP 0xBA // Transfer Stack Pointer to X Register (Implied, 2) : C, T
 
 // TXS : Transfer X Register to Stack Pointer
 
-#define TXS_IMP 0x9A // Transfer X Register to Stack Pointer (Implied, 2) :
+#define TXS_IMP 0x9A // Transfer X Register to Stack Pointer (Implied, 2) : C, T
 
 // PHA : Push Accumulator
 
-#define PHA_IMP 0x48 // Push Accumulator to Stack (Implied, 3) :
+#define PHA_IMP 0x48 // Push Accumulator to Stack (Implied, 3) : C, T
 
 // PHP : Push Processor Status
 
-#define PHP_IMP 0x08 // Push Processor Status to Stack (Implied, 3) :
+#define PHP_IMP 0x08 // Push Processor Status to Stack (Implied, 3) : C, T
 
 // PLA : Pull Accumulator
 
-#define PLA_IMP 0x68 // Pull value from stack and store in accumulator (Implied, 4) :
+#define PLA_IMP 0x68 // Pull value from stack and store in accumulator (Implied, 4) : C, T
 
 // PLP : Pull Processor Status
 
-#define PLP_IMP 0x28 // Pull value from stack and store as processor status (Implied, 4) :
+#define PLP_IMP 0x28 // Pull value from stack and store as processor status (Implied, 4) : C, T
 
 // AND : Logical AND on Accumulator
 
