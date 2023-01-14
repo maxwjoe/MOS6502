@@ -58,6 +58,12 @@ word CPUReadWord(CPU c, word address);
 // CPUWriteByte : Writes a byte to memory at a given address (1 Cycle)
 int CPUWriteByte(CPU c, word address, byte data);
 
+// CPUPushByteToStack : Writes a byte of data to the stack (2 Cycles)
+int CPUPushByteToStack(CPU c, byte data);
+
+// CPUPopByteFromStack : Pulls a byte of data from the stack (2 Cycles)
+byte CPUPopByteFromStack(CPU c);
+
 // === Clock Operations ===
 
 // CPUConnectClock : Connects CPU to clock

@@ -179,6 +179,29 @@ int CPUWriteByte(CPU c, word address, byte data)
     return status_code;
 }
 
+int CPUPushByteToStack(CPU c, byte data)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    CPUWriteByte(c, DEFAULT_STACK_BEGIN + c->SP, data);
+
+    c->SP--;
+    CPUClockTick(c);
+
+    return ok;
+}
+
+byte CPUPopByteFromStack(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    c->PS++;
+    CPUClockTick(c);
+
+    byte data = CPUReadByte(c, DEFAULT_STACK_BEGIN + c->PS);
+    return data;
+}
+
 int CPUSetStatusFlag(CPU c, int flag_id, int flag_value)
 {
     HANDLE_NULL(c, error_invalid_argument);
@@ -413,4 +436,34 @@ static void s_setup_op_array(CPU c)
     c->ops[STY_ZP] = &INS_STY_ZP;
     c->ops[STY_ZPX] = &INS_STY_ZPX;
     c->ops[STY_AB] = &INS_STY_AB;
+
+    // TAX
+    c->ops[TAX_IMP] = &INS_TAX_IMP;
+
+    // TAY
+    c->ops[TAY_IMP] = &INS_TAY_IMP;
+
+    // TXA
+    c->ops[TXA_IMP] = &INS_TXA_IMP;
+
+    // TYA
+    c->ops[TYA_IMP] = &INS_TYA_IMP;
+
+    // TSX
+    c->ops[TSX_IMP] = &INS_TSX_IMP;
+
+    // TXS
+    c->ops[TXS_IMP] = &INS_TXS_IMP;
+
+    // PHA
+    c->ops[PHA_IMP] = &INS_PHA_IMP;
+
+    // PHP
+    c->ops[PHP_IMP] = &INS_PHP_IMP;
+
+    // PLA
+    c->ops[PLA_IMP] = &INS_PLA_IMP;
+
+    // PLP
+    c->ops[PLP_IMP] = &INS_PLP_IMP;
 }

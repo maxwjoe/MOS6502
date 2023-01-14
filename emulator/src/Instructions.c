@@ -212,3 +212,86 @@ void INS_STY_AB(CPU c)
     word address = ADDR_AB(c);
     OPER_STY(c, address);
 }
+
+void INS_TAX_IMP(CPU c)
+{
+    byte a_value = CPUGetA(c);
+    CPUSetX(c, a_value);
+    SET_PS_XREGISTER(c);
+
+    CPUClockTick(c);
+}
+
+void INS_TAY_IMP(CPU c)
+{
+    byte a_value = CPUGetA(c);
+    CPUSetY(c, a_value);
+    SET_PS_YREGISTER(c);
+
+    CPUClockTick(c);
+}
+
+void INS_TXA_IMP(CPU c)
+{
+    byte x_value = CPUGetX(c);
+    CPUSetA(c, x_value);
+    SET_PS_ACCUMULATOR(c);
+
+    CPUClockTick(c);
+}
+
+void INS_TYA_IMP(CPU c)
+{
+    byte y_value = CPUGetY(c);
+    CPUSetA(c, y_value);
+    SET_PS_ACCUMULATOR(c);
+
+    CPUClockTick(c);
+}
+
+void INS_TSX_IMP(CPU c)
+{
+    byte stack_ptr = CPUGetSP(c);
+    CPUSetX(c, stack_ptr);
+    SET_PS_XREGISTER(c);
+
+    CPUClockTick(c);
+}
+
+void INS_TXS_IMP(CPU c)
+{
+    byte x_value = CPUGetX(c);
+    CPUSetSP(c, x_value);
+
+    CPUClockTick(c);
+}
+
+void INS_PHA_IMP(CPU c)
+{
+    byte a_value = CPUGetA(c);
+    CPUPushByteToStack(c, a_value);
+}
+
+void INS_PHP_IMP(CPU c)
+{
+    byte status_register = CPUGetStatusRegister(c);
+    CPUPushByteToStack(c, status_register);
+}
+
+void INS_PLA_IMP(CPU c)
+{
+    byte value = CPUPopByteFromStack(c);
+
+    CPUClockTick(c); // Why?
+    CPUSetA(c, value);
+    SET_PS_ACCUMULATOR(c);
+}
+
+void INS_PLP_IMP(CPU c)
+{
+    byte value = CPUPopByteFromStack(c);
+
+    CPUClockTick(c); // Why?
+    CPUSetStatusRegister(c, value);
+    SET_PS_ACCUMULATOR(c);
+}

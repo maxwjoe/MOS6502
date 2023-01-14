@@ -117,4 +117,54 @@ void INS_STY_ZPX(CPU c);
 // INS_STY_AB : Executes STY_AB
 void INS_STY_AB(CPU c);
 
+// --- TAX ---
+
+// INS_TAX_IMP : Executes TAX_IMP
+void INS_TAX_IMP(CPU c);
+
+// --- TAY ---
+
+// INS_TAY_IMP : Executes TAY_IMP
+void INS_TAY_IMP(CPU c);
+
+// --- TXA ---
+
+// INS_TXA_IMP : Executes TXA_IMP
+void INS_TXA_IMP(CPU c);
+
+// --- TYA ---
+
+// INS_TYA_IMP : Executes TYA_IMP
+void INS_TYA_IMP(CPU c);
+
+// --- TSX ---
+
+// INS_TSX_IMP : Executes TSX_IMP
+void INS_TSX_IMP(CPU c);
+
+// -- TXS ---
+
+// INS_TXS_IMP : Executes TXS_IMP
+void INS_TXS_IMP(CPU c);
+
+// --- PHA ---
+
+// INS_PHA_IMP : Executes PHA_IMP
+void INS_PHA_IMP(CPU c);
+
+// --- PHP ---
+
+// INS_PHP_IMP : Executes PHP_IMP
+void INS_PHP_IMP(CPU c);
+
+// --- PLA ---
+
+// INS_PLA_IMP : Executes PLA_IMP
+void INS_PLA_IMP(CPU c);
+
+// --- PLP ---
+
+// INS_PLP_IMP : Executes PLP_IMP
+void INS_PLP_IMP(CPU c);
+
 #endif
