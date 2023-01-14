@@ -166,13 +166,13 @@ TEST(T_STA_INY)
 
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, STA_INY);
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x23);
-    MemoryWriteByte(m, 0x23 + y_reg, 0x43);
-    MemoryWriteByte(m, 0x23 + y_reg + 1, 0x43);
+    MemoryWriteByte(m, 0x23, 0x43);
+    MemoryWriteByte(m, 0x23 + 1, 0x43);
 
     int execution_status = CPUExecute(c);
 
     int cycles_remaining = ClockGetTickLimit(clk);
-    byte value_written = MemoryReadByte(m, 0x4343);
+    byte value_written = MemoryReadByte(m, 0x4343 + y_reg);
 
     CHECK_EQ(execution_status, ok);
     CHECK_EQ(value_written, 0x78);

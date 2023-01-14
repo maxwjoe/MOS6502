@@ -230,9 +230,9 @@ TEST(T_LDA_INY_NO_CROSS)
 
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, LDA_INY);
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x56);
-    MemoryWriteByte(m, 0x56, 0x99);
+    MemoryWriteByte(m, 0x56, 0x00);
     MemoryWriteByte(m, 0x56 + 1, 0x88);
-    MemoryWriteByte(m, 0x8899 + y_reg, 0x42);
+    MemoryWriteByte(m, 0x8800 + y_reg, 0x42);
 
     int execution_result = CPUExecute(c);
 

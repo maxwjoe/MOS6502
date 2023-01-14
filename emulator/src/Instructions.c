@@ -171,5 +171,8 @@ void INS_STA_INX(CPU c)
 void INS_STA_INY(CPU c)
 {
     word address = ADDR_INY(c);
+
+    CPUClockTick(c); // See Note 1
+
     OPER_STA(c, address);
 }

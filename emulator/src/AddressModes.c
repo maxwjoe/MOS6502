@@ -76,12 +76,12 @@ word ADDR_INX(CPU c)
 word ADDR_INY(CPU c)
 {
     byte zp_address = CPUFetchByte(c);
-    word effective_address = CPUReadWord(c, zp_address);
+    word address = CPUReadWord(c, zp_address);
 
-    word shifted_address = effective_address + CPUGetY(c);
+    word shifted_address = address + CPUGetY(c);
 
     // Check for and handle page cross after offsetting address
-    if (shifted_address & 0xFF00)
+    if ((shifted_address & 0xFF00) != (address & 0xFF00))
     {
         CPUSetCyclePenalty(c, CPUGetCyclePenalty(c) + 1);
     }
