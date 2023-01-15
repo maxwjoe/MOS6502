@@ -1,6 +1,7 @@
 #include "CPU6502.h"
 #include "stdlib.h"
 #include "EmulatorHelper.h"
+#include "EmulatorConfig.h"
 #include "Instructions.h"
 
 static void s_setup_op_array(CPU c);
@@ -372,6 +373,14 @@ int CPUExecute(CPU c)
     {
         byte instruction = CPUFetchByte(c);
 
+#if !DEBUG_MODE
+        if (!instruction)
+        {
+            CPUClockTick(c);
+            continue;
+        }
+#endif
+
         cpu_operation func = c->ops[instruction];
 
         if (!func)
@@ -466,4 +475,14 @@ static void s_setup_op_array(CPU c)
 
     // PLP
     c->ops[PLP_IMP] = &INS_PLP_IMP;
+
+    // AND
+    c->ops[AND_IM] = &INS_AND_IM;
+    c->ops[AND_ZP] = &INS_AND_ZP;
+    c->ops[AND_ZPX] = &INS_AND_ZPX;
+    c->ops[AND_AB] = &INS_AND_AB;
+    c->ops[AND_ABX] = &INS_AND_ABX;
+    c->ops[AND_ABY] = &INS_AND_ABY;
+    c->ops[AND_INX] = &INS_AND_INX;
+    c->ops[AND_INY] = &INS_AND_INY;
 }

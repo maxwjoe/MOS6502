@@ -200,8 +200,8 @@ TEST(T_LDA_INX)
 
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, LDA_INX);
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x56);
-    MemoryWriteByte(m, 0x56 + x_reg, 0x99);
-    MemoryWriteByte(m, 0x56 + x_reg + 1, 0x99);
+    MemoryWriteByte(m, 0x0056 + x_reg, 0x99);
+    MemoryWriteByte(m, 0x0056 + x_reg + 1, 0x99);
     MemoryWriteByte(m, 0x9999, 0x42);
 
     int execution_result = CPUExecute(c);

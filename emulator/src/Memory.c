@@ -39,6 +39,8 @@ Memory MemoryNew(int capacity_bytes)
         return NULL;
     }
 
+    MemoryWriteAll(m, 0xEA); // Set all to NO-OP
+
     return m;
 }
 
@@ -68,7 +70,7 @@ int MemoryWriteAll(Memory m, byte data)
         return error_invalid_argument;
     }
 
-    for (byte i = 0; i < m->capacity; i++)
+    for (word i = 0; i < m->capacity; i++)
     {
         m->data[i] = data;
     }

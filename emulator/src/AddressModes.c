@@ -1,6 +1,9 @@
 #include "AddressModes.h"
 #include "CPU6502.h"
 
+// TODO: Ensure wrapping is correct for each address mode
+// - Eg. Does ZPX for example need to return a word?
+
 byte ADDR_ZP(CPU c)
 {
     return CPUFetchByte(c);

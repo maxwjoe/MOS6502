@@ -167,4 +167,126 @@ void INS_PLA_IMP(CPU c);
 // INS_PLP_IMP : Executes PLP_IMP
 void INS_PLP_IMP(CPU c);
 
+// --- AND ---
+
+// INS_AND_IM : Executes AND_IM
+void INS_AND_IM(CPU c);
+
+// INS_AND_ZP : Executes AND_ZP
+void INS_AND_ZP(CPU c);
+
+// INS_AND_ZPX : Executes AND_ZPX
+void INS_AND_ZPX(CPU c);
+
+// INS_AND_AB : Executes AND_AB
+void INS_AND_AB(CPU c);
+
+// INS_AND_ABX : Executes AND_ABX
+void INS_AND_ABX(CPU c);
+
+// INS_AND_ABY : Executes AND_ABY
+void INS_AND_ABY(CPU c);
+
+// INS_AND_INX : Executes AND_INX
+void INS_AND_INX(CPU c);
+
+// INS_AND_INY : Executes AND_INY
+void INS_AND_INY(CPU c);
+
+// --- EOR ---
+
+// INS_EOR_IM : Executes EOR_IM
+void INS_EOR_IM(CPU c);
+
+// INS_EOR_ZP : Executes EOR_IM
+void INS_EOR_ZP(CPU c);
+
+// INS_EOR_ZPX : Executes EOR_ZPX
+void INS_EOR_ZPX(CPU c);
+
+// INS_EOR_AB : Executes EOR_AB
+void INS_EOR_AB(CPU c);
+
+// INS_EOR_ABX : Executes EOR_ABX
+void INS_EOR_ABX(CPU c);
+
+// INS_EOR_ABY : Executes EOR_ABY
+void INS_EOR_ABY(CPU c);
+
+// INS_EOR_INX : Executes EOR_INX
+void INS_EOR_INX(CPU c);
+
+// INS_EOR_INY : Executes EOR_INY
+void INS_EOR_INY(CPU c);
+
+// --- ORA ---
+
+// INS_ORA_IM : Executes ORA_IM
+void INS_ORA_IM(CPU c);
+
+// INS_ORA_ZP : Executes ORA_IM
+void INS_ORA_ZP(CPU c);
+
+// INS_ORA_ZPX : Executes ORA_ZPX
+void INS_ORA_ZPX(CPU c);
+
+// INS_ORA_AB : Executes ORA_AB
+void INS_ORA_AB(CPU c);
+
+// INS_ORA_ABX : Executes ORA_ABX
+void INS_ORA_ABX(CPU c);
+
+// INS_ORA_ABY : Executes ORA_ABY
+void INS_ORA_ABY(CPU c);
+
+// INS_ORA_INX : Executes ORA_INX
+void INS_ORA_INX(CPU c);
+
+// INS_ORA_INY : Executes ORA_INY
+void INS_ORA_INY(CPU c);
+
+// --- BIT ---
+
+// INS_BIT_ZP : Executes BIT_ZP
+void INS_BIT_ZP(CPU c);
+
+// INS_BIT_AB : Executes BIT_AB
+void INS_BIT_AB(CPU c);
+
+// --- ADC ---
+
+// INS_ADC_IM : Executes ADC_IM
+void INS_ADC_IM(CPU c);
+
+// INS_ADC_ZP : Executes ADC_ZP
+void INS_ADC_ZP(CPU c);
+
+// INS_ADC_ZPX : Executes ADC_ZPX
+void INS_ADC_ZPX(CPU c);
+
+// INS_ADC_AB : Executes ADC_AB
+void INS_ADC_AB(CPU c);
+
+// INS_ADC_ABX : Executes ADC_ABX
+void INS_ADC_ABX(CPU c);
+
+// INS_ADC_ABY : Executes ADC_ABY
+void INS_ADC_ABY(CPU c);
+
+// INS_ADC_INX : Executes ADC_INX
+void INS_ADC_INX(CPU c);
+
+// INS_ADC_INY : Executes ADC_INY
+void INS_ADC_INY(CPU c);
+
+// --- JSR ---
+
+// INS_JSR_AB : Executes JSR_AB
+void INS_JSR_AB(CPU c);
+
+// --- NOP ---
+
+// INS_NOP_IM : Executes NOP_IM
+void INS_NOP_IM(CPU c);
+
 #endif

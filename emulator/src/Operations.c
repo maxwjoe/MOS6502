@@ -1,6 +1,7 @@
 #include "Operations.h"
 #include "EmulatorHelper.h"
 #include "CPU6502.h"
+#include "stdio.h"
 
 void OPER_LDA(CPU c, word address)
 {
@@ -45,6 +46,17 @@ void OPER_STY(CPU c, word address)
 {
     byte y_register = CPUGetY(c);
     CPUWriteByte(c, address, y_register);
+}
+
+void OPER_AND(CPU c, word address)
+{
+    CYCLE_PENALTY(c);
+
+    byte mem_value = CPUReadByte(c, address);
+    byte a_value = CPUGetA(c);
+
+    CPUSetA(c, mem_value & a_value);
+    SET_PS_ACCUMULATOR(c);
 }
 
 void SET_PS_ACCUMULATOR(CPU c)
