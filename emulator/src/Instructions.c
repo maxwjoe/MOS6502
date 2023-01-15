@@ -346,3 +346,105 @@ void INS_AND_INY(CPU c)
     word address = ADDR_INY(c);
     OPER_AND(c, address);
 }
+
+void INS_EOR_IM(CPU c)
+{
+    byte mem_value = CPUFetchByte(c);
+    byte a_value = CPUGetA(c);
+
+    CPUSetA(c, mem_value ^ a_value);
+    SET_PS_ACCUMULATOR(c);
+}
+
+void INS_EOR_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_EOR(c, address);
+}
+
+void INS_EOR_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_EOR(c, address);
+}
+
+void INS_EOR_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_EOR(c, address);
+}
+
+void INS_EOR_ABX(CPU c)
+{
+    word address = ADDR_ABX(c);
+    OPER_EOR(c, address);
+}
+
+void INS_EOR_ABY(CPU c)
+{
+    word address = ADDR_ABY(c);
+    OPER_EOR(c, address);
+}
+
+void INS_EOR_INX(CPU c)
+{
+    word address = ADDR_INX(c);
+    OPER_EOR(c, address);
+}
+
+void INS_EOR_INY(CPU c)
+{
+    word address = ADDR_INY(c);
+    OPER_EOR(c, address);
+}
+
+void INS_ORA_IM(CPU c)
+{
+    byte mem_value = CPUFetchByte(c);
+    byte a_value = CPUGetA(c);
+
+    CPUSetA(c, mem_value | a_value);
+    SET_PS_ACCUMULATOR(c);
+}
+
+void INS_ORA_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_ORA(c, address);
+}
+
+void INS_ORA_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_ORA(c, address);
+}
+
+void INS_ORA_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_ORA(c, address);
+}
+
+void INS_ORA_ABX(CPU c)
+{
+    word address = ADDR_ABX(c);
+    OPER_ORA(c, address);
+}
+
+void INS_ORA_ABY(CPU c)
+{
+    word address = ADDR_ABY(c);
+    OPER_ORA(c, address);
+}
+
+void INS_ORA_INX(CPU c)
+{
+    word address = ADDR_INX(c);
+    OPER_ORA(c, address);
+}
+
+void INS_ORA_INY(CPU c)
+{
+    word address = ADDR_INY(c);
+    OPER_ORA(c, address);
+}

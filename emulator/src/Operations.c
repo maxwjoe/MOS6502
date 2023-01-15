@@ -59,6 +59,28 @@ void OPER_AND(CPU c, word address)
     SET_PS_ACCUMULATOR(c);
 }
 
+void OPER_EOR(CPU c, word address)
+{
+    CYCLE_PENALTY(c);
+
+    byte mem_value = CPUReadByte(c, address);
+    byte a_value = CPUGetA(c);
+
+    CPUSetA(c, mem_value ^ a_value);
+    SET_PS_ACCUMULATOR(c);
+}
+
+void OPER_ORA(CPU c, word address)
+{
+    CYCLE_PENALTY(c);
+
+    byte mem_value = CPUReadByte(c, address);
+    byte a_value = CPUGetA(c);
+
+    CPUSetA(c, mem_value | a_value);
+    SET_PS_ACCUMULATOR(c);
+}
+
 void SET_PS_ACCUMULATOR(CPU c)
 {
     byte a_val = CPUGetA(c);
