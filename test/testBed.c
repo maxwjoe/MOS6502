@@ -9,6 +9,7 @@
 #include "./unit_tests/test_store_reg.c"
 #include "./unit_tests/test_stack_trans.c"
 #include "./unit_tests/test_logical.c"
+#include "./unit_tests/test_arithmetic.c"
 
 int main()
 {
@@ -129,6 +130,9 @@ int main()
     ADD_TEST(LOGICAL_COLLECTION, T_ORA_INY_WITH_CROSS);
     ADD_TEST(LOGICAL_COLLECTION, T_BIT_ZP);
     ADD_TEST(LOGICAL_COLLECTION, T_BIT_AB);
+
+    // === ARITHMETIC Collection ===
+    ADD_TEST(ARITHMETIC_COLLECTION, T_ADC_IM);
 
     // === RUN ===
     RUN_ALL();

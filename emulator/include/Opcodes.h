@@ -136,30 +136,30 @@
 
 // BIT : Bit Test
 
-#define BIT_ZP 0x24 // Bit Test (Zero Page Mode, 3) :
-#define BIT_AB 0x2C // Bit Test (Absolute Mode, 4) :
+#define BIT_ZP 0x24 // Bit Test (Zero Page Mode, 3) : C, T
+#define BIT_AB 0x2C // Bit Test (Absolute Mode, 4) : C, T
 
 // ADC : Add With Carry
 
-#define ADC_IM 0x69  // Add With Carry (Immediate Mode, 2) :
-#define ADC_ZP 0x65  // Add With Carry (Zero Page Mode, 3) :
-#define ADC_ZPX 0x75 // Add With Carry (Zero Page X Mode, 4) :
-#define ADC_AB 0x6D  // Add With Carry (Absolute Mode, 4) :
-#define ADC_ABX 0x7D // Add With Carry (Absolute X Mode, 4 + 1 if Page Cross) :
-#define ADC_ABY 0x79 // Add With Carry (Absolute Y Mode, 4 + 1 if Page Cross) :
-#define ADC_INX 0x61 // Add With Carry (Indirect X Mode, 6) :
-#define ADC_INY 0x71 // Add With Carry (Indirect Y Mode, 5 + 1 if Page Cross) :
+#define ADC_IM 0x69  // Add With Carry (Immediate Mode, 2) : C
+#define ADC_ZP 0x65  // Add With Carry (Zero Page Mode, 3) : C
+#define ADC_ZPX 0x75 // Add With Carry (Zero Page X Mode, 4) : C
+#define ADC_AB 0x6D  // Add With Carry (Absolute Mode, 4) : C
+#define ADC_ABX 0x7D // Add With Carry (Absolute X Mode, 4 + 1 if Page Cross) : C
+#define ADC_ABY 0x79 // Add With Carry (Absolute Y Mode, 4 + 1 if Page Cross) : C
+#define ADC_INX 0x61 // Add With Carry (Indirect X Mode, 6) : C
+#define ADC_INY 0x71 // Add With Carry (Indirect Y Mode, 5 + 1 if Page Cross) : C
 
 // SBC : Subtract With Carry
 
-#define SBC_IM 0xE9  // Subtract With Carry (Immediate Mode, 2) :
-#define SBC_ZP 0xE5  // Subtract With Carry (Zero Page Mode, 3) :
-#define SBC_ZPX 0xF5 // Subtract With Carry (Zero Page X Mode, 4) :
-#define SBC_AB 0xED  // Subtract With Carry (Absolute Mode, 4) :
-#define SBC_ABX 0xFD // Subtract With Carry (Absolute X Mode, 4 + 1 if Page Cross) :
-#define SBC_ABY 0xF9 // Subtract With Carry (Absolute Y Mode, 4 + 1 if Page Cross) :
-#define SBC_INX 0xE1 // Subtract With Carry (Indirect X Mode, 6) :
-#define SBC_INY 0xF1 // Subtract With Carry (Indirect Y Mode, 5 + 1 if Page Cross) :
+#define SBC_IM 0xE9  // Subtract With Carry (Immediate Mode, 2) : C
+#define SBC_ZP 0xE5  // Subtract With Carry (Zero Page Mode, 3) : C
+#define SBC_ZPX 0xF5 // Subtract With Carry (Zero Page X Mode, 4) : C
+#define SBC_AB 0xED  // Subtract With Carry (Absolute Mode, 4) : C
+#define SBC_ABX 0xFD // Subtract With Carry (Absolute X Mode, 4 + 1 if Page Cross) : C
+#define SBC_ABY 0xF9 // Subtract With Carry (Absolute Y Mode, 4 + 1 if Page Cross) : C
+#define SBC_INX 0xE1 // Subtract With Carry (Indirect X Mode, 6) : C
+#define SBC_INY 0xF1 // Subtract With Carry (Indirect Y Mode, 5 + 1 if Page Cross) : C
 
 // CMP : Compare Accumulator
 
