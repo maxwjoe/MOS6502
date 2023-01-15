@@ -448,3 +448,115 @@ void INS_ORA_INY(CPU c)
     word address = ADDR_INY(c);
     OPER_ORA(c, address);
 }
+
+void INS_BIT_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_BIT(c, address);
+}
+
+void INS_BIT_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_BIT(c, address);
+}
+
+void INS_ADC_IM(CPU c)
+{
+    word address = CPUGetPC(c);
+    CPUFetchByte(c);
+
+    OPER_ADC(c, address);
+}
+
+void INS_ADC_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_ADC(c, address);
+}
+
+void INS_ADC_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_ADC(c, address);
+}
+
+void INS_ADC_AB(CPU c)
+{
+    byte address = ADDR_AB(c);
+    OPER_ADC(c, address);
+}
+
+void INS_ADC_ABX(CPU c)
+{
+    byte address = ADDR_ABX(c);
+    OPER_ADC(c, address);
+}
+
+void INS_ADC_ABY(CPU c)
+{
+    byte address = ADDR_ABY(c);
+    OPER_ADC(c, address);
+}
+
+void INS_ADC_INX(CPU c)
+{
+    byte address = ADDR_INX(c);
+    OPER_ADC(c, address);
+}
+
+void INS_ADC_INY(CPU c)
+{
+    byte address = ADDR_INY(c);
+    OPER_ADC(c, address);
+}
+
+void INS_SBC_IM(CPU c)
+{
+    word address = CPUGetPC(c);
+    CPUFetchByte(c);
+
+    OPER_SBC(c, address);
+}
+
+void INS_SBC_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_SBC(c, address);
+}
+
+void INS_SBC_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_SBC(c, address);
+}
+
+void INS_SBC_AB(CPU c)
+{
+    byte address = ADDR_AB(c);
+    OPER_SBC(c, address);
+}
+
+void INS_SBC_ABX(CPU c)
+{
+    byte address = ADDR_ABX(c);
+    OPER_SBC(c, address);
+}
+
+void INS_SBC_ABY(CPU c)
+{
+    byte address = ADDR_ABY(c);
+    OPER_SBC(c, address);
+}
+
+void INS_SBC_INX(CPU c)
+{
+    byte address = ADDR_INX(c);
+    OPER_SBC(c, address);
+}
+
+void INS_SBC_INY(CPU c)
+{
+    byte address = ADDR_INY(c);
+    OPER_SBC(c, address);
+}

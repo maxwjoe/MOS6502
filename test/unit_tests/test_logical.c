@@ -994,3 +994,57 @@ TEST(T_ORA_INY_WITH_CROSS)
 
     CPUFree(c, 1);
 }
+
+TEST(T_BIT_ZP)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 3);
+
+    CPUSetA(c, 0xD6);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, BIT_ZP);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x33);
+    MemoryWriteByte(m, 0x0033, 0x50);
+
+    int execution_result = CPUExecute(c);
+    int cycles_remaining = ClockGetTickLimit(clk);
+
+    GET_ALL_FLAGS();
+
+    CHECK_EQ(execution_result, ok);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_TRUE(F_V);
+    CHECK_FALSE(F_N);
+    CHECK_FALSE(F_Z);
+
+    CPUFree(c, 1);
+}
+
+TEST(T_BIT_AB)
+{
+    SETUP_HW();
+
+    ClockSetTickLimit(clk, 4);
+
+    CPUSetA(c, 0x00);
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, BIT_AB);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x33);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x33);
+
+    MemoryWriteByte(m, 0x3333, 0x50);
+
+    int execution_result = CPUExecute(c);
+    int cycles_remaining = ClockGetTickLimit(clk);
+
+    GET_ALL_FLAGS();
+
+    CHECK_EQ(execution_result, ok);
+    CHECK_EQ(cycles_remaining, 0);
+    CHECK_TRUE(F_V);
+    CHECK_FALSE(F_N);
+    CHECK_TRUE(F_Z);
+
+    CPUFree(c, 1);
+}

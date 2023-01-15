@@ -505,4 +505,28 @@ static void s_setup_op_array(CPU c)
     c->ops[ORA_ABY] = &INS_ORA_ABY;
     c->ops[ORA_INX] = &INS_ORA_INX;
     c->ops[ORA_INY] = &INS_ORA_INY;
+
+    // BIT
+    c->ops[BIT_ZP] = &INS_BIT_ZP;
+    c->ops[BIT_AB] = &INS_BIT_AB;
+
+    // ADC
+    c->ops[ADC_IM] = &INS_ADC_IM;
+    c->ops[ADC_ZP] = &INS_ADC_ZP;
+    c->ops[ADC_ZPX] = &INS_ADC_ZPX;
+    c->ops[ADC_AB] = &INS_ADC_AB;
+    c->ops[ADC_ABX] = &INS_ADC_ABX;
+    c->ops[ADC_ABY] = &INS_ADC_ABY;
+    c->ops[ADC_INX] = &INS_ADC_INX;
+    c->ops[ADC_INY] = &INS_ADC_INY;
+
+    // SBC
+    c->ops[SBC_IM] = &INS_SBC_IM;
+    c->ops[SBC_ZP] = &INS_SBC_ZP;
+    c->ops[SBC_ZPX] = &INS_SBC_ZPX;
+    c->ops[SBC_AB] = &INS_SBC_AB;
+    c->ops[SBC_ABX] = &INS_SBC_ABX;
+    c->ops[SBC_ABY] = &INS_SBC_ABY;
+    c->ops[SBC_INX] = &INS_SBC_INX;
+    c->ops[SBC_INY] = &INS_SBC_INY;
 }

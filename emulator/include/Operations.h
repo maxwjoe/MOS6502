@@ -57,4 +57,10 @@ void SET_PS_XREGISTER(CPU c);
 // SET_PS_YREGISTER : Sets the processor status flags based on value in the Y Register
 void SET_PS_YREGISTER(CPU c);
 
+// SET_PS_ADC : Sets the processor status flags based on Add with carry operation
+void SET_PS_ADC(CPU c, word a_value, word value_to_add, word sum);
+
+// SET_PS_SBC : Sets the processor status flags based on Subtract with carry operation
+void SET_PS_SBC(CPU c, word a_value, word value_to_add, word sum);
+
 #endif

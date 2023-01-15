@@ -279,6 +279,32 @@ void INS_ADC_INX(CPU c);
 // INS_ADC_INY : Executes ADC_INY
 void INS_ADC_INY(CPU c);
 
+// --- SBC ---
+
+// INS_SBC_IM : Executes SBC_IM
+void INS_SBC_IM(CPU c);
+
+// INS_SBC_ZP : Executes SBC_ZP
+void INS_SBC_ZP(CPU c);
+
+// INS_SBC_ZPX : Executes SBC_ZPX
+void INS_SBC_ZPX(CPU c);
+
+// INS_SBC_AB : Executes SBC_AB
+void INS_SBC_AB(CPU c);
+
+// INS_SBC_ABX : Executes SBC_ABX
+void INS_SBC_ABX(CPU c);
+
+// INS_SBC_ABY : Executes SBC_ABY
+void INS_SBC_ABY(CPU c);
+
+// INS_SBC_INX : Executes SBC_INX
+void INS_SBC_INX(CPU c);
+
+// INS_SBC_INY : Executes SBC_INY
+void INS_SBC_INY(CPU c);
+
 // --- JSR ---
 
 // INS_JSR_AB : Executes JSR_AB
