@@ -114,25 +114,25 @@
 
 // EOR : Exclusive OR (XOR) on Accumulator
 
-#define EOR_IM 0x49  // Logical XOR on Accumulator (Immediate Mode, 2) : C
-#define EOR_ZP 0x45  // Logical XOR on Accumulator (Zero Page Mode, 3) : C
-#define EOR_ZPX 0x55 // Logical XOR on Accumulator (Zero Page X Mode, 4) : C
-#define EOR_AB 0x4D  // Logical XOR on Accumulator (Absolute Mode, 4) : C
-#define EOR_ABX 0x5D // Logical XOR on Accumulator (Absolute X Mode, 4 + 1 if Page Cross) : C
-#define EOR_ABY 0x59 // Logical XOR on Accumulator (Absolute Y Mode, 4 + 1 if Page Cross) : C
-#define EOR_INX 0x41 // Logical XOR on Accumulator (Indirect X Mode, 6) : C
-#define EOR_INY 0x51 // Logical XOR on Accumulator (Indirect Y Mode, 5 + 1 if Page Cross) : C
+#define EOR_IM 0x49  // Logical XOR on Accumulator (Immediate Mode, 2) : C, T
+#define EOR_ZP 0x45  // Logical XOR on Accumulator (Zero Page Mode, 3) : C, T
+#define EOR_ZPX 0x55 // Logical XOR on Accumulator (Zero Page X Mode, 4) : C, T
+#define EOR_AB 0x4D  // Logical XOR on Accumulator (Absolute Mode, 4) : C, T
+#define EOR_ABX 0x5D // Logical XOR on Accumulator (Absolute X Mode, 4 + 1 if Page Cross) : C, T
+#define EOR_ABY 0x59 // Logical XOR on Accumulator (Absolute Y Mode, 4 + 1 if Page Cross) : C, T
+#define EOR_INX 0x41 // Logical XOR on Accumulator (Indirect X Mode, 6) : C, T
+#define EOR_INY 0x51 // Logical XOR on Accumulator (Indirect Y Mode, 5 + 1 if Page Cross) : C, T
 
 // ORA : Inclusive OR (OR) on Accumulator
 
-#define ORA_IM 0x09  // Logical OR on Accumulator (Immediate Mode, 2) : C
-#define ORA_ZP 0x05  // Logical OR on Accumulator (Zero Page Mode, 3) : C
-#define ORA_ZPX 0x15 // Logical OR on Accumulator (Zero Page X Mode, 4) : C
-#define ORA_AB 0x0D  // Logical OR on Accumulator (Absolute Mode, 4) : C
-#define ORA_ABX 0x1D // Logical OR on Accumulator (Absolute X Mode, 4 + 1 if Page Cross) : C
-#define ORA_ABY 0x19 // Logical OR on Accumulator (Absolute Y Mode, 4 + 1 if Page Cross) : C
-#define ORA_INX 0x01 // Logical OR on Accumulator (Indirect X Mode, 6) : C
-#define ORA_INY 0x11 // Logical OR on Accumulator (Indirect Y Mode, 5 + 1 if Page Cross) : C
+#define ORA_IM 0x09  // Logical OR on Accumulator (Immediate Mode, 2) : C, T
+#define ORA_ZP 0x05  // Logical OR on Accumulator (Zero Page Mode, 3) : C, T
+#define ORA_ZPX 0x15 // Logical OR on Accumulator (Zero Page X Mode, 4) : C, T
+#define ORA_AB 0x0D  // Logical OR on Accumulator (Absolute Mode, 4) : C, T
+#define ORA_ABX 0x1D // Logical OR on Accumulator (Absolute X Mode, 4 + 1 if Page Cross) : C, T
+#define ORA_ABY 0x19 // Logical OR on Accumulator (Absolute Y Mode, 4 + 1 if Page Cross) : C, T
+#define ORA_INX 0x01 // Logical OR on Accumulator (Indirect X Mode, 6) : C, T
+#define ORA_INY 0x11 // Logical OR on Accumulator (Indirect Y Mode, 5 + 1 if Page Cross) : C, T
 
 // BIT : Bit Test
 

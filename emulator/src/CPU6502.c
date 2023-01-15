@@ -485,4 +485,24 @@ static void s_setup_op_array(CPU c)
     c->ops[AND_ABY] = &INS_AND_ABY;
     c->ops[AND_INX] = &INS_AND_INX;
     c->ops[AND_INY] = &INS_AND_INY;
+
+    // EOR
+    c->ops[EOR_IM] = &INS_EOR_IM;
+    c->ops[EOR_ZP] = &INS_EOR_ZP;
+    c->ops[EOR_ZPX] = &INS_EOR_ZPX;
+    c->ops[EOR_AB] = &INS_EOR_AB;
+    c->ops[EOR_ABX] = &INS_EOR_ABX;
+    c->ops[EOR_ABY] = &INS_EOR_ABY;
+    c->ops[EOR_INX] = &INS_EOR_INX;
+    c->ops[EOR_INY] = &INS_EOR_INY;
+
+    // ORA
+    c->ops[ORA_IM] = &INS_ORA_IM;
+    c->ops[ORA_ZP] = &INS_ORA_ZP;
+    c->ops[ORA_ZPX] = &INS_ORA_ZPX;
+    c->ops[ORA_AB] = &INS_ORA_AB;
+    c->ops[ORA_ABX] = &INS_ORA_ABX;
+    c->ops[ORA_ABY] = &INS_ORA_ABY;
+    c->ops[ORA_INX] = &INS_ORA_INX;
+    c->ops[ORA_INY] = &INS_ORA_INY;
 }
