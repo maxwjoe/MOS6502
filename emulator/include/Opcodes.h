@@ -184,6 +184,36 @@
 #define CPY_ZP 0xC4 // Compare Y Register (Zero Page Mode, 3) : C
 #define CPY_AB 0xCC // Compare Y Register (Absolute Mode, 4) : C
 
+// INC : Increment Memory
+
+#define INC_ZP 0xE6  // Increment value held at a given memory location (Zero Page Mode, 5) :
+#define INC_ZPX 0xF6 // Increment value held at a given memory location (Zero Page X Mode, 6) :
+#define INC_AB 0xEE  // Increment value held at a given memory location (Absolute Mode, 6) :
+#define INC_ABX 0xFE // Increment value held at a given memory location (Absolute X Mode, 7) :
+
+// INX : Increment X Register
+
+#define INX_IMP 0xE8 // Increments the X Register (Implied Mode, 2)
+
+// INY : Increment Y Register
+
+#define INY_IMP 0xC8 // Increments the Y Register (Implied Mode, 2)
+
+// DEC : Decrement Memory
+
+#define DEC_ZP 0xC6  // Decrement value held at a given memory location (Zero Page Mode, 5) :
+#define DEC_ZPX 0xD6 // Decrement value held at a given memory location (Zero Page X Mode, 6) :
+#define DEC_AB 0xCE  // Decrement value held at a given memory location (Absolute Mode, 6) :
+#define DEC_ABX 0xDE // Decrement value held at a given memory location (Absolute X Mode, 7) :
+
+// DEX : Decrement X Register
+
+#define DEX_IMP 0xCA // Decrement the X Register (Implied Mode, 2)
+
+// DEY : Decrement X Register
+
+#define DEY_IMP 0x88 // Decrement the Y Register (Implied Mode, 2)
+
 // JSR : Jump to Subroutine
 
 #define JSR_AB 0x20 // Jump to subroutine (Absolute Mode, 6) :
