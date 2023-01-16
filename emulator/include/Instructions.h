@@ -305,6 +305,54 @@ void INS_SBC_INX(CPU c);
 // INS_SBC_INY : Executes SBC_INY
 void INS_SBC_INY(CPU c);
 
+// --- CMP ---
+
+// INS_CMP_IM : Executes CMP_IM
+void INS_CMP_IM(CPU c);
+
+// INS_CMP_ZP : Executes CMP_ZP
+void INS_CMP_ZP(CPU c);
+
+// INS_CMP_ZPX : Executes CMP_ZPX
+void INS_CMP_ZPX(CPU c);
+
+// INS_CMP_AB : Executes CMP_AB
+void INS_CMP_AB(CPU c);
+
+// INS_CMP_ABX : Executes CMP_ABX
+void INS_CMP_ABX(CPU c);
+
+// INS_CMP_ABY : Executes CMP_ABY
+void INS_CMP_ABY(CPU c);
+
+// INS_CMP_INX : Executes CMP_INX
+void INS_CMP_INX(CPU c);
+
+// INS_CMP_INY : Executes CMP_INY
+void INS_CMP_INY(CPU c);
+
+// --- CPX ---
+
+// INS_CPX_IM : Executes CPX_IM
+void INS_CPX_IM(CPU c);
+
+// INS_CPX_ZP : Executes CPX_ZP
+void INS_CPX_ZP(CPU c);
+
+// INS_CPX_AB : Executes CPX_AB
+void INS_CPX_AB(CPU c);
+
+// --- CPY ---
+
+// INS_CPY_IM : Executes CPY_IM
+void INS_CPY_IM(CPU c);
+
+// INS_CPY_ZP : Executes CPY_ZP
+void INS_CPY_ZP(CPU c);
+
+// INS_CPY_AB : Executes CPY_AB
+void INS_CPY_AB(CPU c);
+
 // --- JSR ---
 
 // INS_JSR_AB : Executes JSR_AB

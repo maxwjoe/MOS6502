@@ -133,6 +133,9 @@ int main()
 
     // === ARITHMETIC Collection ===
     ADD_TEST(ARITHMETIC_COLLECTION, T_ADC_IM);
+    ADD_TEST(ARITHMETIC_COLLECTION, T_ADC_ZP);
+    ADD_TEST(ARITHMETIC_COLLECTION, T_ADC_ZPX);
+    // TODO: Complete this
 
     // === RUN ===
     RUN_ALL();

@@ -529,4 +529,24 @@ static void s_setup_op_array(CPU c)
     c->ops[SBC_ABY] = &INS_SBC_ABY;
     c->ops[SBC_INX] = &INS_SBC_INX;
     c->ops[SBC_INY] = &INS_SBC_INY;
+
+    // CMP
+    c->ops[CMP_IM] = &INS_CMP_IM;
+    c->ops[CMP_ZP] = &INS_CMP_ZP;
+    c->ops[CMP_ZPX] = &INS_CMP_ZPX;
+    c->ops[CMP_AB] = &INS_CMP_AB;
+    c->ops[CMP_ABX] = &INS_CMP_ABX;
+    c->ops[CMP_ABY] = &INS_CMP_ABY;
+    c->ops[CMP_INX] = &INS_CMP_INX;
+    c->ops[CMP_INY] = &INS_CMP_INY;
+
+    // CPX
+    c->ops[CPX_IM] = &INS_CPX_IM;
+    c->ops[CPX_ZP] = &INS_CPX_ZP;
+    c->ops[CPX_AB] = &INS_CPX_AB;
+
+    // CPY
+    c->ops[CPY_IM] = &INS_CPY_IM;
+    c->ops[CPY_ZP] = &INS_CPY_ZP;
+    c->ops[CPY_AB] = &INS_CPY_AB;
 }

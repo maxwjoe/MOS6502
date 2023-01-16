@@ -464,7 +464,7 @@ void INS_BIT_AB(CPU c)
 void INS_ADC_IM(CPU c)
 {
     word address = CPUGetPC(c);
-    CPUFetchByte(c);
+    CPUSetPC(c, address + 1);
 
     OPER_ADC(c, address);
 }
@@ -559,4 +559,94 @@ void INS_SBC_INY(CPU c)
 {
     byte address = ADDR_INY(c);
     OPER_SBC(c, address);
+}
+
+void INS_CMP_IM(CPU c)
+{
+    word address = CPUGetPC(c);
+    CPUSetPC(c, address + 1);
+
+    OPER_CMP(c, address);
+}
+
+void INS_CMP_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_CMP(c, address);
+}
+
+void INS_CMP_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_CMP(c, address);
+}
+
+void INS_CMP_AB(CPU c)
+{
+    byte address = ADDR_AB(c);
+    OPER_CMP(c, address);
+}
+
+void INS_CMP_ABX(CPU c)
+{
+    byte address = ADDR_ABX(c);
+    OPER_CMP(c, address);
+}
+
+void INS_CMP_ABY(CPU c)
+{
+    byte address = ADDR_ABY(c);
+    OPER_CMP(c, address);
+}
+
+void INS_CMP_INX(CPU c)
+{
+    byte address = ADDR_INX(c);
+    OPER_CMP(c, address);
+}
+
+void INS_CMP_INY(CPU c)
+{
+    byte address = ADDR_INY(c);
+    OPER_CMP(c, address);
+}
+
+void INS_CPX_IM(CPU c)
+{
+    word address = CPUGetPC(c);
+    CPUSetPC(c, address + 1);
+
+    OPER_CPX(c, address);
+}
+
+void INS_CPX_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_CPX(c, address);
+}
+
+void INS_CPX_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_CPX(c, address);
+}
+
+void INS_CPY_IM(CPU c)
+{
+    word address = CPUGetPC(c);
+    CPUSetPC(c, address + 1);
+
+    OPER_CPY(c, address);
+}
+
+void INS_CPY_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_CPY(c, address);
+}
+
+void INS_CPY_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_CPY(c, address);
 }

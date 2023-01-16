@@ -163,26 +163,26 @@
 
 // CMP : Compare Accumulator
 
-#define CMP_IM 0xC9  // Compare Accumulator (Immediate Mode, 2) :
-#define CMP_ZP 0xC5  // Compare Accumulator (Zero Page Mode, 3) :
-#define CMP_ZPX 0xD5 // Compare Accumulator (Zero Page X Mode, 4) :
-#define CMP_AB 0xCD  // Compare Accumulator (Absolute Mode, 4) :
-#define CMP_ABX 0xDD // Compare Accumulator (Absolute X Mode, 4 + 1 if Page Cross) :
-#define CMP_ABY 0xD9 // Compare Accumulator (Absolute Y Mode, 4 + 1 if Page Cross) :
-#define CMP_INX 0xC1 // Compare Accumulator (Indirect X Mode, 6) :
-#define CMP_INY 0xD1 // Compare Accumulator (Indirect Y Mode, 5 + 1 if Page Cross) :
+#define CMP_IM 0xC9  // Compare Accumulator (Immediate Mode, 2) : C
+#define CMP_ZP 0xC5  // Compare Accumulator (Zero Page Mode, 3) : C
+#define CMP_ZPX 0xD5 // Compare Accumulator (Zero Page X Mode, 4) : C
+#define CMP_AB 0xCD  // Compare Accumulator (Absolute Mode, 4) : C
+#define CMP_ABX 0xDD // Compare Accumulator (Absolute X Mode, 4 + 1 if Page Cross) : C
+#define CMP_ABY 0xD9 // Compare Accumulator (Absolute Y Mode, 4 + 1 if Page Cross) : C
+#define CMP_INX 0xC1 // Compare Accumulator (Indirect X Mode, 6) : C
+#define CMP_INY 0xD1 // Compare Accumulator (Indirect Y Mode, 5 + 1 if Page Cross) : C
 
 // CPX : Compare X Register
 
-#define CPX_IM 0xE0 // Compare X Register (Immediate Mode, 2) :
-#define CPX_ZP 0xE4 // Compare X Register (Zero Page Mode, 3) :
-#define CPX_AB 0xEC // Compare X Register (Absolute Mode, 4) :
+#define CPX_IM 0xE0 // Compare X Register (Immediate Mode, 2) : C
+#define CPX_ZP 0xE4 // Compare X Register (Zero Page Mode, 3) : C
+#define CPX_AB 0xEC // Compare X Register (Absolute Mode, 4) : C
 
 // CPY : Compare Y Register
 
-#define CPY_IM 0xC0 // Compare Y Register (Immediate Mode, 2) :
-#define CPY_ZP 0xC4 // Compare Y Register (Zero Page Mode, 3) :
-#define CPY_AB 0xCC // Compare Y Register (Absolute Mode, 4) :
+#define CPY_IM 0xC0 // Compare Y Register (Immediate Mode, 2) : C
+#define CPY_ZP 0xC4 // Compare Y Register (Zero Page Mode, 3) : C
+#define CPY_AB 0xCC // Compare Y Register (Absolute Mode, 4) : C
 
 // JSR : Jump to Subroutine
 

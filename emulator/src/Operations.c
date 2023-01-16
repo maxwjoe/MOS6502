@@ -127,6 +127,42 @@ void OPER_SBC(CPU c, word address)
     SET_PS_SBC(c, a_value, mem_value, sum);
 }
 
+void OPER_CMP(CPU c, word address)
+{
+    byte mem_value = CPUReadByte(c, address);
+    byte a_value = CPUGetA(c);
+
+    byte cmp_res = a_value - mem_value;
+
+    CPUSetStatusFlag(c, PS_C, (a_value >= mem_value));
+    CPUSetStatusFlag(c, PS_Z, a_value == mem_value);
+    CPUSetStatusFlag(c, PS_N, (cmp_res & 0x0080));
+}
+
+void OPER_CPX(CPU c, word address)
+{
+    byte mem_value = CPUReadByte(c, address);
+    byte x_value = CPUGetX(c);
+
+    byte cmp_res = x_value - mem_value;
+
+    CPUSetStatusFlag(c, PS_C, (x_value >= mem_value));
+    CPUSetStatusFlag(c, PS_Z, x_value == mem_value);
+    CPUSetStatusFlag(c, PS_N, (cmp_res & 0x0080));
+}
+
+void OPER_CPY(CPU c, word address)
+{
+    byte mem_value = CPUReadByte(c, address);
+    byte y_value = CPUGetY(c);
+
+    byte cmp_res = y_value - mem_value;
+
+    CPUSetStatusFlag(c, PS_C, (y_value >= mem_value));
+    CPUSetStatusFlag(c, PS_Z, y_value == mem_value);
+    CPUSetStatusFlag(c, PS_N, (cmp_res & 0x0080));
+}
+
 void SET_PS_ADC(CPU c, word a_value, word value_to_add, word sum)
 {
     // Assumption : This function is called using the accumulator value

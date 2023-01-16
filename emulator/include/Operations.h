@@ -46,6 +46,15 @@ void OPER_ADC(CPU c, word address);
 // OPER_SBC : Implements SBC Instruction
 void OPER_SBC(CPU c, word address);
 
+// OPER_CMP : Implements CMP Instruction
+void OPER_CMP(CPU c, word address);
+
+// OPER_CPX : Implements CPX Instruction
+void OPER_CPX(CPU c, word address);
+
+// OPER_CPY : Implements CPY Instruction
+void OPER_CPY(CPU c, word address);
+
 // === Status Register Functions ===
 
 // SET_PS_ACCUMULATOR : Sets the processor status flags based on value in accumulator
