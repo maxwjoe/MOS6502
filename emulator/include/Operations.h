@@ -55,6 +55,24 @@ void OPER_CPX(CPU c, word address);
 // OPER_CPY : Implements CPY Instruction
 void OPER_CPY(CPU c, word address);
 
+// OPER_INC : Implements INC Instruction
+void OPER_INC(CPU c, word address);
+
+// OPER_DEC : Implements DEC Instruction
+void OPER_DEC(CPU c, word address);
+
+// OPER_INX : Implements DEC Instruction
+void OPER_INX(CPU c, word address);
+
+// OPER_INY : Implements DEC Instruction
+void OPER_INY(CPU c, word address);
+
+// OPER_DEX : Implements DEC Instruction
+void OPER_DEX(CPU c, word address);
+
+// OPER_DEY : Implements DEC Instruction
+void OPER_DEY(CPU c, word address);
+
 // === Status Register Functions ===
 
 // SET_PS_ACCUMULATOR : Sets the processor status flags based on value in accumulator
@@ -71,5 +89,8 @@ void SET_PS_ADC(CPU c, word a_value, word value_to_add, word sum);
 
 // SET_PS_SBC : Sets the processor status flags based on Subtract with carry operation
 void SET_PS_SBC(CPU c, word a_value, word value_to_add, word sum);
+
+// SET_PS_MEM_OP : Sets the processor status flags based on modified value in memory (INC and DEC ops)
+void SET_PS_MEM_OP(CPU c, byte value);
 
 #endif

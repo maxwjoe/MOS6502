@@ -163,6 +163,30 @@ void OPER_CPY(CPU c, word address)
     CPUSetStatusFlag(c, PS_N, (cmp_res & 0x0080));
 }
 
+void OPER_INC(CPU c, word address)
+{
+    byte mem_value = CPUReadByte(c, address);
+
+    mem_value++;
+    CPUClockTick(c);
+
+    CPUWriteByte(c, address, mem_value);
+
+    SET_PS_MEM_OP(c, mem_value);
+}
+
+void OPER_DEC(CPU c, word address)
+{
+    byte mem_value = CPUReadByte(c, address);
+
+    mem_value--;
+    CPUClockTick(c);
+
+    CPUWriteByte(c, address, mem_value);
+
+    SET_PS_MEM_OP(c, mem_value);
+}
+
 void SET_PS_ADC(CPU c, word a_value, word value_to_add, word sum)
 {
     // Assumption : This function is called using the accumulator value
@@ -221,4 +245,10 @@ void SET_PS_YREGISTER(CPU c)
     byte y_val = CPUGetY(c);
     CPUSetStatusFlag(c, PS_Z, (y_val == 0));
     CPUSetStatusFlag(c, PS_N, (y_val & 0b10000000) > 0);
+}
+
+void SET_PS_MEM_OP(CPU c, byte value)
+{
+    CPUSetStatusFlag(c, PS_Z, (value == 0));
+    CPUSetStatusFlag(c, PS_N, (value & 0x0080));
 }

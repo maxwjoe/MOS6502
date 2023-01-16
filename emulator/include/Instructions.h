@@ -26,16 +26,16 @@ void INS_LDA_ZPX(CPU c);
 // INS_LDA_AB : Executes LDA_AB
 void INS_LDA_AB(CPU c);
 
-// INS_LDA_ABX : Executes LDA_ABX (TODO: Handle page cross)
+// INS_LDA_ABX : Executes LDA_ABX
 void INS_LDA_ABX(CPU c);
 
-// INS_LDA_ABY : Executes LDA_ABY (TODO: Handle page cross)
+// INS_LDA_ABY : Executes LDA_ABY
 void INS_LDA_ABY(CPU c);
 
-// INS_LDA_INX : Executes LDA_INX (TODO: Check CPU cycles)
+// INS_LDA_INX : Executes LDA_INX
 void INS_LDA_INX(CPU c);
 
-// INS_LDA_INY : Executes LDA_INY (TODO: Handle Page Cross)
+// INS_LDA_INY : Executes LDA_INY
 void INS_LDA_INY(CPU c);
 
 // --- LDX ---
@@ -52,7 +52,7 @@ void INS_LDX_ZPY(CPU c);
 // INS_LDX_AB : Executes LDX_AB
 void INS_LDX_AB(CPU c);
 
-// INS_LDX_ABY : Executes LDX_ABY (TODO: Need to handle page crossing)
+// INS_LDX_ABY : Executes LDX_ABY
 void INS_LDX_ABY(CPU c);
 
 // --- LDY ---
@@ -69,7 +69,7 @@ void INS_LDY_ZPX(CPU c);
 // INS_LDY_AB : Executes LDY_AB
 void INS_LDY_AB(CPU c);
 
-// INS_LDY_ABX : Executes LDY_ABX (TODO: Handle page crossing)
+// INS_LDY_ABX : Executes LDY_ABX
 void INS_LDY_ABX(CPU c);
 
 // --- STA ---
@@ -352,6 +352,54 @@ void INS_CPY_ZP(CPU c);
 
 // INS_CPY_AB : Executes CPY_AB
 void INS_CPY_AB(CPU c);
+
+// --- INC ---
+
+// INS_INC_ZP : Executes INC_ZP
+void INS_INC_ZP(CPU c);
+
+// INS_INC_ZPX : Executes INC_ZPX
+void INS_INC_ZPX(CPU c);
+
+// INS_INC_AB : Executes INC_AB
+void INS_INC_AB(CPU c);
+
+// INS_INC_ABX : Executes INC_ABX
+void INS_INC_ABX(CPU c);
+
+// -- DEC ---
+
+// INS_DEC_ZP : Executes DEC_ZP
+void INS_DEC_ZP(CPU c);
+
+// INS_DEC_ZPX : Executes DEC_ZPX
+void INS_DEC_ZPX(CPU c);
+
+// INS_DEC_AB : Executes DEC_AB
+void INS_DEC_AB(CPU c);
+
+// INS_DEC_ABX : Executes DEC_ABX
+void INS_DEC_ABX(CPU c);
+
+// --- INX ---
+
+// INS_INX_IMP : Executes INX_IMP
+void INS_INX_IMP(CPU c);
+
+// --- INY ---
+
+// INS_INY_IMP : Executes INY_IMP
+void INS_INY_IMP(CPU c);
+
+// --- DEX ---
+
+// INS_DEX_IMP : Executes DEX_IMP
+void INS_DEX_IMP(CPU c);
+
+// --- DEY ---
+
+// INS_DEY_IMP : Executes DEY_IMP
+void INS_DEY_IMP(CPU c);
 
 // --- JSR ---
 

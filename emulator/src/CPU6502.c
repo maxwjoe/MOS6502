@@ -549,4 +549,28 @@ static void s_setup_op_array(CPU c)
     c->ops[CPY_IM] = &INS_CPY_IM;
     c->ops[CPY_ZP] = &INS_CPY_ZP;
     c->ops[CPY_AB] = &INS_CPY_AB;
+
+    // INC
+    c->ops[INC_ZP] = &INS_INC_ZP;
+    c->ops[INC_ZPX] = &INS_INC_ZPX;
+    c->ops[INC_AB] = &INS_INC_AB;
+    c->ops[INC_ABX] = &INS_INC_ABX;
+
+    // DEC
+    c->ops[DEC_ZP] = &INS_DEC_ZP;
+    c->ops[DEC_ZPX] = &INS_DEC_ZPX;
+    c->ops[DEC_AB] = &INS_DEC_AB;
+    c->ops[DEC_ABX] = &INS_DEC_ABX;
+
+    // INX
+    c->ops[INX_IMP] = &INS_INX_IMP;
+
+    // DEX
+    c->ops[DEX_IMP] = &INS_DEX_IMP;
+
+    // INY
+    c->ops[INY_IMP] = &INS_INY_IMP;
+
+    // DEY
+    c->ops[DEY_IMP] = &INS_DEY_IMP;
 }

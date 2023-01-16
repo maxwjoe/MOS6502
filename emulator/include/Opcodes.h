@@ -186,33 +186,33 @@
 
 // INC : Increment Memory
 
-#define INC_ZP 0xE6  // Increment value held at a given memory location (Zero Page Mode, 5) :
-#define INC_ZPX 0xF6 // Increment value held at a given memory location (Zero Page X Mode, 6) :
-#define INC_AB 0xEE  // Increment value held at a given memory location (Absolute Mode, 6) :
-#define INC_ABX 0xFE // Increment value held at a given memory location (Absolute X Mode, 7) :
+#define INC_ZP 0xE6  // Increment value held at a given memory location (Zero Page Mode, 5) : C
+#define INC_ZPX 0xF6 // Increment value held at a given memory location (Zero Page X Mode, 6) : C
+#define INC_AB 0xEE  // Increment value held at a given memory location (Absolute Mode, 6) : C
+#define INC_ABX 0xFE // Increment value held at a given memory location (Absolute X Mode, 7) : C
 
 // INX : Increment X Register
 
-#define INX_IMP 0xE8 // Increments the X Register (Implied Mode, 2)
+#define INX_IMP 0xE8 // Increments the X Register (Implied Mode, 2) : C
 
 // INY : Increment Y Register
 
-#define INY_IMP 0xC8 // Increments the Y Register (Implied Mode, 2)
+#define INY_IMP 0xC8 // Increments the Y Register (Implied Mode, 2) : C
 
 // DEC : Decrement Memory
 
-#define DEC_ZP 0xC6  // Decrement value held at a given memory location (Zero Page Mode, 5) :
-#define DEC_ZPX 0xD6 // Decrement value held at a given memory location (Zero Page X Mode, 6) :
-#define DEC_AB 0xCE  // Decrement value held at a given memory location (Absolute Mode, 6) :
-#define DEC_ABX 0xDE // Decrement value held at a given memory location (Absolute X Mode, 7) :
+#define DEC_ZP 0xC6  // Decrement value held at a given memory location (Zero Page Mode, 5) : C
+#define DEC_ZPX 0xD6 // Decrement value held at a given memory location (Zero Page X Mode, 6) : C
+#define DEC_AB 0xCE  // Decrement value held at a given memory location (Absolute Mode, 6) : C
+#define DEC_ABX 0xDE // Decrement value held at a given memory location (Absolute X Mode, 7) : C
 
 // DEX : Decrement X Register
 
-#define DEX_IMP 0xCA // Decrement the X Register (Implied Mode, 2)
+#define DEX_IMP 0xCA // Decrement the X Register (Implied Mode, 2) : C
 
 // DEY : Decrement X Register
 
-#define DEY_IMP 0x88 // Decrement the Y Register (Implied Mode, 2)
+#define DEY_IMP 0x88 // Decrement the Y Register (Implied Mode, 2) : C
 
 // JSR : Jump to Subroutine
 

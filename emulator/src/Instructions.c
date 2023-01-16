@@ -650,3 +650,79 @@ void INS_CPY_AB(CPU c)
     word address = ADDR_AB(c);
     OPER_CPY(c, address);
 }
+
+void INS_INC_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_INC(c, address);
+}
+
+void INS_INC_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_INC(c, address);
+}
+
+void INS_INC_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_INC(c, address);
+}
+
+void INS_INC_ABX(CPU c)
+{
+    word address = ADDR_ABX(c);
+    OPER_INC(c, address);
+}
+
+void INS_DEC_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_DEC(c, address);
+}
+
+void INS_DEC_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_DEC(c, address);
+}
+
+void INS_DEC_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_DEC(c, address);
+}
+
+void INS_DEC_ABX(CPU c)
+{
+    word address = ADDR_ABX(c);
+    OPER_DEC(c, address);
+}
+
+void INS_INX_IMP(CPU c)
+{
+    CPUSetX(c, CPUGetX(c) + 1);
+    CPUClockTick(c);
+    SET_PS_XREGISTER(c);
+}
+
+void INS_INY_IMP(CPU c)
+{
+    CPUSetY(c, CPUGetY(c) + 1);
+    CPUClockTick(c);
+    SET_PS_YREGISTER(c);
+}
+
+void INS_DEX_IMP(CPU c)
+{
+    CPUSetX(c, CPUGetX(c) - 1);
+    CPUClockTick(c);
+    SET_PS_XREGISTER(c);
+}
+
+void INS_DEY_IMP(CPU c)
+{
+    CPUSetY(c, CPUGetY(c) - 1);
+    CPUClockTick(c);
+    SET_PS_YREGISTER(c);
+}
