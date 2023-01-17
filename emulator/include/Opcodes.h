@@ -291,4 +291,44 @@
 
 #define BVS_REL 0x70 // If Overflow Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross]) : C
 
+// CLC : Clear Carry Flag
+
+#define CLC_IMP 0x18 // Clears the Carry flag (Implied, 2) :
+
+// CLD : Clear Decimal Flag
+
+#define CLD_IMP 0xD8 // Clears the Decimal flag (Implied, 2) :
+
+// CLI : Clear Interrupt Flag
+
+#define CLI_IMP 0x58 // Clears the Interrupt Flag (Implied, 2) :
+
+// CLV : Clear Overflow Flag
+
+#define CLV_IMP 0xB8 // Clears the Overflow Flag (Implied, 2) :
+
+// SEC : Set Carry Flag
+
+#define SEC_IMP 0x38 // Sets the Carry Flag (Implied, 2) :
+
+// SED : Set Decimal Flag
+
+#define SED_IMP 0xF8 // Sets the Decimal Flag (Implied, 2) :
+
+// SEI : Set Interrupt Flag
+
+#define SEI_IMP 0x78 // Sets the Interrupt Flag (Implied, 2) :
+
+// BRK : Force Interrupt
+
+#define BRK_IMP 0x00 // Forces an interrupt (Implied, 7) :
+
+// NOP : No Operation
+
+#define NOP_IMP 0xEA // No Operation (Implied, 2) :
+
+// RTI : Return from Interrupt
+
+#define RTI_IMP 0x40 // Return from interrupt (Implied, 6) :
+
 #endif

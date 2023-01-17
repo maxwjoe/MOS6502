@@ -373,14 +373,6 @@ int CPUExecute(CPU c)
     {
         byte instruction = CPUFetchByte(c);
 
-#if !DEBUG_MODE
-        if (!instruction)
-        {
-            CPUClockTick(c);
-            continue;
-        }
-#endif
-
         cpu_operation func = c->ops[instruction];
 
         if (!func)
