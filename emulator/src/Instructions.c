@@ -726,3 +726,162 @@ void INS_DEY_IMP(CPU c)
     CPUClockTick(c);
     SET_PS_YREGISTER(c);
 }
+
+void INS_ASL_ACC(CPU c)
+{
+    byte a_value = CPUGetA(c);
+
+    a_value = a_value << 1;
+
+    CPUSetStatusFlag(c, PS_C, (a_value & 0xFF00) > 0);
+    CPUSetStatusFlag(c, PS_N, (a_value & 0x0080));
+    CPUSetStatusFlag(c, PS_Z, (a_value == 0));
+
+    CPUSetA(c, a_value);
+    CPUClockTick(c);
+}
+
+void INS_ASL_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_ASL(c, address);
+}
+
+void INS_ASL_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_ASL(c, address);
+}
+
+void INS_ASL_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_ASL(c, address);
+}
+
+void INS_ASL_ABX(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_ASL(c, address);
+}
+
+// --- LSR ---
+
+void INS_LSR_ACC(CPU c)
+{
+    byte a_value = CPUGetA(c);
+
+    CPUSetStatusFlag(c, PS_C, (a_value & 0x0001));
+
+    a_value = a_value >> 1;
+
+    CPUSetStatusFlag(c, PS_N, a_value & 0x0080);
+    CPUSetStatusFlag(c, PS_Z, (a_value == 0));
+
+    CPUSetA(c, a_value);
+    CPUClockTick(c);
+}
+
+void INS_LSR_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_LSR(c, address);
+}
+
+void INS_LSR_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_LSR(c, address);
+}
+
+void INS_LSR_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_LSR(c, address);
+}
+
+void INS_LSR_ABX(CPU c)
+{
+    word address = ADDR_ABX(c);
+    OPER_LSR(c, address);
+}
+
+// --- ROL ---
+
+void INS_ROL_ACC(CPU c)
+{
+    word a_value = CPUGetA(c);
+
+    a_value = (a_value << 1) | CPUGetStatusFlag(c, PS_C);
+
+    CPUSetStatusFlag(c, PS_C, (a_value & 0xFF00));
+    CPUSetStatusFlag(c, PS_Z, (a_value & 0x00FF == 0x0000));
+    CPUSetStatusFlag(c, PS_N, (a_value & 0x0080));
+
+    CPUSetA(c, a_value);
+    CPUClockTick(c);
+}
+
+void INS_ROL_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_ROL(c, address);
+}
+
+void INS_ROL_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_ROL(c, address);
+}
+
+void INS_ROL_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_ROL(c, address);
+}
+
+void INS_ROL_ABX(CPU c)
+{
+    word address = ADDR_ABX(c);
+    OPER_ROL(c, address);
+}
+
+// --- ROR ---
+
+void INS_ROR_ACC(CPU c)
+{
+    word a_value = CPUGetA(c);
+
+    a_value = (a_value >> 1) | (CPUGetStatusFlag(c, PS_C) << 7);
+
+    CPUSetStatusFlag(c, PS_C, (a_value & 0x0001));
+    CPUSetStatusFlag(c, PS_Z, (a_value & 0x00FF == 0x0000));
+    CPUSetStatusFlag(c, PS_N, (a_value & 0x0080));
+
+    CPUSetA(c, a_value);
+    CPUClockTick(c);
+}
+
+void INS_ROR_ZP(CPU c)
+{
+    byte address = ADDR_ZP(c);
+    OPER_ROR(c, address);
+}
+
+void INS_ROR_ZPX(CPU c)
+{
+    byte address = ADDR_ZPX(c);
+    OPER_ROR(c, address);
+}
+
+void INS_ROR_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    OPER_ROR(c, address);
+}
+
+void INS_ROR_ABX(CPU c)
+{
+    word address = ADDR_ABX(c);
+    OPER_ROR(c, address);
+}

@@ -401,6 +401,74 @@ void INS_DEX_IMP(CPU c);
 // INS_DEY_IMP : Executes DEY_IMP
 void INS_DEY_IMP(CPU c);
 
+// --- ASL ---
+
+// INS_ASL_ACC : Executes ASL_ACC
+void INS_ASL_ACC(CPU c);
+
+// INS_ASL_ZP : Executes ASL_ZP
+void INS_ASL_ZP(CPU c);
+
+// INS_ASL_ZPX : Executes ASL_ZPX
+void INS_ASL_ZPX(CPU c);
+
+// INS_ASL_AB : Executes ASL_AB
+void INS_ASL_AB(CPU c);
+
+// INS_ASL_ABX : Executes ASL_ABX
+void INS_ASL_ABX(CPU c);
+
+// --- LSR ---
+
+// INS_LSR_ACC : Executes LSR_ACC
+void INS_LSR_ACC(CPU c);
+
+// INS_LSR_ZP : Executes LSR_ZP
+void INS_LSR_ZP(CPU c);
+
+// INS_LSR_ZPX : Executes LSR_ZPX
+void INS_LSR_ZPX(CPU c);
+
+// INS_LSR_AB : Executes LSR_AB
+void INS_LSR_AB(CPU c);
+
+// INS_LSR_ABX : Executes LSR_ABX
+void INS_LSR_ABX(CPU c);
+
+// --- ROL ---
+
+// INS_ROL_ACC : Executes ROL_ACC
+void INS_ROL_ACC(CPU c);
+
+// INS_ROL_ZP : Executes ROL_ZP
+void INS_ROL_ZP(CPU c);
+
+// INS_ROL_ZPX : Executes ROL_ZPX
+void INS_ROL_ZPX(CPU c);
+
+// INS_ROL_AB : Executes ROL_AB
+void INS_ROL_AB(CPU c);
+
+// INS_ROL_ABX : Executes ROL_ABX
+void INS_ROL_ABX(CPU c);
+
+// --- ROR ---
+
+// INS_ROR_ACC : Executes ROR_ACC
+void INS_ROR_ACC(CPU c);
+
+// INS_ROR_ZP : Executes ROR_ZP
+void INS_ROR_ZP(CPU c);
+
+// INS_ROR_ZPX : Executes ROR_ZPX
+void INS_ROR_ZPX(CPU c);
+
+// INS_ROR_AB : Executes ROR_AB
+void INS_ROR_AB(CPU c);
+
+// INS_ROR_ABX : Executes ROR_ABX
+void INS_ROR_ABX(CPU c);
+
 // --- JSR ---
 
 // INS_JSR_AB : Executes JSR_AB

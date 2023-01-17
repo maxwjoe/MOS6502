@@ -61,17 +61,17 @@ void OPER_INC(CPU c, word address);
 // OPER_DEC : Implements DEC Instruction
 void OPER_DEC(CPU c, word address);
 
-// OPER_INX : Implements DEC Instruction
-void OPER_INX(CPU c, word address);
+// OPER_ASL : Implements ASL Instruction
+void OPER_ASL(CPU c, word address);
 
-// OPER_INY : Implements DEC Instruction
-void OPER_INY(CPU c, word address);
+// OPER_LSR : Implements LSR Instruction
+void OPER_LSR(CPU c, word address);
 
-// OPER_DEX : Implements DEC Instruction
-void OPER_DEX(CPU c, word address);
+// OPER_ROL : Implements ROL Instruction
+void OPER_ROL(CPU c, word address);
 
-// OPER_DEY : Implements DEC Instruction
-void OPER_DEY(CPU c, word address);
+// OPER_ROR : Implements ROR Instruction
+void OPER_ROR(CPU c, word address);
 
 // === Status Register Functions ===
 

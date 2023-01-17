@@ -187,6 +187,59 @@ void OPER_DEC(CPU c, word address)
     SET_PS_MEM_OP(c, mem_value);
 }
 
+void OPER_ASL(CPU c, word address)
+{
+    byte mem_value = CPUReadByte(c, address);
+
+    mem_value = mem_value << 1;
+
+    CPUSetStatusFlag(c, PS_C, (mem_value & 0xFF00) > 0);
+    CPUSetStatusFlag(c, PS_N, (mem_value & 0x0080));
+    CPUSetStatusFlag(c, PS_Z, (mem_value == 0));
+
+    CPUWriteByte(c, address, mem_value);
+}
+
+void OPER_LSR(CPU c, word address)
+{
+    byte mem_value = CPUReadByte(c, address);
+
+    CPUSetStatusFlag(c, PS_C, (mem_value & 0x0001));
+
+    mem_value = mem_value >> 1;
+
+    CPUSetStatusFlag(c, PS_N, mem_value & 0x0080);
+    CPUSetStatusFlag(c, PS_Z, (mem_value == 0));
+
+    CPUWriteByte(c, address, mem_value);
+}
+
+void OPER_ROL(CPU c, word address)
+{
+    word mem_value = CPUReadByte(c, address);
+
+    mem_value = (mem_value << 1) | CPUGetStatusFlag(c, PS_C);
+
+    CPUSetStatusFlag(c, PS_C, (mem_value & 0xFF00));
+    CPUSetStatusFlag(c, PS_Z, (mem_value & 0x00FF == 0x0000));
+    CPUSetStatusFlag(c, PS_N, (mem_value & 0x0080));
+
+    CPUWriteByte(c, address, mem_value);
+}
+
+void OPER_ROR(CPU c, word address)
+{
+    word mem_value = CPUReadByte(c, address);
+
+    mem_value = (mem_value >> 1) | (CPUGetStatusFlag(c, PS_C) << 7);
+
+    CPUSetStatusFlag(c, PS_C, (mem_value & 0x0001));
+    CPUSetStatusFlag(c, PS_Z, (mem_value & 0x00FF == 0x0000));
+    CPUSetStatusFlag(c, PS_N, (mem_value & 0x0080));
+
+    CPUWriteByte(c, address, mem_value);
+}
+
 void SET_PS_ADC(CPU c, word a_value, word value_to_add, word sum)
 {
     // Assumption : This function is called using the accumulator value

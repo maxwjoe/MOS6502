@@ -573,4 +573,32 @@ static void s_setup_op_array(CPU c)
 
     // DEY
     c->ops[DEY_IMP] = &INS_DEY_IMP;
+
+    // ASL
+    c->ops[ASL_ACC] = &INS_ASL_ACC;
+    c->ops[ASL_ZP] = &INS_ASL_ZP;
+    c->ops[ASL_ZPX] = &INS_ASL_ZPX;
+    c->ops[ASL_AB] = &INS_ASL_AB;
+    c->ops[ASL_ABX] = &INS_ASL_ABX;
+
+    // LSR
+    c->ops[LSR_ACC] = &INS_LSR_ACC;
+    c->ops[LSR_ZP] = &INS_LSR_ZP;
+    c->ops[LSR_ZPX] = &INS_LSR_ZPX;
+    c->ops[LSR_AB] = &INS_LSR_AB;
+    c->ops[LSR_ABX] = &INS_LSR_ABX;
+
+    // ROL
+    c->ops[ROL_ACC] = &INS_ROL_ACC;
+    c->ops[ROL_ZP] = &INS_ROL_ZP;
+    c->ops[ROL_ZPX] = &INS_ROL_ZPX;
+    c->ops[ROL_AB] = &INS_ROL_AB;
+    c->ops[ROL_ABX] = &INS_ROL_ABX;
+
+    // ROR
+    c->ops[ROR_ACC] = &INS_ROR_ACC;
+    c->ops[ROR_ZP] = &INS_ROR_ZP;
+    c->ops[ROR_ZPX] = &INS_ROR_ZPX;
+    c->ops[ROR_AB] = &INS_ROR_AB;
+    c->ops[ROR_ABX] = &INS_ROR_ABX;
 }
