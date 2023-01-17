@@ -1001,3 +1001,75 @@ void INS_BVS_REL(CPU c)
         OPER_BRANCH(c, offset);
     }
 }
+
+void INS_CLC_IMP(CPU c)
+{
+    CPUSetStatusFlag(c, PS_C, 0);
+    CPUClockTick(c);
+}
+
+void INS_CLD_IMP(CPU c)
+{
+    CPUSetStatusFlag(c, PS_D, 0);
+    CPUClockTick(c);
+}
+
+void INS_CLI_IMP(CPU c)
+{
+    CPUSetStatusFlag(c, PS_I, 0);
+    CPUClockTick(c);
+}
+
+void INS_CLV_IMP(CPU c)
+{
+    CPUSetStatusFlag(c, PS_V, 0);
+    CPUClockTick(c);
+}
+
+void INS_SEC_IMP(CPU c)
+{
+    CPUSetStatusFlag(c, PS_C, 1);
+    CPUClockTick(c);
+}
+
+void INS_SED_IMP(CPU c)
+{
+    CPUSetStatusFlag(c, PS_D, 1);
+    CPUClockTick(c);
+}
+
+void INS_SEI_IMP(CPU c)
+{
+    CPUSetStatusFlag(c, PS_I, 1);
+    CPUClockTick(c);
+}
+
+void INS_BRK_IMP(CPU c)
+{
+    CPUSetStatusFlag(c, PS_I, 1);
+    word pc_value = CPUGetPC(c);
+
+    CPUPushByteToStack(c, (pc_value >> 8) & 0x00FF);
+    CPUPushByteToStack(c, (pc_value & 0x00FF));
+
+    CPUSetStatusFlag(c, PS_B, 1);
+    CPUPushByteToStack(c, CPUGetStatusRegister(c));
+
+    pc_value = MemoryReadByte(CPUGetMemory(c), IRQ_VECTOR_START);
+    pc_value |= MemoryReadByte(CPUGetMemory(c), IRQ_VECTOR_START + 1) << 8;
+}
+
+void INS_RTI_IMP(CPU c)
+{
+    byte status_flags = CPUPopByteFromStack(c);
+    CPUSetStatusRegister(c, status_flags);
+
+    byte prog_counter = CPUPopByteFromStack(c);
+    prog_counter |= CPUPopByteFromStack(c) << 8;
+    CPUSetPC(c, prog_counter);
+}
+
+void INS_NOP_IM(CPU c)
+{
+    CPUClockTick(c);
+}

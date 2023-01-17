@@ -527,6 +527,51 @@ void INS_BVC_REL(CPU c);
 // INS_BVS_REL : Executes BVS_REL
 void INS_BVS_REL(CPU c);
 
+// --- CLC ---
+
+// INS_CLC_IMP : Executes CLC_IMP
+void INS_CLC_IMP(CPU c);
+
+// --- CLD ---
+
+// INS_CLD_IMP : Executes CLD_IMP
+void INS_CLD_IMP(CPU c);
+
+// --- CLI ---
+
+// INS_CLI_IMP : Executes CLI_IMP
+void INS_CLI_IMP(CPU c);
+
+// --- CLV ---
+
+// INS_CLV_IMP : Executes CLV_IMP
+void INS_CLV_IMP(CPU c);
+
+// --- SEC ---
+
+// INS_SEC_IMP : Executes SEC_IMP
+void INS_SEC_IMP(CPU c);
+
+// --- SED ---
+
+// INS_SED_IMP : Executes SED_IMP
+void INS_SED_IMP(CPU c);
+
+// --- SEI ---
+
+// INS_SEI_IMP : Executes SEI_IMP
+void INS_SEI_IMP(CPU c);
+
+// --- BRK ---
+
+// INS_BRK_IMP : Executes BRK_IMP
+void INS_BRK_IMP(CPU c);
+
+// --- RTI ---
+
+// INS_RTI_IMP : Executes RTI_IMP
+void INS_RTI_IMP(CPU c);
+
 // --- NOP ---
 
 // INS_NOP_IM : Executes NOP_IM

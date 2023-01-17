@@ -15,6 +15,7 @@ typedef struct cpu6502 *CPU;
 #define DEFAULT_PROCESSOR_STATUS_FLAGS 0x00
 #define DEFAULT_STACK_BEGIN 0x0100
 #define DEFAULT_STACK_END 0x01FF
+#define IRQ_VECTOR_START 0xFFFE
 
 // === Enumerations ===
 
