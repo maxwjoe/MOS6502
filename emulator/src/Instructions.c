@@ -514,7 +514,8 @@ void INS_ADC_INY(CPU c)
 void INS_SBC_IM(CPU c)
 {
     word address = CPUGetPC(c);
-    CPUFetchByte(c);
+    CPUIncrementPC(c, 1);
+    CPUClockTick(c);
 
     OPER_SBC(c, address);
 }
@@ -884,4 +885,39 @@ void INS_ROR_ABX(CPU c)
 {
     word address = ADDR_ABX(c);
     OPER_ROR(c, address);
+}
+
+void INS_JMP_AB(CPU c)
+{
+    word address = ADDR_AB(c);
+    CPUSetPC(c, address);
+}
+
+void INS_JMP_IND(CPU c)
+{
+    word abs_address = ADDR_AB(c);
+    word address = CPUReadWord(c, abs_address);
+    CPUSetPC(c, address);
+}
+
+void INS_JSR_AB(CPU c)
+{
+    byte sr_address = CPUFetchByte(c);
+
+    CPUIncrementPC(c, -1);
+    word pc_value = CPUGetPC(c);
+
+    CPUPushByteToStack(c, (pc_value >> 8) & 0x00FF);
+    CPUPushByteToStack(c, pc_value & 0x00FF);
+
+    CPUSetPC(c, sr_address);
+}
+
+void INS_RTS_IMP(CPU c)
+{
+    word old_pc = CPUPopByteFromStack(c);
+    old_pc |= CPUPopByteFromStack(c) << 8;
+
+    CPUSetPC(c, old_pc + 1);
+    CPUClockTick(c);
 }

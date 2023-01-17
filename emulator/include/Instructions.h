@@ -469,10 +469,23 @@ void INS_ROR_AB(CPU c);
 // INS_ROR_ABX : Executes ROR_ABX
 void INS_ROR_ABX(CPU c);
 
+// --- JMP ---
+
+// INS_JMP_AB : Executes JMP_AB
+void INS_JMP_AB(CPU c);
+
+// INS_JMP_IND : Executes JMP_IND
+void INS_JMP_IND(CPU c);
+
 // --- JSR ---
 
 // INS_JSR_AB : Executes JSR_AB
 void INS_JSR_AB(CPU c);
+
+// --- RTS ---
+
+// INS_RTS_IMP : Executes RTS_IMP
+void INS_RTS_IMP(CPU c);
 
 // --- NOP ---
 

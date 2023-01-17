@@ -601,4 +601,14 @@ static void s_setup_op_array(CPU c)
     c->ops[ROR_ZPX] = &INS_ROR_ZPX;
     c->ops[ROR_AB] = &INS_ROR_AB;
     c->ops[ROR_ABX] = &INS_ROR_ABX;
+
+    // JMP
+    c->ops[JMP_AB] = &INS_JMP_AB;
+    c->ops[JMP_IND] = &INS_JMP_IND;
+
+    // JSR
+    c->ops[JSR_AB] = &INS_JSR_AB;
+
+    // RTS
+    c->ops[RTS_IMP] = &INS_RTS_IMP;
 }

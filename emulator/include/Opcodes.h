@@ -246,8 +246,17 @@
 #define ROR_AB 0x6E  // Shifts bits in memory to right, B0 becomes carry, carry becomes B7 (Absolute  Mode, 6) : C
 #define ROR_ABX 0x7E // Shifts bits in memory to right, B0 becomes carry, carry becomes B7 (Absolute X Mode, 7) : C
 
+// JMP : Jump
+
+#define JMP_AB 0x4C  // Sets the program counter to address specified (Absolute Mode, 3) : C
+#define JMP_IND 0x6C // Sets the program counter to address specified (Indirect Mode, 5) : C
+
 // JSR : Jump to Subroutine
 
-#define JSR_AB 0x20 // Jump to subroutine (Absolute Mode, 6) :
+#define JSR_AB 0x20 // Push address to return point - 1 to stack, set PC to specified address (Absolute Mode, 6) : C
+
+// RTS : Return from Subroutine
+
+#define RTS_IMP 0x60 // Pulls PC minus one from stack, used to end subroutine and return to call routine (Implied Mode, 6) : C
 
 #endif

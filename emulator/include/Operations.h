@@ -8,6 +8,9 @@
 // OPER_XXX : given an address, OPER functions carry out the logic of each opcode
 // OPER_XXX functions are not directly executed by the CPU, they are called inside of INS_XXX_YYY
 
+// Note : Not all operations are here as some do not have multiple addressing modes, or are just very simple (eg. JMP)
+// in this case they are directly implemented in the Instructions.c file
+
 // === OPERATION DECLARATIONS ===
 
 // OPER_LDA : Implements LDA Instruction (1 Cycle)
