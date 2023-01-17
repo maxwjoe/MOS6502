@@ -259,4 +259,36 @@
 
 #define RTS_IMP 0x60 // Pulls PC minus one from stack, used to end subroutine and return to call routine (Implied Mode, 6) : C
 
+// BCC : Branch if Carry Clear
+
+#define BCC_REL 0x90 // If Carry Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+
+// BCS : Branch if Carry Set
+
+#define BCS_REL 0xB0 // If Carry Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+
+// BEQ : Branch if Equal
+
+#define BEQ_REL 0xF0 // If Zero Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+
+// BMI : Branch if Minus
+
+#define BMI_REL 0x30 // If Negative Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+
+// BNE : Branch if Not Equal
+
+#define BNE_REL 0xD0 // If Zero flag Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+
+// BPL : Branch if Positive
+
+#define BPL_REL 0x10 // If Negative Flag Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+
+// BVC : Branch if Overflow Clear
+
+#define BVC_REL 0x50 // If Overflow Flag Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+
+// BVS : Branch if Overflow Set
+
+#define BVS_REL 0x70 // If Overflow Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+
 #endif
