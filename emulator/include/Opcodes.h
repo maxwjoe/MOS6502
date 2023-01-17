@@ -214,6 +214,38 @@
 
 #define DEY_IMP 0x88 // Decrement the Y Register (Implied Mode, 2) : C
 
+// ASL : Arithmetic Shift Left
+
+#define ASL_ACC 0x0A // Shifts contents of accumulator to left by one bit (Accumulator, 2) :
+#define ASL_ZP 0x06  // Shifts contents of memory location to left by one bit (Zero Page Mode, 5) :
+#define ASL_ZPX 0x16 // Shifts contents of memory location to left by one bit (Zero Page X Mode, 6) :
+#define ASL_AB 0x0E  // Shifts contents of memory location to left by one bit (Absolute Mode, 6) :
+#define ASL_ABX 0x1E // Shifts contents of memory location to left by one bit (Absolute Mode, 7) :
+
+// LSR : Logical Shift Right
+
+#define LSR_ACC 0x4A // Shifts contents of accumulator to right and Bit zero into carry (Accumulator, 2) :
+#define LSR_ZP 0x46  // Shifts memory contents to right and bit zero into carry register (Zero Page Mode, 5) :
+#define LSR_ZPX 0x56 // Shifts memory contents to right and bit zero into carry register (Zero Page X Mode, 5) :
+#define LSR_AB 0x4E  // Shifts memory contents to right and bit zero into carry register (Absolute Mode, 5) :
+#define LSR_ABX 0x5E // Shifts memory contents to right and bit zero into carry register (Absolute X Mode, 5) :
+
+// ROL : Rotate Left
+
+#define ROL_ACC 0x2A // Shifts bits in accumulator to left, B0 becomes carry, carry becomes B7 (Accumulator, 2) :
+#define ROL_ZP 0x26  // Shifts bits in memory to left, B0 becomes carry, carry becomes B7 (Zero Page Mode, 5) :
+#define ROL_ZPX 0x36 // Shifts bits in memory to left, B0 becomes carry, carry becomes B7 (Zero Page X Mode, 6) :
+#define ROL_AB 0x2E  // Shifts bits in memory to left, B0 becomes carry, carry becomes B7 (Absolute  Mode, 6) :
+#define ROL_ABX 0x3E // Shifts bits in memory to left, B0 becomes carry, carry becomes B7 (Absolute X Mode, 7) :
+
+// ROR : Rotate Right
+
+#define ROR_ACC 0x6A // Shifts bits in accumulator to right, B0 becomes carry, carry becomes B7 (Accumulator, 2) :
+#define ROR_ZP 0x66  // Shifts bits in memory to right, B0 becomes carry, carry becomes B7 (Zero Page Mode, 5) :
+#define ROR_ZPX 0x76 // Shifts bits in memory to right, B0 becomes carry, carry becomes B7 (Zero Page X Mode, 6) :
+#define ROR_AB 0x6E  // Shifts bits in memory to right, B0 becomes carry, carry becomes B7 (Absolute  Mode, 6) :
+#define ROR_ABX 0x7E // Shifts bits in memory to right, B0 becomes carry, carry becomes B7 (Absolute X Mode, 7) :
+
 // JSR : Jump to Subroutine
 
 #define JSR_AB 0x20 // Jump to subroutine (Absolute Mode, 6) :
