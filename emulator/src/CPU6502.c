@@ -94,6 +94,77 @@ int CPUFree(CPU c, int free_connections)
     return free_status;
 }
 
+int CPUReset(CPU c)
+{
+    HANDLE_NULL(c, error_invalid_argument);
+
+    c->A = 0x00;
+    c->X = 0x00;
+    c->Y = 0x00;
+
+    // Emulate Cycles
+    for (int i = 0; i < 7; i++)
+    {
+        CPUClockTick(c);
+    }
+
+    CPUSetStatusRegister(c, 0x00);
+    CPUSetStatusFlag(c, PS_U, 1);
+
+    CPUSetSP(c, 0xFD);
+
+    // Set PC
+    c->PC = DEFAULT_PROGRAM_COUNTER;
+    word pc_new = CPUFetchByte(c);
+    pc_new |= CPUFetchByte(c) << 8;
+    CPUSetPC(c, pc_new);
+}
+
+int CPUIRQ(CPU c)
+{
+    if (CPUGetStatusFlag(c, PS_I) == 0)
+    {
+        // Push PC To Stack
+        byte pc_value = CPUGetPC(c);
+
+        CPUPushByteToStack(c, (pc_value >> 8) & 0x00FF);
+        CPUPushByteToStack(c, pc_value & 0x00FF);
+
+        // Push Processor Status to Stack
+        CPUSetStatusFlag(c, PS_B, 0);
+        CPUSetStatusFlag(c, PS_U, 1);
+        CPUSetStatusFlag(c, PS_I, 1);
+        CPUPushByteToStack(c, CPUGetStatusRegister(c));
+
+        // Read in new PC Location
+        c->PC = IRQ_VECTOR_START;
+        pc_value = CPUFetchByte(c);
+        pc_value |= CPUFetchByte(c) << 8;
+        CPUSetPC(c, pc_value);
+    }
+}
+
+int CPUNMI(CPU c)
+{
+    // Push PC To Stack
+    byte pc_value = CPUGetPC(c);
+
+    CPUPushByteToStack(c, (pc_value >> 8) & 0x00FF);
+    CPUPushByteToStack(c, pc_value & 0x00FF);
+
+    // Push Processor Status to Stack
+    CPUSetStatusFlag(c, PS_B, 0);
+    CPUSetStatusFlag(c, PS_U, 1);
+    CPUSetStatusFlag(c, PS_I, 1);
+    CPUPushByteToStack(c, CPUGetStatusRegister(c));
+
+    // Read in new PC Location
+    c->PC = NMI_VECTOR_START;
+    pc_value = CPUFetchByte(c);
+    pc_value |= CPUFetchByte(c) << 8;
+    CPUSetPC(c, pc_value);
+}
+
 int CPUConnectMemory(CPU c, Memory m)
 {
     if (c == NULL || m == NULL)

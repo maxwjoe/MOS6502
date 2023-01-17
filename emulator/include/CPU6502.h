@@ -16,6 +16,7 @@ typedef struct cpu6502 *CPU;
 #define DEFAULT_STACK_BEGIN 0x0100
 #define DEFAULT_STACK_END 0x01FF
 #define IRQ_VECTOR_START 0xFFFE
+#define NMI_VECTOR_START 0xFFFA
 
 // === Enumerations ===
 
@@ -28,7 +29,8 @@ enum PS_FLAGS
     PS_D, // Decimal Mode
     PS_B, // Break Command
     PS_V, // Overflow
-    PS_N  // Negative
+    PS_N, // Negative
+    PS_U  // Unused
 };
 
 // === Object Lifetime ===
@@ -77,6 +79,15 @@ int CPUClockTick(CPU c);
 
 // CPUExecute : Runs the CPU
 int CPUExecute(CPU c);
+
+// CPUReset : Resets the CPU
+int CPUReset(CPU c);
+
+// CPUIRQ : Interrupt Request
+int CPUIRQ(CPU c);
+
+// CPUNMI : Non-Maskable Interrupt
+int CPUNMI(CPU c);
 
 // === Getters and Setters ===
 
