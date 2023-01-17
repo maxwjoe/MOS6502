@@ -921,3 +921,83 @@ void INS_RTS_IMP(CPU c)
     CPUSetPC(c, old_pc + 1);
     CPUClockTick(c);
 }
+
+void INS_BCC_REL(CPU c)
+{
+    word offset = CPUFetchByte(c);
+
+    if (!CPUGetStatusFlag(c, PS_C))
+    {
+        OPER_BRANCH(c, offset);
+    }
+}
+
+void INS_BCS_REL(CPU c)
+{
+    word offset = CPUFetchByte(c);
+
+    if (CPUGetStatusFlag(c, PS_C))
+    {
+        OPER_BRANCH(c, offset);
+    }
+}
+
+void INS_BEQ_REL(CPU c)
+{
+    word offset = CPUFetchByte(c);
+
+    if (CPUGetStatusFlag(c, PS_Z))
+    {
+        OPER_BRANCH(c, offset);
+    }
+}
+
+void INS_BMI_REL(CPU c)
+{
+    word offset = CPUFetchByte(c);
+
+    if (CPUGetStatusFlag(c, PS_N))
+    {
+        OPER_BRANCH(c, offset);
+    }
+}
+
+void INS_BNE_REL(CPU c)
+{
+    word offset = CPUFetchByte(c);
+
+    if (!CPUGetStatusFlag(c, PS_Z))
+    {
+        OPER_BRANCH(c, offset);
+    }
+}
+
+void INS_BPL_REL(CPU c)
+{
+    word offset = CPUFetchByte(c);
+
+    if (!CPUGetStatusFlag(c, PS_N))
+    {
+        OPER_BRANCH(c, offset);
+    }
+}
+
+void INS_BVC_REL(CPU c)
+{
+    word offset = CPUFetchByte(c);
+
+    if (!CPUGetStatusFlag(c, PS_V))
+    {
+        OPER_BRANCH(c, offset);
+    }
+}
+
+void INS_BVS_REL(CPU c)
+{
+    word offset = CPUFetchByte(c);
+
+    if (CPUGetStatusFlag(c, PS_V))
+    {
+        OPER_BRANCH(c, offset);
+    }
+}

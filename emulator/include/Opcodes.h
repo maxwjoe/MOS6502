@@ -261,34 +261,34 @@
 
 // BCC : Branch if Carry Clear
 
-#define BCC_REL 0x90 // If Carry Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+#define BCC_REL 0x90 // If Carry Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross]) : C
 
 // BCS : Branch if Carry Set
 
-#define BCS_REL 0xB0 // If Carry Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+#define BCS_REL 0xB0 // If Carry Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross]) : C
 
 // BEQ : Branch if Equal
 
-#define BEQ_REL 0xF0 // If Zero Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+#define BEQ_REL 0xF0 // If Zero Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross]) : C
 
 // BMI : Branch if Minus
 
-#define BMI_REL 0x30 // If Negative Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+#define BMI_REL 0x30 // If Negative Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross]) : C
 
 // BNE : Branch if Not Equal
 
-#define BNE_REL 0xD0 // If Zero flag Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+#define BNE_REL 0xD0 // If Zero flag Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross]) : C
 
 // BPL : Branch if Positive
 
-#define BPL_REL 0x10 // If Negative Flag Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+#define BPL_REL 0x10 // If Negative Flag Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross]) : C
 
 // BVC : Branch if Overflow Clear
 
-#define BVC_REL 0x50 // If Overflow Flag Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+#define BVC_REL 0x50 // If Overflow Flag Clear, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross]) : C
 
 // BVS : Branch if Overflow Set
 
-#define BVS_REL 0x70 // If Overflow Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross])
+#define BVS_REL 0x70 // If Overflow Flag Set, Add relative displacement to Program Counter to Branch (Relative, 2, [3 If branch success], [4 If page cross]) : C
 
 #endif

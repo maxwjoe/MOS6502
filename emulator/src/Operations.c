@@ -240,6 +240,21 @@ void OPER_ROR(CPU c, word address)
     CPUWriteByte(c, address, mem_value);
 }
 
+void OPER_BRANCH(CPU c, word rel_offset)
+{
+    word pc_value = CPUGetPC(c);
+    word branch_address = pc_value + rel_offset;
+    CPUClockTick(c);
+
+    // Handle Branch to new page
+    if ((branch_address & 0xFF00) != (pc_value & 0xFF00))
+    {
+        CPUClockTick(c);
+    }
+
+    CPUSetPC(c, branch_address);
+}
+
 void SET_PS_ADC(CPU c, word a_value, word value_to_add, word sum)
 {
     // Assumption : This function is called using the accumulator value

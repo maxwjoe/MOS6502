@@ -611,4 +611,28 @@ static void s_setup_op_array(CPU c)
 
     // RTS
     c->ops[RTS_IMP] = &INS_RTS_IMP;
+
+    // BCC
+    c->ops[BCC_REL] = &INS_BCC_REL;
+
+    // BCS
+    c->ops[BCS_REL] = &INS_BCS_REL;
+
+    // BEQ
+    c->ops[BEQ_REL] = &INS_BEQ_REL;
+
+    // BNE
+    c->ops[BNE_REL] = &INS_BNE_REL;
+
+    // BVS
+    c->ops[BVS_REL] = &INS_BVS_REL;
+
+    // BVC
+    c->ops[BVC_REL] = &INS_BVC_REL;
+
+    // BMI
+    c->ops[BMI_REL] = &INS_BMI_REL;
+
+    // BPL
+    c->ops[BPL_REL] = &INS_BPL_REL;
 }

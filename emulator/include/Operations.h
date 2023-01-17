@@ -76,6 +76,9 @@ void OPER_ROL(CPU c, word address);
 // OPER_ROR : Implements ROR Instruction
 void OPER_ROR(CPU c, word address);
 
+// OPER_BRANCH : Implements Generic Branching
+void OPER_BRANCH(CPU c, word rel_offset);
+
 // === Status Register Functions ===
 
 // SET_PS_ACCUMULATOR : Sets the processor status flags based on value in accumulator

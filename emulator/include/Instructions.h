@@ -487,6 +487,46 @@ void INS_JSR_AB(CPU c);
 // INS_RTS_IMP : Executes RTS_IMP
 void INS_RTS_IMP(CPU c);
 
+// --- BCC ---
+
+// INS_BCC_REL : Executes BCC_REL
+void INS_BCC_REL(CPU c);
+
+// --- BCS ---
+
+// INS_BCS_REL : Executes BCS_REL
+void INS_BCS_REL(CPU c);
+
+// --- BEQ ---
+
+// INS_BEQ_REL : Executes BEQ_REL
+void INS_BEQ_REL(CPU c);
+
+// --- BMI ---
+
+// INS_BMI_REL : Executes BMI_REL
+void INS_BMI_REL(CPU c);
+
+// --- BNE ---
+
+// INS_BNE_REL : Executes BNE_REL
+void INS_BNE_REL(CPU c);
+
+// --- BPL ---
+
+// INS_BPL_REL : Executes BPL_REL
+void INS_BPL_REL(CPU c);
+
+// --- BVC ---
+
+// INS_BVC_REL : Executes BVC_REL
+void INS_BVC_REL(CPU c);
+
+// --- BVS ---
+
+// INS_BVS_REL : Executes BVS_REL
+void INS_BVS_REL(CPU c);
+
 // --- NOP ---
 
 // INS_NOP_IM : Executes NOP_IM
