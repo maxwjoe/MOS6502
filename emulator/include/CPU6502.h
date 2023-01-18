@@ -151,4 +151,9 @@ byte CPUGetX(CPU c);
 // CPUGetY : Returns the value in the Y Register
 byte CPUGetY(CPU c);
 
+// === IO Helpers ===
+
+// CPUSetCycleCallback : Sets callback function to execute each CPU Cycle
+void CPUSetCycleCallback(CPU c, void (*callback)(CPU));
+
 #endif

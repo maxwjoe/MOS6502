@@ -13,3 +13,9 @@ make
 echo TEST BUILT
 ./bin/testBed
 cd ../
+echo TESTS RUN
+cd frontend
+make clean
+make
+echo FRONTEND BUILT
+cd ../

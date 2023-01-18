@@ -26,8 +26,9 @@ typedef struct cpu6502
 
     // === Other ===
 
-    int cycle_penalty;  // Flag to indicate additional cycle required
-    cpu_operation *ops; // Array of function pointers to CPU Operations
+    int cycle_penalty;          // Flag to indicate additional cycle required
+    cpu_operation *ops;         // Array of function pointers to CPU Operations
+    void (*cycle_callback)(CPU) // Callback function to execute on clock cycle (Useful for frontend)
 
 } *CPU;
 
@@ -60,6 +61,8 @@ CPU CPUNew()
 
     c->clk = NULL;
     c->mem = NULL;
+    c->cycle_callback = NULL;
+    c->cycle_penalty = 0;
 
     s_setup_op_array(c);
 
@@ -194,7 +197,7 @@ byte CPUFetchByte(CPU c)
     HANDLE_NULL(c, error_invalid_argument);
 
     byte data = MemoryReadByte(c->mem, c->PC);
-    ClockTick(c->clk);
+    CPUClockTick(c);
     c->PC++;
 
     return data;
@@ -207,11 +210,11 @@ word CPUFetchWord(CPU c)
     // MOS6502 Is Little Endian
 
     word data = MemoryReadByte(c->mem, c->PC);
-    ClockTick(c->clk);
+    CPUClockTick(c);
     c->PC++;
 
     data |= MemoryReadByte(c->mem, c->PC) << 8;
-    ClockTick(c->clk);
+    CPUClockTick(c);
     c->PC++;
 
     return data;
@@ -222,7 +225,7 @@ byte CPUReadByte(CPU c, word address)
     HANDLE_NULL(c, error_invalid_argument);
 
     byte data = MemoryReadByte(c->mem, address);
-    ClockTick(c->clk);
+    CPUClockTick(c);
 
     return data;
 }
@@ -246,7 +249,7 @@ int CPUWriteByte(CPU c, word address, byte data)
     HANDLE_NULL(c, error_invalid_argument);
 
     int status_code = MemoryWriteByte(c->mem, address, data);
-    ClockTick(c->clk);
+    CPUClockTick(c);
 
     return status_code;
 }
@@ -334,6 +337,11 @@ int CPUClockTick(CPU c)
     HANDLE_NULL(c, error_invalid_argument);
 
     ClockTick(c->clk);
+
+    if (c->cycle_callback != NULL)
+    {
+        c->cycle_callback(c);
+    }
     return ok;
 }
 
@@ -419,6 +427,16 @@ byte CPUGetY(CPU c)
 {
     HANDLE_NULL(c, error_invalid_argument);
     return c->Y;
+}
+
+void CPUSetCycleCallback(CPU c, void (*callback)(CPU))
+{
+    if (!c)
+    {
+        return;
+    }
+
+    c->cycle_callback = callback;
 }
 
 int CPUSetCyclePenalty(CPU c, int value)

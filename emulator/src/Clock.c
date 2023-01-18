@@ -1,5 +1,6 @@
 #include "Clock.h"
 #include "stdlib.h"
+#include "stdio.h"
 #include "EmulatorHelper.h"
 #include "EmulatorTypes.h"
 
@@ -43,10 +44,11 @@ int ClockTick(Clock clk)
         s_clock_delay(clk->period);
         break;
     case CM_STEP_LIMIT:
-        // Implement
+        getchar();
+        clk->tick_limit--;
         break;
     case CM_STEP_NO_LIMIT:
-        // Implement
+        getchar();
         break;
     default:
         LOG_STATUS(error_generic);
@@ -59,6 +61,13 @@ int ClockSetTickLimit(Clock clk, int tick_limit)
     HANDLE_NULL(clk, error_invalid_argument);
 
     clk->tick_limit = tick_limit;
+    return ok;
+}
+
+int ClockSetMode(Clock clk, int clock_mode)
+{
+    HANDLE_NULL(clk, error_invalid_argument);
+    clk->mode = clock_mode;
     return ok;
 }
 
