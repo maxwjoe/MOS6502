@@ -65,7 +65,7 @@ int main()
 
     ctx->stdscr = stdscr;
     ctx->register_window = newwin(s_rows / 2, s_cols / 3, 0, 2 * s_cols / 3);
-    ctx->stack_window = newwin(s_rows / 2, s_cols / 3, 0, 2 * s_cols / 3);
+    ctx->stack_window = newwin((s_rows / 2) - 1, s_cols / 3, (s_rows / 2) + 1, 2 * s_cols / 3);
     ctx->memory_window = newwin(s_rows, 2 * s_cols / 3, 0, 0);
 
     refresh();
@@ -113,12 +113,52 @@ void print_stack(CPU c)
     Memory mem_ptr = CPUGetMemory(c);
 
     int stk_rows, stk_cols;
-    int start_row, start_col;
-    getbegyx(stkwin, stk_rows, stk_cols);
-    getmaxyx(stkwin, start_row, start_col);
+    getmaxyx(stkwin, stk_rows, stk_cols);
+
+    int start_row = 2;
+    int start_col = 2;
 
     wclear(stkwin);
     box(stkwin, 0, 0);
+
+    // Heading
+    wattron(stkwin, A_BOLD);
+    wattron(stkwin, A_UNDERLINE);
+    mvwprintw(stkwin, start_row + 1, start_row + 2, "Stack Memory");
+    wattroff(stkwin, A_BOLD);
+    wattroff(stkwin, A_UNDERLINE);
+
+    // Print Stack
+    byte stk_ptr = CPUGetSP(c);
+    int row_limit = stk_rows - 7;
+
+    int curr_row = 0;
+
+    word addr_i = DEFAULT_STACK_BEGIN + stk_ptr;
+    while (curr_row < row_limit)
+    {
+        int is_stk_ptr = ((addr_i & 0x00FF) == stk_ptr);
+
+        if (is_stk_ptr)
+        {
+            wattron(stkwin, COLOR_PAIR(1));
+        }
+
+        // Print Stack Address
+        wattron(stkwin, A_BOLD);
+        mvwprintw(stkwin, start_row + 3 + curr_row, start_col + 2, "0x%02X : %x", stk_ptr);
+        wattroff(stkwin, A_BOLD);
+
+        mvwprintw(stkwin, start_row + 3 + curr_row, stk_cols - 6, "0x%02X", MemoryReadByte(mem_ptr, addr_i));
+
+        if (is_stk_ptr)
+        {
+            wattroff(stkwin, COLOR_PAIR(1));
+        }
+
+        curr_row++;
+        addr_i++;
+    }
 
     wrefresh(stkwin);
 }
