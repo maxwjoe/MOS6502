@@ -55,7 +55,7 @@ CPU CPUNew()
     c->PC = DEFAULT_PROGRAM_COUNTER;
     c->PS = DEFAULT_PROCESSOR_STATUS_FLAGS;
 
-    c->SP = 0x00;
+    c->SP = 0xFF;
     c->A = 0x00;
     c->X = 0x00;
     c->Y = 0x00;
@@ -473,18 +473,30 @@ int CPUGetCyclePenalty(CPU c)
     return c->cycle_penalty;
 }
 
+cpu_operation CPUGetInstruction(CPU c, byte op_code)
+{
+    HANDLE_NULL(c, NULL);
+
+    if (op_code < 0 || op_code > 0xFF)
+    {
+        return NULL;
+    }
+
+    return c->ops[op_code];
+}
+
 int CPUExecute(CPU c)
 {
     HANDLE_NULL(c, error_invalid_argument);
 
-    int tick_forever = ClockGetMode(c->clk);
-    tick_forever = 0; // Remove Later
+    int clock_mode = ClockGetMode(c->clk);
+    int tick_forever = (clock_mode == CM_FREQ_NO_LIMIT || clock_mode == CM_STEP_NO_LIMIT);
 
     while (tick_forever || ClockGetTickLimit(c->clk) > 0)
     {
         byte instruction = CPUFetchByte(c);
 
-        cpu_operation func = c->ops[instruction];
+        cpu_operation func = CPUGetInstruction(c, instruction);
 
         if (!func)
         {
@@ -738,4 +750,34 @@ static void s_setup_op_array(CPU c)
 
     // BPL
     c->ops[BPL_REL] = &INS_BPL_REL;
+
+    // CLC
+    c->ops[CLC_IMP] = &INS_CLC_IMP;
+
+    // CLD
+    c->ops[CLD_IMP] = &INS_CLD_IMP;
+
+    // CLI
+    c->ops[CLI_IMP] = &INS_CLI_IMP;
+
+    // CLV
+    c->ops[CLV_IMP] = &INS_CLV_IMP;
+
+    // SEC
+    c->ops[SEC_IMP] = &INS_SEC_IMP;
+
+    // SED
+    c->ops[SED_IMP] = &INS_SED_IMP;
+
+    // SEI
+    c->ops[SEI_IMP] = &INS_SEI_IMP;
+
+    // BRK
+    c->ops[BRK_IMP] = &INS_BRK_IMP;
+
+    // NOP
+    c->ops[NOP_IM] = &INS_NOP_IM;
+
+    // RTI
+    c->ops[RTI_IMP] = &INS_RTI_IMP;
 }

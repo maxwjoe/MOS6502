@@ -325,7 +325,7 @@
 
 // NOP : No Operation
 
-#define NOP_IMP 0xEA // No Operation (Implied, 2) :
+#define NOP_IM 0xEA // No Operation (Implied, 2) :
 
 // RTI : Return from Interrupt
 

@@ -902,7 +902,7 @@ void INS_JMP_IND(CPU c)
 
 void INS_JSR_AB(CPU c)
 {
-    byte sr_address = CPUFetchByte(c);
+    word sr_address = ADDR_AB(c);
 
     CPUIncrementPC(c, -1);
     word pc_value = CPUGetPC(c);

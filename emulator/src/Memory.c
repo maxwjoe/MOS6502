@@ -30,7 +30,7 @@ Memory MemoryNew(int capacity_bytes)
     }
 
     m->capacity = capacity_bytes;
-    m->data = (byte *)calloc(m->capacity, sizeof(byte));
+    m->data = (byte *)calloc(m->capacity + 1, sizeof(byte));
 
     if (m->data == NULL)
     {

@@ -91,6 +91,9 @@ int CPUNMI(CPU c);
 
 // === Getters and Setters ===
 
+// CPUGetInstruction : Returns function pointer from instruction array
+cpu_operation CPUGetInstruction(CPU c, byte op_code);
+
 // CPUSetEnvContext : Sets env_context pointer
 void CPUSetEnvContext(CPU c, void *context);
 
