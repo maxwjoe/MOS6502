@@ -26,9 +26,10 @@ typedef struct cpu6502
 
     // === Other ===
 
-    int cycle_penalty;          // Flag to indicate additional cycle required
-    cpu_operation *ops;         // Array of function pointers to CPU Operations
-    void (*cycle_callback)(CPU) // Callback function to execute on clock cycle (Useful for frontend)
+    int cycle_penalty;           // Flag to indicate additional cycle required
+    cpu_operation *ops;          // Array of function pointers to CPU Operations
+    void (*cycle_callback)(CPU); // Callback function to execute on clock cycle (Useful for frontend)
+    void *env_context;           // Pointer to memory used for the frontend context
 
 } *CPU;
 
@@ -62,6 +63,7 @@ CPU CPUNew()
     c->clk = NULL;
     c->mem = NULL;
     c->cycle_callback = NULL;
+    c->env_context = NULL;
     c->cycle_penalty = 0;
 
     s_setup_op_array(c);
@@ -427,6 +429,26 @@ byte CPUGetY(CPU c)
 {
     HANDLE_NULL(c, error_invalid_argument);
     return c->Y;
+}
+
+void CPUSetEnvContext(CPU c, void *context)
+{
+    if (!c)
+    {
+        return;
+    }
+
+    c->env_context = context;
+}
+
+void *CPUGetEnvContext(CPU c)
+{
+    if (!c)
+    {
+        return NULL;
+    }
+
+    return c->env_context;
 }
 
 void CPUSetCycleCallback(CPU c, void (*callback)(CPU))

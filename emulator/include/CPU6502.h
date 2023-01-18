@@ -91,6 +91,12 @@ int CPUNMI(CPU c);
 
 // === Getters and Setters ===
 
+// CPUSetEnvContext : Sets env_context pointer
+void CPUSetEnvContext(CPU c, void *context);
+
+// CPUGetEnvContext : Gets env_context pointer
+void *CPUGetEnvContext(CPU c);
+
 // CPUSetCyclePenalty : Sets the value of the cycle_penalty variable
 int CPUSetCyclePenalty(CPU c, int value);
 
