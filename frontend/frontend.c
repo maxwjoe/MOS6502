@@ -22,6 +22,7 @@ typedef struct fe_context
     int main_cols;
     int main_s_row;
     int main_s_col;
+    int mem_capacity;
 } *FE_CONTEXT;
 
 // cycle_callback : Callback function to execute on each CPU Cycle
@@ -41,6 +42,9 @@ void draw_memory(CPU c, FE_CONTEXT ctx);
 
 // draw_too_small : Draws too small warning
 void draw_too_small(FE_CONTEXT ctx);
+
+// draw_cpu_flag : Draws a status flag
+void draw_cpu_flag(WINDOW *w, int r, int c, char *text, int flag_level);
 
 // get_window_dimensions : Calculates window sizes and positions
 int get_window_dimensions(FE_CONTEXT ctx, int *twr, int *twc, int *cwr, int *cwc, int *swr, int *swc, int *mwr, int *mwc);
@@ -62,9 +66,15 @@ int main()
     start_color();
     curs_set(0);
 
+    // Setup Color Pairs
+    init_pair(1, COLOR_GREEN, COLOR_BLACK); // Flag == 1
+    init_pair(2, COLOR_RED, COLOR_BLACK);   // Flag == 0
+
     // Setup Hardware
+    int mem_capacity = 0xFFFF;
+
     CPU c = CPUNew();
-    Memory m = MemoryNew(0xFFFF);
+    Memory m = MemoryNew(mem_capacity);
     Clock clk = ClockNew();
     ClockSetMode(clk, CM_STEP_NO_LIMIT);
 
@@ -80,6 +90,7 @@ int main()
     }
 
     ctx->cycles = 0;
+    ctx->mem_capacity = mem_capacity;
     ctx->main = stdscr;
 
     // Initial Window Create
@@ -101,7 +112,15 @@ int main()
     CPUSetEnvContext(c, (void *)ctx);
     CPUSetCycleCallback(c, &cycle_callback);
 
-    // Tick Clock once to see static layout
+    // Program and Execute
+
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, JSR_AB);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x00);
+    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x61);
+
+    MemoryWriteByte(m, 0x6100, LDA_IM);
+    MemoryWriteByte(m, 0x6101, 0x45);
+
     CPUExecute(c);
 
     // Cleanup
@@ -146,10 +165,86 @@ void draw_memory(CPU c, FE_CONTEXT ctx)
 
 void draw_cpu(CPU c, FE_CONTEXT ctx)
 {
-    WINDOW *terminal = ctx->main;
     WINDOW *cpuwin = ctx->cpu_window;
-
     box(cpuwin, 0, 0);
+
+    Memory mem_ptr = CPUGetMemory(c);
+
+    int start_row = 1;
+    int start_col = 1;
+
+    int m_r, m_c;
+    getmaxyx(cpuwin, m_r, m_c);
+
+    // Internal Register Heading
+    wattron(cpuwin, A_BOLD);
+    wattron(cpuwin, A_UNDERLINE);
+    mvwprintw(cpuwin, start_row, start_col, "Internal Registers");
+    wattroff(cpuwin, A_BOLD);
+    wattroff(cpuwin, A_UNDERLINE);
+
+    // Draw Register Headings
+    mvwprintw(cpuwin, start_row + 2, start_col, "Program Counter :");
+    mvwprintw(cpuwin, start_row + 3, start_col, "Stack Pointer :");
+
+    mvwprintw(cpuwin, start_row + 5, start_col, "A Register :");
+    mvwprintw(cpuwin, start_row + 6, start_col, "X Register :");
+    mvwprintw(cpuwin, start_row + 7, start_col, "Y Register :");
+    mvwprintw(cpuwin, start_row + 9, start_col, "CPU Status :");
+
+    // Register Values
+    mvwprintw(cpuwin, start_row + 2, m_c - 8, "0x%04X", CPUGetPC(c));
+    mvwprintw(cpuwin, start_row + 3, m_c - 6, "0x%02X", CPUGetSP(c));
+
+    mvwprintw(cpuwin, start_row + 5, m_c - 6, "0x%02X", CPUGetA(c));
+    mvwprintw(cpuwin, start_row + 6, m_c - 6, "0x%02X", CPUGetX(c));
+    mvwprintw(cpuwin, start_row + 7, m_c - 6, "0x%02X", CPUGetY(c));
+
+    // Status Values
+    draw_cpu_flag(cpuwin, start_row + 9, m_c - 17, "C", CPUGetStatusFlag(c, PS_C));
+    draw_cpu_flag(cpuwin, start_row + 9, m_c - 15, "Z", CPUGetStatusFlag(c, PS_Z));
+    draw_cpu_flag(cpuwin, start_row + 9, m_c - 13, "I", CPUGetStatusFlag(c, PS_I));
+    draw_cpu_flag(cpuwin, start_row + 9, m_c - 11, "D", CPUGetStatusFlag(c, PS_D));
+    draw_cpu_flag(cpuwin, start_row + 9, m_c - 9, "B", CPUGetStatusFlag(c, PS_V));
+    draw_cpu_flag(cpuwin, start_row + 9, m_c - 7, "V", CPUGetStatusFlag(c, PS_B));
+    draw_cpu_flag(cpuwin, start_row + 9, m_c - 5, "N", CPUGetStatusFlag(c, PS_N));
+    draw_cpu_flag(cpuwin, start_row + 9, m_c - 3, "U", CPUGetStatusFlag(c, PS_U));
+    mvwprintw(cpuwin, start_row + 10, m_c - 8, "[0x%02X]", CPUGetStatusRegister(c));
+
+    // Vectors
+    wattron(cpuwin, A_BOLD);
+    wattron(cpuwin, A_UNDERLINE);
+    mvwprintw(cpuwin, start_row + 12, start_col, "Vectors");
+    wattroff(cpuwin, A_BOLD);
+    wattroff(cpuwin, A_UNDERLINE);
+
+    word reset_vec = MemoryReadByte(mem_ptr, DEFAULT_PROGRAM_COUNTER) & 0x00FF;
+    reset_vec |= (MemoryReadByte(mem_ptr, DEFAULT_PROGRAM_COUNTER + 1) << 8);
+
+    word irq_vec = MemoryReadByte(mem_ptr, IRQ_VECTOR_START) & 0x00FF;
+    irq_vec |= (MemoryReadByte(mem_ptr, IRQ_VECTOR_START + 1) << 8);
+
+    word nmi_vec = MemoryReadByte(mem_ptr, NMI_VECTOR_START) & 0x00FF;
+    nmi_vec |= (MemoryReadByte(mem_ptr, NMI_VECTOR_START + 1) << 8);
+
+    mvwprintw(cpuwin, start_row + 14, start_col, "Reset :");
+    mvwprintw(cpuwin, start_row + 14, m_c - 8, "0x%04X", reset_vec);
+    mvwprintw(cpuwin, start_row + 15, start_col, "IRQ :");
+    mvwprintw(cpuwin, start_row + 15, m_c - 8, "0x%04X", irq_vec);
+    mvwprintw(cpuwin, start_row + 16, start_col, "NMI :");
+    mvwprintw(cpuwin, start_row + 16, m_c - 8, "0x%04X", nmi_vec);
+
+    // CPU Connections
+    wattron(cpuwin, A_BOLD);
+    wattron(cpuwin, A_UNDERLINE);
+    mvwprintw(cpuwin, start_row + 18, start_col, "Connected Devices");
+    wattroff(cpuwin, A_BOLD);
+    wattroff(cpuwin, A_UNDERLINE);
+
+    mvwprintw(cpuwin, start_row + 20, start_col, "Clock Cycles :");
+    mvwprintw(cpuwin, start_row + 20, m_c - 7, "%05d", ctx->cycles);
+    mvwprintw(cpuwin, start_row + 21, start_col, "Memory Capacity :");
+    mvwprintw(cpuwin, start_row + 21, m_c - 8, "0x%04X", ctx->mem_capacity);
 
     wrefresh(cpuwin);
 }
@@ -167,6 +262,7 @@ void cycle_callback(CPU c)
 {
     // Unpack Context and Check for Terminal Resize
     FE_CONTEXT ctx = (FE_CONTEXT)CPUGetEnvContext(c);
+    ctx->cycles++;
 
     int twr, twc, cwr, cwc, swr, swc, mwr, mwc;
     int resize_status = get_window_dimensions(ctx, &twr, &twc, &cwr, &cwc, &swr, &swc, &mwr, &mwc);
@@ -251,4 +347,29 @@ void draw_too_small(FE_CONTEXT ctx)
 {
     wclear(ctx->main);
     mvwprintw(ctx->main, 1, 1, "Screen too small!");
+}
+
+void draw_cpu_flag(WINDOW *w, int r, int c, char *text, int flag_level)
+{
+    wattron(w, A_BOLD);
+    if (flag_level)
+    {
+        wattron(w, COLOR_PAIR(1));
+    }
+    else
+    {
+        wattron(w, COLOR_PAIR(2));
+    }
+
+    mvwprintw(w, r, c, text);
+
+    if (flag_level)
+    {
+        wattroff(w, COLOR_PAIR(1));
+    }
+    else
+    {
+        wattroff(w, COLOR_PAIR(2));
+    }
+    wattroff(w, A_BOLD);
 }
