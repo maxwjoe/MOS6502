@@ -119,7 +119,16 @@ int main()
     MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x61);
 
     MemoryWriteByte(m, 0x6100, LDA_IM);
-    MemoryWriteByte(m, 0x6101, 0x45);
+    MemoryWriteByte(m, 0x6101, 0x88);
+
+    MemoryWriteByte(m, 0x6102, PHA_IMP);
+
+    MemoryWriteByte(m, 0x6103, ADC_IM);
+    MemoryWriteByte(m, 0x6104, 0xFF);
+
+    MemoryWriteByte(m, 0x6105, TAX_IMP);
+    MemoryWriteByte(m, 0x6106, PLA_IMP);
+    MemoryWriteByte(m, 0x6107, TAY_IMP);
 
     CPUExecute(c);
 
