@@ -67,8 +67,9 @@ int main()
     curs_set(0);
 
     // Setup Color Pairs
-    init_pair(1, COLOR_GREEN, COLOR_BLACK); // Flag == 1
-    init_pair(2, COLOR_RED, COLOR_BLACK);   // Flag == 0
+    init_pair(1, COLOR_GREEN, COLOR_BLACK);  // Flag == 1
+    init_pair(2, COLOR_RED, COLOR_BLACK);    // Flag == 0
+    init_pair(3, COLOR_BLACK, COLOR_YELLOW); // Stack Pointer
 
     // Setup Hardware
     int mem_capacity = 0xFFFF;
@@ -261,8 +262,52 @@ void draw_cpu(CPU c, FE_CONTEXT ctx)
 void draw_stack(CPU c, FE_CONTEXT ctx)
 {
     WINDOW *stackwin = ctx->stack_window;
-
     box(stackwin, 0, 0);
+
+    Memory mem_ptr = CPUGetMemory(c);
+    int start_row = 1;
+    int start_col = 1;
+
+    int sw_rows, sw_cols;
+    getmaxyx(stackwin, sw_rows, sw_cols);
+
+    // Window Title
+    wattron(stackwin, A_BOLD);
+    wattron(stackwin, A_UNDERLINE);
+    mvwprintw(stackwin, start_row, start_col, "Stack");
+    wattroff(stackwin, A_BOLD);
+    wattroff(stackwin, A_UNDERLINE);
+
+    // Calculate Address Range
+    int num_addresses = sw_rows - 4;
+    byte stack_ptr = CPUGetSP(c);
+
+    byte lo_addr = stack_ptr - (num_addresses / 2);
+    // byte hi_addr = stack_ptr + (num_addresses / 2);
+
+    // Print Addresses
+    for (int i = 0; i < num_addresses; i++)
+    {
+        byte curr_addr = (byte)(lo_addr + i);
+        if (curr_addr == stack_ptr)
+        {
+            wattron(stackwin, COLOR_PAIR(3));
+        }
+        mvwprintw(stackwin, start_row + 2 + i, start_col + 1, "0x%02X : ", curr_addr);
+        mvwprintw(stackwin, start_row + 2 + i, sw_cols - 6, "0x%02X", MemoryReadByte(mem_ptr, DEFAULT_STACK_BEGIN + curr_addr));
+
+        if (curr_addr == stack_ptr)
+        {
+            // Fill whitespace
+            int string_length = strlen("0x%02X");
+            for (int s = start_col + 1 + string_length; s < sw_cols - 6; s++)
+            {
+                mvwprintw(stackwin, start_row + 2 + i, s, " ");
+            }
+
+            wattroff(stackwin, COLOR_PAIR(3));
+        }
+    }
 
     wrefresh(stackwin);
 }
