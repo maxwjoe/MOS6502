@@ -167,8 +167,59 @@ void draw_title(CPU c, FE_CONTEXT ctx)
 void draw_memory(CPU c, FE_CONTEXT ctx)
 {
     WINDOW *memwin = ctx->memory_window;
-
     box(memwin, 0, 0);
+
+    Memory mem_ptr = CPUGetMemory(c);
+
+    int start_row = 1;
+    int start_col = 1;
+
+    int m_rows, m_cols;
+    getmaxyx(memwin, m_rows, m_cols);
+
+    // Memory Heading
+    wattron(memwin, A_BOLD);
+    wattron(memwin, A_UNDERLINE);
+    mvwprintw(memwin, start_row, start_col, "Connected Memory");
+    wattroff(memwin, A_BOLD);
+    wattroff(memwin, A_UNDERLINE);
+
+    // Calculate Memory Width
+    int addr_per_row = m_cols / 6;
+    int mem_rows = m_rows - 4;
+
+    // Calculate Range
+    word prog_counter = CPUGetPC(c);
+    word start_addr = prog_counter & 0xFFF0;
+
+    word offset = 0;
+    // Draw Memory
+    for (int r = 0; r < mem_rows; r++)
+    {
+        word curr_addr = (word)(start_addr + offset);
+        // Draw Start Address
+        wattron(memwin, A_BOLD);
+        mvwprintw(memwin, start_row + 2 + r, start_col + 1, "0x%04X : ", curr_addr);
+        wattroff(memwin, A_BOLD);
+
+        // Draw Data
+        for (int c = 0; c < addr_per_row; c++)
+        {
+            word addr = (word)(curr_addr + c);
+
+            if (addr == prog_counter)
+            {
+                wattron(memwin, COLOR_PAIR(3));
+            }
+            mvwprintw(memwin, start_row + 2 + r, start_col + 10 + (5 * c), "0x%02X", MemoryReadByte(mem_ptr, addr));
+            if (addr == prog_counter)
+            {
+                wattroff(memwin, COLOR_PAIR(3));
+            }
+        }
+
+        offset += 0x0010;
+    }
 
     wrefresh(memwin);
 }
