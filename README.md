@@ -72,7 +72,7 @@ When programming the memory, be sure to only use the Memory ADT functions. The C
 
 ## Executing a Program
 
-After programming is complete, simply call CPUExecute(c) to run the CPU on the connected memory. If you are using a clock mode with a cycle limit, be sure to set the tick_limit variable with the Clock's API first otherwise it will exit straight away. 
+After programming is complete, simply call CPUExecute() to run the CPU on the connected memory. If you are using a clock mode with a cycle limit, be sure to set the tick_limit variable with the Clock's API first otherwise it will exit straight away. 
 
 ```C
 
