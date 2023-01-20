@@ -71,7 +71,8 @@ int main()
     // Setup Color Pairs
     init_pair(1, COLOR_GREEN, COLOR_BLACK);  // Flag == 1
     init_pair(2, COLOR_RED, COLOR_BLACK);    // Flag == 0
-    init_pair(3, COLOR_BLACK, COLOR_YELLOW); // Stack Pointer
+    init_pair(3, COLOR_BLACK, COLOR_YELLOW); // Stack and PC Pointer
+    init_pair(4, COLOR_WHITE, COLOR_GREEN);  // Memory Highlight
 
     // Setup Hardware
     int mem_capacity = 0xFFFF;
@@ -169,7 +170,7 @@ void draw_memory(CPU c, FE_CONTEXT ctx)
     // Memory Heading
     wattron(memwin, A_BOLD);
     wattron(memwin, A_UNDERLINE);
-    mvwprintw(memwin, start_row, start_col, "Connected Memory");
+    mvwprintw(memwin, start_row, m_cols / 2 - strlen("Connected Memory") / 2, "Connected Memory");
     wattroff(memwin, A_BOLD);
     wattroff(memwin, A_UNDERLINE);
 
@@ -185,7 +186,15 @@ void draw_memory(CPU c, FE_CONTEXT ctx)
     wattron(memwin, A_BOLD);
     for (int o = 0; o < addr_per_row; o++)
     {
+        if ((prog_counter & 0x000F) == o)
+        {
+            wattron(memwin, COLOR_PAIR(4));
+        }
         mvwprintw(memwin, start_row + 2, start_col + 10 + (5 * o), "0x%02X", (word)o);
+        if ((prog_counter & 0x000F) == o)
+        {
+            wattroff(memwin, COLOR_PAIR(4));
+        }
     }
     wattron(memwin, A_BOLD);
 
@@ -194,10 +203,20 @@ void draw_memory(CPU c, FE_CONTEXT ctx)
     for (int r = 0; r < mem_rows; r++)
     {
         word curr_addr = (word)(start_addr + offset);
+
+        int pc_in_row = (prog_counter >= curr_addr && prog_counter < curr_addr + 0x0010);
+        if (pc_in_row)
+        {
+            wattron(memwin, COLOR_PAIR(4));
+        }
         // Draw Start Address
         wattron(memwin, A_BOLD);
-        mvwprintw(memwin, start_row + 4 + r, start_col + 1, "0x%04X  ", curr_addr);
+        mvwprintw(memwin, start_row + 4 + r, start_col + 1, "0x%04X", curr_addr);
         wattroff(memwin, A_BOLD);
+        if (pc_in_row)
+        {
+            wattroff(memwin, COLOR_PAIR(4));
+        }
 
         // Draw Data
         for (int c = 0; c < addr_per_row; c++)
@@ -237,7 +256,7 @@ void draw_cpu(CPU c, FE_CONTEXT ctx)
     // Internal Register Heading
     wattron(cpuwin, A_BOLD);
     wattron(cpuwin, A_UNDERLINE);
-    mvwprintw(cpuwin, start_row, start_col, "Internal Registers");
+    mvwprintw(cpuwin, start_row, m_c / 2 - strlen("Internal Registers") / 2, "Internal Registers");
     wattroff(cpuwin, A_BOLD);
     wattroff(cpuwin, A_UNDERLINE);
 
@@ -272,7 +291,7 @@ void draw_cpu(CPU c, FE_CONTEXT ctx)
     // Vectors
     wattron(cpuwin, A_BOLD);
     wattron(cpuwin, A_UNDERLINE);
-    mvwprintw(cpuwin, start_row + 12, start_col, "Vectors");
+    mvwprintw(cpuwin, start_row + 12, m_c / 2 - strlen("Vectors") / 2, "Vectors");
     wattroff(cpuwin, A_BOLD);
     wattroff(cpuwin, A_UNDERLINE);
 
@@ -295,7 +314,7 @@ void draw_cpu(CPU c, FE_CONTEXT ctx)
     // CPU Connections
     wattron(cpuwin, A_BOLD);
     wattron(cpuwin, A_UNDERLINE);
-    mvwprintw(cpuwin, start_row + 18, start_col, "Connected Devices");
+    mvwprintw(cpuwin, start_row + 18, m_c / 2 - strlen("Connected Devices") / 2, "Connected Devices");
     wattroff(cpuwin, A_BOLD);
     wattroff(cpuwin, A_UNDERLINE);
 
@@ -322,7 +341,7 @@ void draw_stack(CPU c, FE_CONTEXT ctx)
     // Window Title
     wattron(stackwin, A_BOLD);
     wattron(stackwin, A_UNDERLINE);
-    mvwprintw(stackwin, start_row, start_col, "Stack");
+    mvwprintw(stackwin, start_row, (sw_cols / 2) - strlen("Stack") / 2, "Stack");
     wattroff(stackwin, A_BOLD);
     wattroff(stackwin, A_UNDERLINE);
 
