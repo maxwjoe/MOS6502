@@ -142,12 +142,12 @@ void draw_title(CPU c, FE_CONTEXT ctx)
 
     box(titlewin, 0, 0);
 
-    char *title_text = "MOS Technologies 6502 CPU Emulator";
+    char *title_text = "6502 CPU Emulator";
     int title_offset = strlen(title_text) / 2;
 
     wattron(titlewin, A_BOLD);
     wattron(titlewin, A_UNDERLINE);
-    mvwprintw(titlewin, rows / 2, (cols / 2) - title_offset, "MOS Technologies 6502 CPU Emulator");
+    mvwprintw(titlewin, rows / 2, (cols / 2) - title_offset, title_text);
     wattroff(titlewin, A_UNDERLINE);
     wattroff(titlewin, A_BOLD);
 
