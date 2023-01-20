@@ -8,7 +8,7 @@ The 6502 is an 8-bit microprocessor developed by MOS Technology in the 1970s. It
 
 ## Basic Setup
 
-Three components are required for the emulation to work. These are the CPU, memory and clock. I have separated these into separate components to better represent the real hardware and to improve the modularity of the codebase. This approach will allow me to expand the emulation to other hardware components in the future. Setting up the emulator involves creating the components, setting the clock mode and connecting them to the CPU. 
+Three components are required for the emulation to work. These are the CPU, memory and clock. These have been separated into separate components to better represent the real hardware and to improve the modularity of the codebase. This approach will allow further expansion of the emulatior to include other hardware components in the future. Setting up the emulator involves creating the components, setting the clock mode and connecting them to the CPU. 
 
 ```C
     // Create Hardware Objects
@@ -33,14 +33,13 @@ The cycle limit can be added to the clock through the Clock's API, details on th
 
 ## Programming Memory
 
-When creating a memory object, the entire addressable range is set to 0xEA which is the opcode for a no operation. By default, the CPU will just cycle and nothing meaningful will happen. To do something useful, the memory must be programmed. This can be done in two ways, either manually entering machine instructions in code, or by loading a 6502 binary from a file. This emulator provides a simple API for doing both.
+When creating a memory object, the entire addressable range is set to 0xEA which is the opcode for a no operation. By default, the CPU will just cycle and nothing meaningful will happen. To do something useful, the memory must be programmed. This can be done in two ways, by manually entering machine instructions in code, or by loading a 6502 binary from a file. This emulator provides a simple API for doing both.
 
 ### Manual Programming Example
 
-Below is a simple example of how you would manually write a program into the memory. This method involves directly writing machine code which is time consuming. However, it can be useful when debugging or unit testing. 
+Below is a simple example of how you would manually write a program into the memory. This method involves directly writing machine code.
 
 ```C
-  
   // Load 0x05 into the A Register
   MemoryWriteByte(m, 0x4000, LDA_IM);
   MemoryWriteByte(m, 0x4001, 0x05);
@@ -66,11 +65,9 @@ A much more efficient programming method is to use a compiled 6502 binary. This 
 
 ```
 
-An example of this can be found in the frontend.c file of this repo, where I have loaded a complex testing program straight from a binary. 
-
 ### CPU Read/Write/Fetch vs Memory Read/Write
 
-When programming the memory, be sure to only use the Memory ADT functions. The CPU functions such as CPUReadByte(), CPUFetchByte(), CPUWriteByte(), CPUPushToStack(), CPUPopFromStack(), etc... will modify the CPU's internal state as they are designed to be called whilst the CPU is running. More specifically, something like CPUPushToStack() will modify the stack pointer, program counter and cost CPU cycles. So be sure to use the Memory functions as they only write to memory and cost nothing. Using CPU Functions here will cause unexpected behaviour. 
+When programming the memory, be sure to only use the Memory ADT functions. The CPU functions such as CPUReadByte(), CPUFetchByte(), CPUWriteByte(), CPUPushToStack(), CPUPopFromStack(), etc... will modify the CPU's internal state as they are designed to be called whilst the CPU is running. More specifically, something like CPUPushToStack() will modify the stack pointer, program counter and cost CPU cycles. So be sure to use the Memory functions as they only write to memory and cost nothing. Using CPU functions here will cause unexpected behaviour. 
 
 
 ## Executing a Program
@@ -95,7 +92,7 @@ After programming is complete, simply call CPUExecute(c) to run the CPU on the c
 
 ## Interrupts and Resets
 
-The CPU API includes functions that allow you to make an interrupt request, non-maskable interrupt and reset the CPU. These functions are not callable during execution at the moment as there is no need for them given that the CPU has no asynchronous hardware connected. However, in future there could be, which would require them. 
+The CPU API includes functions that allow you to make an interrupt request, non-maskable interrupt and reset the CPU. These functions are not callable during execution at the moment as there is no need for them given that the CPU has no asynchronous hardware connected. However, in future there could be, so they have been included. 
 
 ## Supported Opcodes
 
@@ -104,6 +101,10 @@ This emulator supports all official 6502 CPU Operations in all addressing modes.
 ## Unit Tests and Issues
 
 The tests folder includes all unit tests used for this emulator. There are some known bugs which are being worked on, these are in the issues section of this repo. The testing was conducted using Eagle, which was written specifically to test this project. Eagle's repository can be found here https://github.com/maxwjoe/Eagle 
+
+## Compatibility 
+
+The emulator itself has no external dependencies outside of the C standard library. However, the unit tests require the Eagle testing framework to be installed and the frontend GUI uses ncurses, which is included in most linux distributions. This emulator was developed in a linux environment and has not been tested for MacOS or Windows. The core emulator itself should be good to go on most operating systems, although the makefile may need modification as it currently builds to a static libraray (.a file), this file extension is different for MacOS and Windows. 
 
 
 
