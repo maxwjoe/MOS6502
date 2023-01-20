@@ -4,7 +4,7 @@
 
 ## About
 
-The 6502 is an 8-bit microprocessor developed by MOS Technology in the 1970s. It appeared in many consumer electronics such as the Atari 2600, Commodore 64, Nintendo Entertainment System (NES) and the Apple II. The processor was designed to be a faster, cheaper and simpler version of the Motorolla 6800. The processor is simple by today's standards, making it a great target for emulation. The goal of this project was to gain an understanding of low level computing and an appreciation of the work that goes into emulating physical devices in software. 
+The 6502 is an 8-bit microprocessor developed by MOS Technology in the 1970s. It appeared in many consumer electronics such as the Atari 2600, Commodore 64, Nintendo Entertainment System (NES) and the Apple II. The processor was designed to be a faster, cheaper and simpler version of the Motorolla 6800. The processor is simple by today's standards, making it a great target for emulation. The goal of this project was to gain an understanding of low level computing and an appreciation for the work that goes into emulating physical devices in software. 
 
 ## Basic Setup
 
