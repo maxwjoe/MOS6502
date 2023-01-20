@@ -7,6 +7,8 @@
 #define MIN_ROWS 15
 #define MIN_COLS 45
 
+#define TEST_PROGRAM_PATH "../programs/6502_binaries/6502_functional_test.bin"
+
 // === Declarations ===
 
 // FE_CONTEXT : Context for the frontend to be passed to the cpu
@@ -113,24 +115,11 @@ int main()
     CPUSetEnvContext(c, (void *)ctx);
     CPUSetCycleCallback(c, &cycle_callback);
 
-    // Program and Execute
+    // Load Program into Memory
+    MemoryLoadBinary(m, TEST_PROGRAM_PATH);
+    CPUSetPC(c, 0x400);
 
-    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER, JSR_AB);
-    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 1, 0x00);
-    MemoryWriteByte(m, DEFAULT_PROGRAM_COUNTER + 2, 0x61);
-
-    MemoryWriteByte(m, 0x6100, LDA_IM);
-    MemoryWriteByte(m, 0x6101, 0x88);
-
-    MemoryWriteByte(m, 0x6102, PHA_IMP);
-
-    MemoryWriteByte(m, 0x6103, ADC_IM);
-    MemoryWriteByte(m, 0x6104, 0xFF);
-
-    MemoryWriteByte(m, 0x6105, TAX_IMP);
-    MemoryWriteByte(m, 0x6106, PLA_IMP);
-    MemoryWriteByte(m, 0x6107, TAY_IMP);
-
+    // Run
     CPUExecute(c);
 
     // Cleanup
@@ -185,21 +174,29 @@ void draw_memory(CPU c, FE_CONTEXT ctx)
     wattroff(memwin, A_UNDERLINE);
 
     // Calculate Memory Width
-    int addr_per_row = m_cols / 6;
-    int mem_rows = m_rows - 4;
+    int addr_per_row = (m_cols - 1 - start_col - 6) / 5 < 0x0010 ? (m_cols - 1 - start_col - 6) / 5 : 0x0010;
+    int mem_rows = m_rows - 6;
 
     // Calculate Range
     word prog_counter = CPUGetPC(c);
     word start_addr = prog_counter & 0xFFF0;
 
-    word offset = 0;
+    // Draw Offsets
+    wattron(memwin, A_BOLD);
+    for (int o = 0; o < addr_per_row; o++)
+    {
+        mvwprintw(memwin, start_row + 2, start_col + 10 + (5 * o), "0x%02X", (word)o);
+    }
+    wattron(memwin, A_BOLD);
+
     // Draw Memory
+    word offset = 0;
     for (int r = 0; r < mem_rows; r++)
     {
         word curr_addr = (word)(start_addr + offset);
         // Draw Start Address
         wattron(memwin, A_BOLD);
-        mvwprintw(memwin, start_row + 2 + r, start_col + 1, "0x%04X : ", curr_addr);
+        mvwprintw(memwin, start_row + 4 + r, start_col + 1, "0x%04X  ", curr_addr);
         wattroff(memwin, A_BOLD);
 
         // Draw Data
@@ -211,7 +208,7 @@ void draw_memory(CPU c, FE_CONTEXT ctx)
             {
                 wattron(memwin, COLOR_PAIR(3));
             }
-            mvwprintw(memwin, start_row + 2 + r, start_col + 10 + (5 * c), "0x%02X", MemoryReadByte(mem_ptr, addr));
+            mvwprintw(memwin, start_row + 4 + r, start_col + 10 + (5 * c), "0x%02X", MemoryReadByte(mem_ptr, addr));
             if (addr == prog_counter)
             {
                 wattroff(memwin, COLOR_PAIR(3));
@@ -334,9 +331,8 @@ void draw_stack(CPU c, FE_CONTEXT ctx)
     byte stack_ptr = CPUGetSP(c);
 
     byte lo_addr = stack_ptr - (num_addresses / 2);
-    // byte hi_addr = stack_ptr + (num_addresses / 2);
 
-    // Print Addresses
+    // Print Data
     for (int i = 0; i < num_addresses; i++)
     {
         byte curr_addr = (byte)(lo_addr + i);
@@ -399,7 +395,7 @@ void cycle_callback(CPU c)
         mvwin(ctx->stack_window, twr, cwc);
 
         wresize(ctx->memory_window, mwr, mwc);
-        mvwin(ctx->memory_window, twr, ctx->main_cols - mwc);
+        mvwin(ctx->memory_window, twr, ctx->main_cols - mwc - 1);
     }
 
     // Draw Data
@@ -429,11 +425,11 @@ int get_window_dimensions(FE_CONTEXT ctx, int *twr, int *twc, int *cwr, int *cwc
 
     // Scale CPU Window
     *cwr = num_rows - *twr - 1;
-    *cwc = num_cols / 3;
+    *cwc = num_cols / 4;
 
     // Scale Stack Window
     *swr = *cwr;
-    *swc = (num_cols - *cwc) - (num_cols / 2);
+    *swc = ((num_cols - *cwc) / 4) < 20 ? ((num_cols - *cwc) / 4) : 20;
 
     // Scale Memory Window
     *mwr = *cwr;
