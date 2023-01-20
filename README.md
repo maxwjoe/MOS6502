@@ -67,7 +67,7 @@ A much more efficient programming method is to use a compiled 6502 binary. This 
 
 ### CPU Read/Write/Fetch vs Memory Read/Write
 
-When programming the memory, be sure to only use the Memory ADT functions. The CPU functions such as CPUReadByte(), CPUFetchByte(), CPUWriteByte(), CPUPushToStack(), CPUPopFromStack(), etc... will modify the CPU's internal state as they are designed to be called whilst the CPU is running. More specifically, something like CPUPushToStack() will modify the stack pointer, program counter and cost CPU cycles. So be sure to use the Memory functions as they only write to memory and cost nothing. Using CPU functions here will cause unexpected behaviour. 
+When programming the memory, be sure to only use the Memory ADT functions. The CPU functions such as CPUReadByte(), CPUFetchByte(), CPUWriteByte(), CPUPushToStack(), CPUPopFromStack(), etc... will modify the CPU's internal state as they are designed to be called whilst the CPU is running. More specifically, something like CPUPushToStack() will modify the stack pointer and cost CPU cycles. So be sure to use the Memory functions as they only write to memory and cost nothing. Using CPU functions here will cause unexpected behaviour. 
 
 
 ## Executing a Program
